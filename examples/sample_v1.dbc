@@ -1,0 +1,105 @@
+VERSION ""
+
+NS_ :
+  NS_DESC_
+  CM_
+  BA_DEF_
+  BA_
+  VAL_
+  CAT_DEF_
+  CAT_
+  FILTER
+  BA_DEF_DEF_
+  EV_DATA_
+  ENVVAR_DATA_
+  SGTYPE_
+  SGTYPE_VAL_
+  BA_DEF_SGTYPE_
+  BA_SGTYPE_
+  SIG_TYPE_REF_
+  VAL_TABLE_
+  SIG_GROUP_
+  SIG_VALTYPE_
+  SIGTYPE_VALTYPE_
+  BO_TX_BU_
+  BA_DEF_REL_
+  BA_REL_
+  BA_DEF_DEF_REL_
+  BU_SG_REL_
+  BU_EV_REL_
+  BU_BO_REL_
+  SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU MCU BMS GW
+
+BO_ 256 VCU_Status : 8 VCU
+ SG_ VCU_GearPos : 0|4@1+ (1,0) [0|15] "" MCU,GW
+ SG_ VCU_VehicleSpeed : 4|12@1+ (0.1,0) [0|409.5] "km/h" MCU,GW
+ SG_ VCU_AccPedalPos : 16|8@1+ (0.4,0) [0|100] "%" MCU
+ SG_ VCU_BrakePedalSts : 24|2@1+ (1,0) [0|3] "" MCU,GW
+ SG_ VCU_ReadyStatus : 26|2@1+ (1,0) [0|3] "" MCU,BMS,GW
+ SG_ VCU_DrivingMode : 28|3@1+ (1,0) [0|7] "" MCU,GW
+
+BO_ 512 MCU_TorqueInfo : 8 MCU
+ SG_ MCU_ActualTorque : 0|16@1- (0.1,-3276.8) [-3276.8|3276.7] "Nm" VCU,GW
+ SG_ MCU_MotorSpeed : 16|16@1- (1,-32768) [-32768|32767] "rpm" VCU,GW
+ SG_ MCU_MotorTemp : 32|8@1+ (1,-40) [-40|215] "degC" VCU,GW
+ SG_ MCU_InverterTemp : 40|8@1+ (1,-40) [-40|215] "degC" VCU,GW
+ SG_ MCU_SysStatus : 48|4@1+ (1,0) [0|15] "" VCU,GW
+ SG_ MCU_FaultCode : 52|8@1+ (1,0) [0|255] "" VCU,GW
+
+BO_ 768 BMS_BattInfo : 8 BMS
+ SG_ BMS_SOC : 0|10@1+ (0.1,0) [0|100] "%" VCU,GW
+ SG_ BMS_Voltage : 10|14@1+ (0.1,0) [0|1638.3] "V" VCU,GW
+ SG_ BMS_Current : 24|16@1- (0.1,-3276.8) [-3276.8|3276.7] "A" VCU,GW
+ SG_ BMS_MaxCellTemp : 40|8@1+ (1,-40) [-40|215] "degC" VCU,GW
+ SG_ BMS_MinCellTemp : 48|8@1+ (1,-40) [-40|215] "degC" VCU,GW
+
+BO_ 1024 GW_TimeSync : 4 GW
+ SG_ GW_Year : 0|7@1+ (1,2000) [2000|2127] "" VCU,MCU,BMS
+ SG_ GW_Month : 7|4@1+ (1,0) [1|12] "" VCU,MCU,BMS
+ SG_ GW_Day : 11|5@1+ (1,0) [1|31] "" VCU,MCU,BMS
+ SG_ GW_Hour : 16|5@1+ (1,0) [0|23] "" VCU,MCU,BMS
+ SG_ GW_Minute : 21|6@1+ (1,0) [0|59] "" VCU,MCU,BMS
+ SG_ GW_Second : 27|6@1+ (1,0) [0|59] "" VCU,MCU,BMS
+
+CM_ BU_ VCU "整车控制器";
+CM_ BU_ MCU "电机控制器";
+CM_ BU_ BMS "电池管理系统";
+CM_ BU_ GW "网关";
+
+CM_ BO_ 256 "VCU整车状态报文，周期10ms";
+CM_ BO_ 512 "MCU电机扭矩信息报文，周期10ms";
+CM_ BO_ 768 "BMS电池信息报文，周期100ms";
+CM_ BO_ 1024 "GW时间同步报文，周期1000ms";
+
+CM_ SG_ 256 VCU_GearPos "档位：0=P, 1=R, 2=N, 3=D";
+CM_ SG_ 256 VCU_VehicleSpeed "车速，精度0.1km/h";
+CM_ SG_ 256 VCU_ReadyStatus "整车Ready状态：0=未就绪, 1=就绪, 2=故障";
+CM_ SG_ 512 MCU_ActualTorque "电机实际扭矩";
+CM_ SG_ 768 BMS_SOC "电池荷电状态";
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 10000;
+BA_DEF_ BO_ "GenMsgSendType" ENUM "Cyclic","Event","NoMsgSendType";
+BA_DEF_ SG_ "SystemSignalLongSymbol" STRING;
+BA_DEF_ SG_ "GenSigSendType" ENUM "Cyclic","Event","NoSigSendType";
+
+BA_DEF_DEF_ "GenMsgCycleTime" 0;
+BA_DEF_DEF_ "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_ "SystemSignalLongSymbol" "";
+BA_DEF_DEF_ "GenSigSendType" "Cyclic";
+
+BA_ "GenMsgCycleTime" BO_ 256 10;
+BA_ "GenMsgCycleTime" BO_ 512 10;
+BA_ "GenMsgCycleTime" BO_ 768 100;
+BA_ "GenMsgCycleTime" BO_ 1024 1000;
+
+VAL_ 256 VCU_GearPos 0 "P" 1 "R" 2 "N" 3 "D" ;
+VAL_ 256 VCU_BrakePedalSts 0 "Released" 1 "Pressed" 2 "Error" 3 "Invalid" ;
+VAL_ 256 VCU_ReadyStatus 0 "NotReady" 1 "Ready" 2 "Fault" 3 "Invalid" ;
+VAL_ 256 VCU_DrivingMode 0 "Normal" 1 "Sport" 2 "Eco" 3 "Snow" 4 "Custom" ;
+VAL_ 512 MCU_SysStatus 0 "Init" 1 "Ready" 2 "Running" 3 "Fault" 4 "Shutdown" ;
+
+

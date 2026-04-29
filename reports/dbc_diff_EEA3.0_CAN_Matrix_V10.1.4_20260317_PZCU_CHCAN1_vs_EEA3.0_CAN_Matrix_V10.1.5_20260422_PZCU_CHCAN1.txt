@@ -1,0 +1,66 @@
+======================================================================
+  DBC 变更差异报告
+  生成时间: 2026-04-29 10:43:09
+  旧版本: EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_CHCAN1.dbc
+  新版本: EEA3.0_CAN_Matrix_V10.1.5_20260422_PZCU_CHCAN1.dbc
+======================================================================
+
+【变更摘要】
+  节点: 新增 1  删除 0
+  报文: 新增 0  删除 0  修改 10
+  信号: 新增 3  删除 2  修改 11
+
+【节点变更】
+  ✚ [新增节点] Vector_XXX
+
+【修改报文】
+  ✎ ESP_SysSts3_10ms (0x76)
+      ✎ [修改信号] AxlePercRngDistbnFrntMax
+          最大值: 0.9995999999999999 → 0.9996
+      ✎ [修改信号] AxlePercRngDistbnFrntMin
+          最大值: 0.9995999999999999 → 0.9996
+  ✎ PZCU_VehSts_10ms (0x100)
+      ✚ [新增信号] REOpngPhase_Test
+          起始位=58  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector__XXX']
+      ✎ [修改信号] VehSpd
+          最大值: 460.64660000000003 → 460.6466
+  ✎ EPS_HWA_SysSts_10ms (0x106)
+      ✎ [修改信号] EpsStrgAng
+          最大值: 779.9000000000001 → 779.9
+  ✎ BZCU_ASU_10ms (0x12C)
+      ✎ [修改信号] FAS_IInp_Fast_BZCU
+          最大值: 49.96510000000001 → 49.9651
+      ✎ [修改信号] RAS_IInp_Fast_BZCU
+          最大值: 49.96510000000001 → 49.9651
+  ✎ TCM_SASSts_10ms (0x147)
+      ✎ [修改信号] SAS_StrgAng
+          最大值: 779.9000000000001 → 779.9
+  ✎ CCU_RWSCmd_10ms (0x167)
+      ✎ [修改信号] VehSpdEstd
+          最大值: 460.64660000000003 → 460.6466
+  ✎ DPB_BZCU_Fr01_10ms (0x1A6)
+      ✎ [修改信号] sInputRod
+          最大值: 46.150000000000006 → 46.15
+  ✎ HWA_Info1_10ms (0x1C4)
+      ✎ [修改信号] SBW_HWAAng
+          最大值: 779.9000000000001 → 779.9
+  ✎ ESP_BZCU_PZCUFr02_10ms (0x1F8)
+      ✎ [修改信号] YrsSensitivity
+          最大值: 1.3499765536000001 → 1.3499765536
+  ✎ BZCU_EPBSts2_50ms (0x317)
+      ✚ [新增信号] ROPPBrakeBackupStrategyState_Rig
+          起始位=17  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['PZCU']
+      ✚ [新增信号] isBrkFuncReqParkBrkDominant_Righ
+          起始位=31  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['PZCU']
+      ✖ [删除信号] ROPPBrakeBackupStrategyState_Right
+          起始位=17  长度=2bit
+      ✖ [删除信号] isBrkFuncReqParkBrkDominant_Right
+          起始位=31  长度=1bit
+
+======================================================================

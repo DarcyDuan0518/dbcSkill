@@ -1,0 +1,112 @@
+VERSION ""
+
+NS_ :
+  NS_DESC_
+  CM_
+  BA_DEF_
+  BA_
+  VAL_
+  CAT_DEF_
+  CAT_
+  FILTER
+  BA_DEF_DEF_
+  EV_DATA_
+  ENVVAR_DATA_
+  SGTYPE_
+  SGTYPE_VAL_
+  BA_DEF_SGTYPE_
+  BA_SGTYPE_
+  SIG_TYPE_REF_
+  VAL_TABLE_
+  SIG_GROUP_
+  SIG_VALTYPE_
+  SIGTYPE_VALTYPE_
+  BO_TX_BU_
+  BA_DEF_REL_
+  BA_REL_
+  BA_DEF_DEF_REL_
+  BU_SG_REL_
+  BU_EV_REL_
+  BU_BO_REL_
+  SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU MCU BMS GW ADAS
+
+BO_ 256 VCU_Status : 8 VCU
+ SG_ VCU_GearPos : 0|4@1+ (1,0) [0|15] "" MCU,GW
+ SG_ VCU_VehicleSpeed : 4|12@1+ (0.05,0) [0|204.75] "km/h" MCU,GW,ADAS
+ SG_ VCU_AccPedalPos : 16|8@1+ (0.4,0) [0|100] "%" MCU
+ SG_ VCU_BrakePedalSts : 24|2@1+ (1,0) [0|3] "" MCU,GW
+ SG_ VCU_ReadyStatus : 26|2@1+ (1,0) [0|3] "" MCU,BMS,GW
+ SG_ VCU_DrivingMode : 28|3@1+ (1,0) [0|7] "" MCU,GW
+ SG_ VCU_SteerAngle : 32|16@1- (0.1,-3276.8) [-3276.8|3276.7] "deg" ADAS,GW
+
+BO_ 512 MCU_TorqueInfo : 8 MCU
+ SG_ MCU_ActualTorque : 0|16@1- (0.1,-3276.8) [-3276.8|3276.7] "Nm" VCU,GW
+ SG_ MCU_MotorSpeed : 16|16@1- (1,-32768) [-32768|32767] "rpm" VCU,GW
+ SG_ MCU_MotorTemp : 32|8@1+ (1,-40) [-40|215] "degC" VCU,GW
+ SG_ MCU_InverterTemp : 40|8@1+ (1,-40) [-40|215] "degC" VCU,GW
+ SG_ MCU_SysStatus : 48|4@1+ (1,0) [0|15] "" VCU,GW
+ SG_ MCU_FaultCode : 52|12@1+ (1,0) [0|4095] "" VCU,GW
+
+BO_ 768 BMS_BattInfo : 8 BMS
+ SG_ BMS_SOC : 0|10@1+ (0.1,0) [0|100] "%" VCU,GW
+ SG_ BMS_Voltage : 10|14@1+ (0.1,0) [0|1638.3] "V" VCU,GW
+ SG_ BMS_Current : 24|16@1- (0.1,-3276.8) [-3276.8|3276.7] "A" VCU,GW
+ SG_ BMS_MaxCellTemp : 40|8@1+ (1,-40) [-40|215] "degC" VCU,GW
+ SG_ BMS_MinCellTemp : 48|8@1+ (1,-40) [-40|215] "degC" VCU,GW
+
+BO_ 1280 ADAS_CtrlCmd : 8 ADAS
+ SG_ ADAS_LongCtrlReq : 0|2@1+ (1,0) [0|3] "" VCU
+ SG_ ADAS_TargetAccel : 2|12@1- (0.05,-102.4) [-10|10] "m/s2" VCU
+ SG_ ADAS_LatCtrlReq : 14|2@1+ (1,0) [0|3] "" VCU
+ SG_ ADAS_TargetSteerAngle : 16|16@1- (0.1,-3276.8) [-3276.8|3276.7] "deg" VCU
+ SG_ ADAS_SystemStatus : 32|4@1+ (1,0) [0|15] "" VCU,GW
+ SG_ ADAS_FaultLevel : 36|3@1+ (1,0) [0|7] "" VCU,GW
+
+CM_ BU_ VCU "整车控制器";
+CM_ BU_ MCU "电机控制器";
+CM_ BU_ BMS "电池管理系统";
+CM_ BU_ GW "网关";
+CM_ BU_ ADAS "高级驾驶辅助系统";
+
+CM_ BO_ 256 "VCU整车状态报文，周期10ms";
+CM_ BO_ 512 "MCU电机扭矩信息报文，周期10ms";
+CM_ BO_ 768 "BMS电池信息报文，周期100ms";
+CM_ BO_ 1280 "ADAS控制指令报文，周期20ms";
+
+CM_ SG_ 256 VCU_GearPos "档位：0=P, 1=R, 2=N, 3=D";
+CM_ SG_ 256 VCU_VehicleSpeed "车速，精度0.05km/h（精度提升）";
+CM_ SG_ 256 VCU_ReadyStatus "整车Ready状态：0=未就绪, 1=就绪, 2=故障";
+CM_ SG_ 256 VCU_SteerAngle "方向盘转角，新增信号";
+CM_ SG_ 512 MCU_ActualTorque "电机实际扭矩";
+CM_ SG_ 512 MCU_FaultCode "故障码，位长度从8扩展到12";
+CM_ SG_ 768 BMS_SOC "电池荷电状态";
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 10000;
+BA_DEF_ BO_ "GenMsgSendType" ENUM "Cyclic","Event","NoMsgSendType";
+BA_DEF_ SG_ "SystemSignalLongSymbol" STRING;
+BA_DEF_ SG_ "GenSigSendType" ENUM "Cyclic","Event","NoSigSendType";
+
+BA_DEF_DEF_ "GenMsgCycleTime" 0;
+BA_DEF_DEF_ "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_ "SystemSignalLongSymbol" "";
+BA_DEF_DEF_ "GenSigSendType" "Cyclic";
+
+BA_ "GenMsgCycleTime" BO_ 256 10;
+BA_ "GenMsgCycleTime" BO_ 512 10;
+BA_ "GenMsgCycleTime" BO_ 768 100;
+BA_ "GenMsgCycleTime" BO_ 1280 20;
+
+VAL_ 256 VCU_GearPos 0 "P" 1 "R" 2 "N" 3 "D" ;
+VAL_ 256 VCU_BrakePedalSts 0 "Released" 1 "Pressed" 2 "Error" 3 "Invalid" ;
+VAL_ 256 VCU_ReadyStatus 0 "NotReady" 1 "Ready" 2 "Fault" 3 "Invalid" ;
+VAL_ 256 VCU_DrivingMode 0 "Normal" 1 "Sport" 2 "Eco" 3 "Snow" 4 "Custom" 5 "Auto" ;
+VAL_ 512 MCU_SysStatus 0 "Init" 1 "Ready" 2 "Running" 3 "Fault" 4 "Shutdown" ;
+VAL_ 1280 ADAS_LongCtrlReq 0 "Inactive" 1 "Active" 2 "Override" 3 "Fault" ;
+VAL_ 1280 ADAS_LatCtrlReq 0 "Inactive" 1 "Active" 2 "Override" 3 "Fault" ;
+VAL_ 1280 ADAS_SystemStatus 0 "Off" 1 "Standby" 2 "Active" 3 "Override" 4 "Fault" ;
+
+
