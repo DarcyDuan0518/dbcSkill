@@ -1,0 +1,103 @@
+======================================================================
+  DBC 变更差异报告
+  生成时间: 2026-04-29 13:48:42
+  旧版本: EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_BDCAN6.dbc
+  新版本: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN6.dbc
+======================================================================
+
+【变更摘要】
+  节点: 新增 0  删除 0
+  报文: 新增 0  删除 0  修改 8
+  信号: 新增 16  删除 0  修改 5
+
+【修改报文】
+  ✎ DZCU_DrLockCtrl_20ms (0x219)
+      ✚ [新增信号] DZCU_RChildProtnLckSts
+          起始位=252  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] DZCU_RRDoorLckSts
+          起始位=249  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] DZCU_RRDoorSts
+          起始位=251  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+  ✎ PZCU_ECGMCmd_20ms (0x247)
+      ✚ [新增信号] ECPrivacySts
+          起始位=41  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RLECProtnSts
+          起始位=24  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RLTempECCtrlCmd
+          起始位=37  长度=4bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 15.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRECProtnSts
+          起始位=54  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRTempECCtrlCmd
+          起始位=33  长度=4bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 15.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] TailDoorECProtnSts
+          起始位=52  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] TaildoorTempECCtrlCmd
+          起始位=45  长度=4bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 15.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] ThirdLECProtnSts
+          起始位=55  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] ThirdRECProtnSts
+          起始位=53  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+  ✎ PZCU_BodySts_20ms (0x259)
+      ✚ [新增信号] PZCU_LChildProtnLckSts
+          起始位=72  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] PZCU_RLDoorLckSts
+          起始位=87  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] PZCU_RLDoorSts
+          起始位=74  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+  ✎ LECGM_Sts1_100msMixed (0x3A1)
+      属性变更 - 报文名称: 'LECGM_Sts1_100ms' → 'LECGM_Sts1_100msMixed'
+      属性变更 - 属性.GenMsgDelayTime: '<不存在>' → 20.0
+      属性变更 - 属性.GenMsgSendType: 0 → 5
+  ✎ RECGM_Sts1_100msMixed (0x3A2)
+      属性变更 - 报文名称: 'RECGM_Sts1_100ms' → 'RECGM_Sts1_100msMixed'
+      属性变更 - 属性.GenMsgDelayTime: '<不存在>' → 20.0
+      属性变更 - 属性.GenMsgSendType: 0 → 5
+  ✎ BZCU_SecSeatSts_100ms (0x3EC)
+      ✎ [修改信号] SecLSeatPosChng
+          值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} → {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
+      ✎ [修改信号] SecRSeatPosChng
+          值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} → {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
+  ✎ BZCU_BodySts_100ms (0x51A)
+      ✎ [修改信号] DrEasyEntCfg
+          值表: {0: 'Active', 1: 'Inactive'} → {0: 'Inactive', 1: 'Active'}
+      ✎ [修改信号] SecLEasyEntCfg
+          值表: {0: 'Active', 1: 'Inactive'} → {0: 'Inactive', 1: 'Active'}
+      ✎ [修改信号] SecREasyEntCfg
+          值表: {0: 'Active', 1: 'Inactive'} → {0: 'Inactive', 1: 'Active'}
+  ✎ CCU_VehSts_1000ms (0x5A0)
+      ✚ [新增信号] OBDDiagDeviceActivated
+          起始位=13  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+
+======================================================================

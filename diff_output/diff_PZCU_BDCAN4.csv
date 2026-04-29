@@ -1,0 +1,37 @@
+﻿变更类型,报文ID(HEX),报文名称,信号名称,变更字段,旧值,新值
+报文-新增,0x19F,ETC_Info3_Event,,DLC,,8
+报文-新增,0x19F,ETC_Info3_Event,,发送节点,,Vector_XXX
+信号-新增,0x19F,ETC_Info3_Event,ETC_TradeStage1,定义,,"起始位=7,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0,单位="
+信号-新增,0x19F,ETC_Info3_Event,ETC_TradeStage2,定义,,"起始位=15,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0,单位="
+信号-新增,0x19F,ETC_Info3_Event,ETC_TradeStage3,定义,,"起始位=23,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0,单位="
+信号-新增,0x19F,ETC_Info3_Event,ETC_TradeStage4,定义,,"起始位=31,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0,单位="
+信号-新增,0x19F,ETC_Info3_Event,ETC_TradeStage5,定义,,"起始位=39,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0,单位="
+报文-新增,0x3E2,EMS_STS2_100ms_GW2,,DLC,,8
+报文-新增,0x3E2,EMS_STS2_100ms_GW2,,发送节点,,Vector_XXX
+信号-新增,0x3E2,EMS_STS2_100ms_GW2,EnMsfrTotCtr,定义,,"起始位=47,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0,单位="
+报文-新增,0x62D,ETC_OBUCardID_1000ms,,DLC,,8
+报文-新增,0x62D,ETC_OBUCardID_1000ms,,发送节点,,Vector_XXX
+信号-新增,0x62D,ETC_OBUCardID_1000ms,OBU_CardID,定义,,"起始位=7,长度=64,字节序=Motorola(大端),因子=1.0,偏移=0.0,单位="
+信号-新增,0x134,EMS_SysSts1_10ms_GW2,EnPrignTotCnt,定义,,"起始位=7,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-修改,0x1B9,ETC_Info2_Event,ETC_TradeAmou,起始位,3,15
+信号-修改,0x1B9,ETC_Info2_Event,ETC_TradeSts,起始位,7,3
+信号-修改,0x1B9,ETC_Info2_Event,ETC_TradeSts,位长度,2,3
+信号-修改,0x1B9,ETC_Info2_Event,ETC_TradeSts,最大值,3.0,7.0
+信号-修改,0x1B9,ETC_Info2_Event,ETC_TradeSts,值表,"{0: 'Trade success', 1: 'Trade fail', 2: 'Please contact the operator', 3: 'No card'}","{0: 'Invalid', 1: 'Trade success', 2: 'Trade fail', 3: 'Please contact the operator', 4: 'No card'}"
+信号-修改,0x21B,DZCU_PSDCmd_20ms,LPSDCtrlCmdSour,值表,"{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock'}","{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock', 5: 'inside rear manual handle', 6: 'outside manual handle'}"
+信号-修改,0x21B,DZCU_PSDCmd_20ms,RPSDCtrlCmdSour,值表,"{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock'}","{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock', 5: 'inside rear manual handle', 6: 'outside manual handle'}"
+信号-新增,0x2B8,PZCU_Sig3RTBD4_20ms,LatGrd,定义,,"起始位=31,长度=8,字节序=Motorola(大端),因子=0.01,偏移=-1.0"
+信号-新增,0x2B8,PZCU_Sig3RTBD4_20ms,LongtGrd,定义,,"起始位=39,长度=8,字节序=Motorola(大端),因子=0.01,偏移=-1.0"
+报文-修改,0x3AC,RRSCU_Sts1_100ms,,属性.GenMsgStartDelayTime,0.0,30.0
+信号-修改,0x3AC,RRSCU_Sts1_100ms,RRSCU_SecRSeatPosChng,值表,"{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}","{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
+信号-新增,0x3E1,EMS_STS2_100ms_GW1,EnBstPre,定义,,"起始位=55,长度=9,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-修改,0x3FA,PSCU_Sts2_100ms,PsngSeatPosChng,值表,"{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}","{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
+报文-修改,0x522,RRSCU_Sts11_100ms,,属性.GenMsgStartDelayTime,0.0,65.0
+信号-新增,0x522,RRSCU_Sts11_100ms,PsngSeatMovReq,定义,,"起始位=63,长度=4,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-新增,0x5A0,CCU_VehSts_1000ms_GW,OBDDiagDeviceActivated,定义,,"起始位=13,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-新增,0x5FB,ETC_Info1_1000ms,ETC_EmsnIntnst,定义,,"起始位=63,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-新增,0x5FB,ETC_Info1_1000ms,ETC_WkupSnstvt,定义,,"起始位=55,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-修改,0x5FB,ETC_Info1_1000ms,ETC_DisasSts,起始位,3,13
+信号-修改,0x5FB,ETC_Info1_1000ms,ETC_DisasSts,位长度,2,3
+信号-修改,0x5FB,ETC_Info1_1000ms,ETC_DisasSts,最大值,3.0,7.0
+信号-修改,0x5FB,ETC_Info1_1000ms,ETC_DisasSts,值表,"{0: 'Invalid', 1: 'ETC not actived/disassembled', 2: 'ETC actived, anti disassembly verification is normal', 3: 'ETC actived, anti disassembly verification overtime'}","{0: 'Invalid', 1: 'ETC not actived', 2: 'ETC actived, anti disassembly verification is normal', 3: 'ETC actived, anti disassembly verification overtime', 4: 'disassembled'}"

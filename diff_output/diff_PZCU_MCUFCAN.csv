@@ -1,0 +1,4 @@
+﻿变更类型,报文ID(HEX),报文名称,信号名称,变更字段,旧值,新值
+信号-新增,0x123,EMS_SysSts1_10ms,EnPrignTotCnt,定义,,"起始位=71,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-新增,0x3AA,PZCU_ACHtMgm_100ms,AtuoChrgSts,定义,,"起始位=205,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-新增,0x5A0,CCU_VehSts_1000ms,OBDDiagDeviceActivated,定义,,"起始位=13,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"

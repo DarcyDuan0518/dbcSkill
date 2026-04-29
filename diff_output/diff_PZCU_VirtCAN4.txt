@@ -1,0 +1,238 @@
+======================================================================
+  DBC 变更差异报告
+  生成时间: 2026-04-29 13:48:42
+  旧版本: EEA3.0_CAN_Matrix_V10.1.0_20260212_PZCU_VirtCAN4.dbc
+  新版本: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_VirtCAN4.dbc
+======================================================================
+
+【变更摘要】
+  节点: 新增 0  删除 0
+  报文: 新增 1  删除 0  修改 3
+  信号: 新增 50  删除 4  修改 2
+
+【新增报文】
+  ✚ PZCU_Monitor4_1000ms (0x1FFC0007)  DLC=8  发送节点=PZCU
+      + 信号: VehMaxCrntIn1Sec  起始位=7  长度=14bit  Motorola(大端)  因子=0.1  偏移=0.0  单位='A'
+
+【修改报文】
+  ✎ PZCU_Monitor2_20ms (0x2F6)
+      属性变更 - DLC: 8 → 16
+      ✚ [新增信号] RRWndRippleAnti_PnchSts
+          起始位=24  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRippleCurrent
+          起始位=47  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 25.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRipplePeriod
+          起始位=59  长度=10bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1024.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRipplePosCounter
+          起始位=55  长度=12bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 4096.0]  单位=''
+          接收节点=['Vector_XXX']
+  ✎ PZCU_Monitor1_100ms (0x393)
+      ✚ [新增信号] FACDrvFaceOtltTempTrg
+          起始位=316  长度=11bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-40.0  范围=[-40.0, 100.0]  单位='��'
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] FACDrvFootOtltTempTrg
+          起始位=321  长度=11bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-40.0  范围=[-40.0, 100.0]  单位='��'
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] FACPsngFaceOtltTempTrg
+          起始位=342  长度=11bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-40.0  范围=[-40.0, 100.0]  单位='��'
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] FACPsngFootOtltTempTrg
+          起始位=347  长度=11bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-40.0  范围=[-40.0, 100.0]  单位='��'
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] HeatcoreTarTemp
+          起始位=167  长度=16bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 65535.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] MotLoopTMModeDcsn
+          起始位=153  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✖ [删除信号] FLACFaceOtltTempTrg
+          起始位=316  长度=11bit
+      ✖ [删除信号] FLACFootOtltTempTrg
+          起始位=321  长度=11bit
+      ✖ [删除信号] FRACFaceOtltTempTrg
+          起始位=342  长度=11bit
+      ✖ [删除信号] FRACFootOtltTempTrg
+          起始位=347  长度=11bit
+      ✎ [修改信号] MotCoolRsn
+          起始位: 175 → 471
+          位长度: 8 → 16
+          最大值: 255.0 → 1023.0
+      ✎ [修改信号] MotWarmRsn
+          起始位: 153 → 455
+          位长度: 10 → 16
+  ✎ PZCU_Monitor3_100ms (0x1FFC0001)
+      ✚ [新增信号] ACAutoDryActv
+          起始位=216  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] ACAutoDryOffCode
+          起始位=239  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] AUTODryingSWSts
+          起始位=210  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] AutoDfgFuncSts
+          起始位=211  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] CbnHexTarT
+          起始位=303  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] Delta2BEXV
+          起始位=358  长度=11bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-40.0  范围=[-40.0, 85.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] Delta2EDC
+          起始位=327  长度=11bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-40.0  范围=[-40.0, 85.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] Delta2EFEXV
+          起始位=332  长度=11bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-40.0  范围=[-40.0, 85.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] Delta2OERV
+          起始位=337  长度=11bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-40.0  范围=[-40.0, 85.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] DrvFaceAirOtltRunModSts
+          起始位=287  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] DrvFaceAndFootTempDiff
+          起始位=219  长度=3bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 7.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] ECOACSwSts
+          起始位=213  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] FanCtrlTar
+          起始位=263  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] FrtACDrvBlwrGearAutoSts
+          起始位=223  长度=4bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 15.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] HiMotWstHeatOffCode
+          起始位=255  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] LoMotWstHeatOffCode
+          起始位=247  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] PM25PurifyFunSts
+          起始位=212  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] PsngFaceAirOtltRunModSts
+          起始位=295  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] PsngFaceAndFootTempDiff
+          起始位=231  长度=3bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 7.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndHallCount
+          起始位=431  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndHallCurDelta
+          起始位=447  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndHallDeltaSum
+          起始位=407  长度=16bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 65535.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndHallHold
+          起始位=423  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndHallSpeed
+          起始位=391  长度=16bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 65535.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndHallSpeedDelta
+          起始位=439  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRippleCount
+          起始位=495  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRippleDeltaSum
+          起始位=471  长度=16bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 65535.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRippleHold
+          起始位=487  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRippleInitnSts
+          起始位=383  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRippleLearnPos
+          起始位=363  长度=12bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 4096.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRipplePcntPos
+          起始位=382  长度=7bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 100.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRippleSpeed
+          起始位=455  长度=16bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 65535.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] RRWndRippleSpeedDelta
+          起始位=503  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] SmallCoolRdy
+          起始位=228  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] TMSDisCode
+          起始位=319  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] UnlckdVentnSwSts
+          起始位=208  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] VTMDisCode
+          起始位=311  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] VTMHVControlCommand
+          起始位=271  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] VTMLvPwrUseReq
+          起始位=279  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+      ✚ [新增信号] VentSWSts
+          起始位=209  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+
+======================================================================
