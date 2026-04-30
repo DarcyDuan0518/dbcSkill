@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30 16:15:34",
+  "generated_at": "2026-04-30 17:28:30",
   "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_MCURCAN.dbc",
   "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_MCURCAN.dbc",
   "stats": {
@@ -8,49 +8,14 @@
     "msg_id_changes": 0,
     "msgs_added": 0,
     "msgs_removed": 0,
-    "msgs_modified": 7,
+    "msgs_modified": 5,
     "sigs_added": 5,
     "sigs_removed": 0,
-    "sigs_modified": 2
+    "sigs_modified": 0
   },
   "node_changes": [],
   "message_id_changes": [],
   "message_changes": [
-    {
-      "type": "MODIFIED",
-      "msg_id": 118,
-      "can_id_hex": "0x76",
-      "msg_name": "ESP_SysSts3_10ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "TDiscMaxEstimd_Mod",
-          "field_changes": [
-            {
-              "field": "单位",
-              "old": "K",
-              "new": "��"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 223,
-            "length": 16,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 0.0625,
-            "offset": -128.0,
-            "min": -128.0,
-            "max": 1920.0,
-            "unit": "��",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
     {
       "type": "MODIFIED",
       "msg_id": 291,
@@ -65,17 +30,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 71,
-            "length": 8,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 255.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 8
           }
         }
       ]
@@ -94,17 +49,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 246,
-            "length": 15,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 0.1,
-            "offset": -1500.0,
-            "min": -1500.0,
-            "max": 1500.0,
-            "unit": "V",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 15
           }
         }
       ]
@@ -123,52 +68,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 205,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 976,
-      "can_id_hex": "0x3D0",
-      "msg_name": "ODU_STS1_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "ChrgInltLEDSts",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Reserved'}",
-              "new": "{0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Invalid'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 47,
-            "length": 4,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 15.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]
@@ -187,17 +87,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 149,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         }
       ]
@@ -216,17 +106,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 13,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]

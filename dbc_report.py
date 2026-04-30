@@ -87,9 +87,7 @@ class TextReporter:
                 lines.append(f"  [+] {mc.msg_name} ({mc.can_id_hex})  DLC={msg.dlc}  发送节点={msg.sender}")
                 if verbose and msg.signals:
                     for sig_name, sig in sorted(msg.signals.items()):
-                        lines.append(f"      + 信号: {sig_name}  起始位={sig.start_bit}  长度={sig.length}bit"
-                                     f"  {_byte_order_str(sig.byte_order)}  因子={sig.factor}  偏移={sig.offset}"
-                                     f"  单位={sig.unit!r}")
+                        lines.append(f"      + 信号: {sig_name}  起始位={sig.start_bit}  长度={sig.length}bit")
 
         # 删除报文
         if result.removed_messages:
@@ -120,11 +118,7 @@ class TextReporter:
                         lines.append(f"      {icon} [{label}信号] {sc.signal_name}")
                         if sc.change_type == ChangeType.ADDED and sc.new_signal:
                             sig = sc.new_signal
-                            lines.append(f"          起始位={sig.start_bit}  长度={sig.length}bit"
-                                         f"  {_byte_order_str(sig.byte_order)}  {_value_type_str(sig.value_type)}")
-                            lines.append(f"          因子={sig.factor}  偏移={sig.offset}"
-                                         f"  范围=[{sig.min_val}, {sig.max_val}]  单位={sig.unit!r}")
-                            lines.append(f"          接收节点={sig.receivers}")
+                            lines.append(f"          起始位={sig.start_bit}  长度={sig.length}bit")
                         elif sc.change_type == ChangeType.REMOVED and sc.old_signal:
                             sig = sc.old_signal
                             lines.append(f"          起始位={sig.start_bit}  长度={sig.length}bit")
@@ -207,15 +201,10 @@ class MarkdownReporter:
                     lines.append(f"- **注释**: {msg.comment}")
                 if msg.signals:
                     lines.append("\n**信号列表**:\n")
-                    lines.append("| 信号名 | 起始位 | 长度(bit) | 字节序 | 类型 | 因子 | 偏移 | 最小值 | 最大值 | 单位 | 接收节点 |")
-                    lines.append("|--------|--------|-----------|--------|------|------|------|--------|--------|------|----------|")
+                    lines.append("| 信号名 | 起始位 | 长度(bit) |")
+                    lines.append("|--------|--------|-----------|")
                     for sig_name, sig in sorted(msg.signals.items()):
-                        lines.append(
-                            f"| `{sig_name}` | {sig.start_bit} | {sig.length} | "
-                            f"{_byte_order_str(sig.byte_order)} | {_value_type_str(sig.value_type)} | "
-                            f"{sig.factor} | {sig.offset} | {sig.min_val} | {sig.max_val} | "
-                            f"{sig.unit} | {', '.join(sig.receivers)} |"
-                        )
+                        lines.append(f"| `{sig_name}` | {sig.start_bit} | {sig.length} |")
                 lines.append("")
 
         # 删除报文
@@ -269,15 +258,6 @@ class MarkdownReporter:
                             lines.append("|------|----|")
                             lines.append(f"| 起始位 | {sig.start_bit} |")
                             lines.append(f"| 位长度 | {sig.length} |")
-                            lines.append(f"| 字节序 | {_byte_order_str(sig.byte_order)} |")
-                            lines.append(f"| 数值类型 | {_value_type_str(sig.value_type)} |")
-                            lines.append(f"| 因子 | {sig.factor} |")
-                            lines.append(f"| 偏移 | {sig.offset} |")
-                            lines.append(f"| 范围 | [{sig.min_val}, {sig.max_val}] |")
-                            lines.append(f"| 单位 | {sig.unit} |")
-                            lines.append(f"| 接收节点 | {', '.join(sig.receivers)} |")
-                            if sig.comment:
-                                lines.append(f"| 注释 | {sig.comment} |")
 
                         elif sc.change_type == ChangeType.REMOVED and sc.old_signal:
                             sig = sc.old_signal
@@ -452,22 +432,29 @@ class HTMLReporter:
 
                 if mc.signal_changes:
                     html.append("<h4>信号变更</h4>")
+                    html.append("<table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr>")
                     for sc in mc.signal_changes:
                         tag_cls = sc.change_type.lower()
-                        html.append(f"<p><span class='tag-{tag_cls}'>{_change_label(sc.change_type)}</span> "
-                                    f"<strong><code>{sc.signal_name}</code></strong></p>")
-
+                        label = _change_label(sc.change_type)
                         if sc.change_type == ChangeType.ADDED and sc.new_signal:
-                            html.append(self._signal_detail_table(sc.new_signal))
+                            sig = sc.new_signal
+                            detail = (f'起始位=<code>{sig.start_bit}</code>&nbsp;&nbsp;'
+                                      f'位长度=<code>{sig.length}</code>')
                         elif sc.change_type == ChangeType.REMOVED and sc.old_signal:
                             sig = sc.old_signal
-                            html.append(f"<p style='color:#888'>起始位: {sig.start_bit}, 长度: {sig.length}bit</p>")
+                            detail = (f'起始位=<code>{sig.start_bit}</code>&nbsp;&nbsp;'
+                                      f'位长度=<code>{sig.length}</code>')
                         elif sc.change_type == ChangeType.MODIFIED and sc.field_changes:
-                            html.append("<table><tr><th>字段</th><th>旧值</th><th>新值</th></tr>")
-                            for fc in sc.field_changes:
-                                html.append(f"<tr><td>{fc.field_name}</td><td><code>{fc.old_value}</code></td>"
-                                            f"<td><code>{fc.new_value}</code></td></tr>")
-                            html.append("</table>")
+                            detail = "; ".join(
+                                f"{fc.field_name}: <code>{fc.old_value}</code>-><code>{fc.new_value}</code>"
+                                for fc in sc.field_changes
+                            )
+                        else:
+                            detail = "-"
+                        html.append(f"<tr><td><span class='tag-{tag_cls}'>{label}</span></td>"
+                                    f"<td><strong><code>{sc.signal_name}</code></strong></td>"
+                                    f"<td>{detail}</td></tr>")
+                    html.append("</table>")
 
                 html.append("</div>")
 
@@ -475,27 +462,18 @@ class HTMLReporter:
         return "".join(html)
 
     def _signal_table(self, signals: dict) -> str:
-        rows = ["<table><tr><th>信号名</th><th>起始位</th><th>长度(bit)</th><th>字节序</th>"
-                "<th>类型</th><th>因子</th><th>偏移</th><th>最小值</th><th>最大值</th><th>单位</th><th>接收节点</th></tr>"]
+        rows = ["<table><tr><th>信号名</th><th>起始位</th><th>长度(bit)</th></tr>"]
         for sig_name, sig in sorted(signals.items()):
-            rows.append(f"<tr><td><code>{sig_name}</code></td><td>{sig.start_bit}</td><td>{sig.length}</td>"
-                        f"<td>{_byte_order_str(sig.byte_order)}</td><td>{_value_type_str(sig.value_type)}</td>"
-                        f"<td>{sig.factor}</td><td>{sig.offset}</td><td>{sig.min_val}</td><td>{sig.max_val}</td>"
-                        f"<td>{sig.unit}</td><td>{', '.join(sig.receivers)}</td></tr>")
+            rows.append(f"<tr><td><code>{sig_name}</code></td><td>{sig.start_bit}</td><td>{sig.length}</td></tr>")
         rows.append("</table>")
         return "".join(rows)
 
     def _signal_detail_table(self, sig: Signal) -> str:
         rows = ["<table>"]
         fields = [
-            ("起始位", sig.start_bit), ("位长度", sig.length),
-            ("字节序", _byte_order_str(sig.byte_order)), ("数值类型", _value_type_str(sig.value_type)),
-            ("因子", sig.factor), ("偏移", sig.offset),
-            ("最小值", sig.min_val), ("最大值", sig.max_val),
-            ("单位", sig.unit), ("接收节点", ", ".join(sig.receivers)),
+            ("起始位", sig.start_bit),
+            ("位长度", sig.length),
         ]
-        if sig.comment:
-            fields.append(("注释", sig.comment))
         for k, v in fields:
             rows.append(f"<tr><td><strong>{k}</strong></td><td><code>{v}</code></td></tr>")
         rows.append("</table>")
@@ -534,7 +512,7 @@ class CSVReporter:
             for sig_name, sig in sorted(msg.signals.items()):
                 rows.append([f"信号-新增", mc.can_id_hex, mc.msg_name, sig_name,
                               "定义", "",
-                              f"起始位={sig.start_bit},长度={sig.length},字节序={_byte_order_str(sig.byte_order)},因子={sig.factor},偏移={sig.offset},单位={sig.unit}"])
+                              f"起始位={sig.start_bit},长度={sig.length}"])
 
         # 删除报文
         for mc in result.removed_messages:
@@ -558,7 +536,7 @@ class CSVReporter:
                     sig = sc.new_signal
                     rows.append([f"信号-新增", mc.can_id_hex, mc.msg_name, sc.signal_name,
                                   "定义", "",
-                                  f"起始位={sig.start_bit},长度={sig.length},字节序={_byte_order_str(sig.byte_order)},因子={sig.factor},偏移={sig.offset}"])
+                                  f"起始位={sig.start_bit},长度={sig.length}"])
                 elif sc.change_type == ChangeType.REMOVED:
                     rows.append([f"信号-删除", mc.can_id_hex, mc.msg_name, sc.signal_name, "", "", ""])
                 elif sc.change_type == ChangeType.MODIFIED:
@@ -628,12 +606,8 @@ class JSONReporter:
                 if sc.new_signal:
                     sig = sc.new_signal
                     sc_data["new_signal"] = {
-                        "start_bit": sig.start_bit, "length": sig.length,
-                        "byte_order": _byte_order_str(sig.byte_order),
-                        "value_type": _value_type_str(sig.value_type),
-                        "factor": sig.factor, "offset": sig.offset,
-                        "min": sig.min_val, "max": sig.max_val,
-                        "unit": sig.unit, "receivers": sig.receivers
+                        "start_bit": sig.start_bit,
+                        "length": sig.length,
                     }
                 mc_data["signal_changes"].append(sc_data)
             data["message_changes"].append(mc_data)

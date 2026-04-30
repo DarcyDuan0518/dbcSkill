@@ -591,6 +591,14 @@ class BatchReportGenerator:
                     html.append(f'<p><span class="tag-add">新增报文</span> '
                                  f'<strong>{mc.msg_name}</strong> <code>{mc.can_id_hex}</code> '
                                  f'DLC={msg.dlc} 发送={msg.sender} 信号数={len(msg.signals)}</p>')
+                    if msg.signals:
+                        html.append('<table style="margin-left:20px;width:calc(100% - 20px)">'
+                                    '<tr><th>信号名</th><th>起始位</th><th>位长度</th></tr>')
+                        for sig_name, sig in sorted(msg.signals.items()):
+                            html.append(f'<tr><td><strong>{sig_name}</strong></td>'
+                                        f'<td>{sig.start_bit}</td>'
+                                        f'<td>{sig.length}</td></tr>')
+                        html.append('</table>')
 
                 # 删除报文
                 for mc in diff.removed_messages:
@@ -615,10 +623,17 @@ class BatchReportGenerator:
                         for sc in mc.signal_changes:
                             tag = {"ADDED": "tag-add", "REMOVED": "tag-del", "MODIFIED": "tag-mod"}.get(sc.change_type, "")
                             label = {"ADDED": "新增", "REMOVED": "删除", "MODIFIED": "修改"}.get(sc.change_type, sc.change_type)
-                            field_str = "; ".join(
-                                f"{fc.field_name}: <code>{fc.old_value}</code>-><code>{fc.new_value}</code>"
-                                for fc in sc.field_changes
-                            ) or "-"
+                            if sc.change_type == "ADDED" and sc.new_signal is not None:
+                                field_str = (f'起始位=<code>{sc.new_signal.start_bit}</code>  '
+                                             f'位长度=<code>{sc.new_signal.length}</code>')
+                            elif sc.change_type == "REMOVED" and sc.old_signal is not None:
+                                field_str = (f'起始位=<code>{sc.old_signal.start_bit}</code>  '
+                                             f'位长度=<code>{sc.old_signal.length}</code>')
+                            else:
+                                field_str = "; ".join(
+                                    f"{fc.field_name}: <code>{fc.old_value}</code>-><code>{fc.new_value}</code>"
+                                    for fc in sc.field_changes
+                                ) or "-"
                             html.append(f'<tr><td><span class="{tag}">{label}</span></td>'
                                         f'<td><strong>{sc.signal_name}</strong></td>'
                                         f'<td>{field_str}</td></tr>')

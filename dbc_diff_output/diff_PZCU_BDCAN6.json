@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30 16:15:34",
+  "generated_at": "2026-04-30 17:28:30",
   "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_BDCAN6.dbc",
   "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN6.dbc",
   "stats": {
@@ -8,10 +8,10 @@
     "msg_id_changes": 0,
     "msgs_added": 0,
     "msgs_removed": 0,
-    "msgs_modified": 8,
+    "msgs_modified": 6,
     "sigs_added": 16,
     "sigs_removed": 0,
-    "sigs_modified": 5
+    "sigs_modified": 0
   },
   "node_changes": [],
   "message_id_changes": [],
@@ -30,17 +30,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 252,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         },
         {
@@ -49,17 +39,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 249,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         },
         {
@@ -68,17 +48,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 251,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]
@@ -97,17 +67,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 41,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         },
         {
@@ -116,17 +76,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 24,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         },
         {
@@ -135,17 +85,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 37,
-            "length": 4,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 15.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 4
           }
         },
         {
@@ -154,17 +94,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 54,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         },
         {
@@ -173,17 +103,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 33,
-            "length": 4,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 15.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 4
           }
         },
         {
@@ -192,17 +112,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 52,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         },
         {
@@ -211,17 +121,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 45,
-            "length": 4,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 15.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 4
           }
         },
         {
@@ -230,17 +130,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 55,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         },
         {
@@ -249,17 +139,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 53,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         }
       ]
@@ -278,17 +158,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 72,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         },
         {
@@ -297,17 +167,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 87,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         },
         {
@@ -316,17 +176,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 74,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]
@@ -385,151 +235,6 @@
     },
     {
       "type": "MODIFIED",
-      "msg_id": 1004,
-      "can_id_hex": "0x3EC",
-      "msg_name": "BZCU_SecSeatSts_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "SecLSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 55,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "SecRSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 151,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 1306,
-      "can_id_hex": "0x51A",
-      "msg_name": "BZCU_BodySts_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "DrEasyEntCfg",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Active', 1: 'Inactive'}",
-              "new": "{0: 'Inactive', 1: 'Active'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 242,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "SecLEasyEntCfg",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Active', 1: 'Inactive'}",
-              "new": "{0: 'Inactive', 1: 'Active'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 241,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "SecREasyEntCfg",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Active', 1: 'Inactive'}",
-              "new": "{0: 'Inactive', 1: 'Active'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 240,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
       "msg_id": 1440,
       "can_id_hex": "0x5A0",
       "msg_name": "CCU_VehSts_1000ms",
@@ -542,17 +247,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 13,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]

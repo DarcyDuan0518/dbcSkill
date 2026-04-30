@@ -1,6 +1,6 @@
 ======================================================================
   DBC 变更差异报告
-  生成时间: 2026-04-30 16:15:34
+  生成时间: 2026-04-30 17:28:30
   旧版本: EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_BDCAN1.dbc
   新版本: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN1.dbc
 ======================================================================
@@ -8,85 +8,44 @@
 【变更摘要】
   节点: 新增 0  删除 0
   报文ID变更: 0
-  报文: 新增 0  删除 0  修改 11
-  信号: 新增 13  删除 0  修改 6
+  报文: 新增 0  删除 0  修改 8
+  信号: 新增 13  删除 0  修改 0
 
 【修改报文】
   [~] EMS_SysSts1_10ms (0x123)
       [+] [新增信号] EnPrignTotCnt
-          起始位=71  长度=8bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
-          接收节点=['Vector_XXX']
+          起始位=71  长度=8bit
   [~] CCU_ChassisInfo1_10ms (0x196)
       [+] [新增信号] VMM_SusBrkCtrlReq
-          起始位=248  长度=1bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
-          接收节点=['Vector_XXX']
+          起始位=248  长度=1bit
   [~] DZCU_DrLockCtrl_20ms (0x219)
       [+] [新增信号] DZCU_RChildProtnLckSts
-          起始位=252  长度=1bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
-          接收节点=['PZCU']
+          起始位=252  长度=1bit
       [+] [新增信号] DZCU_RRDoorLckSts
-          起始位=249  长度=2bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
-          接收节点=['PZCU']
+          起始位=249  长度=2bit
       [+] [新增信号] DZCU_RRDoorSts
-          起始位=251  长度=2bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
-          接收节点=['PZCU']
+          起始位=251  长度=2bit
   [~] PZCU_BodySts_20ms (0x259)
       [+] [新增信号] PZCU_LChildProtnLckSts
-          起始位=72  长度=1bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
-          接收节点=['Vector_XXX']
+          起始位=72  长度=1bit
       [+] [新增信号] PZCU_RLDoorLckSts
-          起始位=87  长度=2bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
-          接收节点=['Vector_XXX']
+          起始位=87  长度=2bit
       [+] [新增信号] PZCU_RLDoorSts
-          起始位=74  长度=2bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
-          接收节点=['Vector_XXX']
+          起始位=74  长度=2bit
   [~] CCU_Info3_50ms (0x342)
       [+] [新增信号] AtuoChrgRobarmMoveSts
-          起始位=102  长度=3bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 7.0]  单位=''
-          接收节点=['Vector_XXX']
+          起始位=102  长度=3bit
       [+] [新增信号] RoadClass
-          起始位=99  长度=4bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 15.0]  单位=''
-          接收节点=['Vector_XXX']
+          起始位=99  长度=4bit
   [~] DZCU_BodyCtrl_100ms (0x399)
       [+] [新增信号] RLWndPcntMvCmd
-          起始位=44  长度=7bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 102.0]  单位=''
-          接收节点=['PZCU']
-  [~] BZCU_SeatCtrl_100ms (0x39A)
-      [~] [修改信号] BZCU_DrSeatPosChng
-          值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} -> {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
-      [~] [修改信号] BZCU_PsngSeatPosChng
-          值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} -> {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
-      [~] [修改信号] PsngEasyEntCfg
-          值表: {0: 'Active', 1: 'Inactive'} -> {0: 'Inactive', 1: 'Active'}
-  [~] BZCU_SecSeatSts_100ms (0x3EC)
-      [~] [修改信号] SecLSeatPosChng
-          值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} -> {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
-      [~] [修改信号] SecRSeatPosChng
-          值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} -> {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
-  [~] PZCU_BodySts5_100ms (0x505)
-      [~] [修改信号] PZCU_PsngSeatPosChng
-          值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} -> {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
+          起始位=44  长度=7bit
   [~] RRSCU_Sts11_100ms_GW (0x522)
       属性变更 - GenMsgStartDelayTime: 0.0 -> 65.0
       [+] [新增信号] PsngSeatMovReq
-          起始位=63  长度=4bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 15.0]  单位=''
-          接收节点=['Vector_XXX']
+          起始位=63  长度=4bit
   [~] DZCU_BodySts4_100ms (0x52C)
       [+] [新增信号] BLEHoodCtrlReq
-          起始位=300  长度=2bit  Motorola(大端)  无符号
-          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
-          接收节点=['PZCU']
+          起始位=300  长度=2bit
 
 ======================================================================

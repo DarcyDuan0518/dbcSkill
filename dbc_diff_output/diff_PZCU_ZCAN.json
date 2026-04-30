@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30 16:15:34",
+  "generated_at": "2026-04-30 17:28:30",
   "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_ZCAN.dbc",
   "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_ZCAN.dbc",
   "stats": {
@@ -8,10 +8,10 @@
     "msg_id_changes": 0,
     "msgs_added": 3,
     "msgs_removed": 0,
-    "msgs_modified": 22,
+    "msgs_modified": 14,
     "sigs_added": 15,
     "sigs_removed": 0,
-    "sigs_modified": 15
+    "sigs_modified": 0
   },
   "node_changes": [],
   "message_id_changes": [],
@@ -57,17 +57,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 71,
-            "length": 8,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 255.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 8
           }
         }
       ]
@@ -86,77 +76,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 127,
-            "length": 8,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 255.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 539,
-      "can_id_hex": "0x21B",
-      "msg_name": "DZCU_PSDCmd_20ms_GW",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "LPSDCtrlCmdSour",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock'}",
-              "new": "{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock', 5: 'inside rear manual handle', 6: 'outside manual handle'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 20,
-            "length": 3,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 7.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "RPSDCtrlCmdSour",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock'}",
-              "new": "{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock', 5: 'inside rear manual handle', 6: 'outside manual handle'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 31,
-            "length": 3,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 7.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
+            "length": 8
           }
         }
       ]
@@ -175,17 +95,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 72,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         },
         {
@@ -194,17 +104,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 87,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         },
         {
@@ -213,17 +113,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 74,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]
@@ -242,17 +132,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 1,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 1
           }
         },
         {
@@ -261,102 +141,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 0,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 922,
-      "can_id_hex": "0x39A",
-      "msg_name": "BZCU_SeatCtrl_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "BZCU_DrSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 135,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "BZCU_PsngSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 113,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "PsngEasyEntCfg",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Active', 1: 'Inactive'}",
-              "new": "{0: 'Inactive', 1: 'Active'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 119,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
+            "length": 1
           }
         }
       ]
@@ -375,17 +160,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 204,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
+            "length": 2
           }
         },
         {
@@ -394,17 +169,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 202,
-            "length": 5,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 31.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
+            "length": 5
           }
         },
         {
@@ -413,17 +178,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 19,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
+            "length": 2
           }
         }
       ]
@@ -442,17 +197,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 205,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]
@@ -470,68 +215,7 @@
           "new": "30.0"
         }
       ],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "RRSCU_SecRSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 58,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 976,
-      "can_id_hex": "0x3D0",
-      "msg_name": "ODU_STS1_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "ChrgInltLEDSts",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Reserved'}",
-              "new": "{0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Invalid'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 47,
-            "length": 4,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 15.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
+      "signal_changes": []
     },
     {
       "type": "MODIFIED",
@@ -547,17 +231,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 74,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]
@@ -576,232 +250,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 149,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 1004,
-      "can_id_hex": "0x3EC",
-      "msg_name": "BZCU_SecSeatSts_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "SecLSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 55,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "SecRSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 151,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 1018,
-      "can_id_hex": "0x3FA",
-      "msg_name": "PSCU_Sts2_100ms_GW",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "PsngSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 11,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 1285,
-      "can_id_hex": "0x505",
-      "msg_name": "PZCU_BodySts5_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "PZCU_PsngSeatPosChng",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
-              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 65,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 1306,
-      "can_id_hex": "0x51A",
-      "msg_name": "BZCU_BodySts_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "DrEasyEntCfg",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Active', 1: 'Inactive'}",
-              "new": "{0: 'Inactive', 1: 'Active'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 242,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "SecLEasyEntCfg",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Active', 1: 'Inactive'}",
-              "new": "{0: 'Inactive', 1: 'Active'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 241,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "SecREasyEntCfg",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Active', 1: 'Inactive'}",
-              "new": "{0: 'Inactive', 1: 'Active'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 240,
-            "length": 1,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 1.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
+            "length": 1
           }
         }
       ]
@@ -826,17 +275,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 63,
-            "length": 4,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 15.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
+            "length": 4
           }
         }
       ]
@@ -855,41 +294,6 @@
         }
       ],
       "signal_changes": []
-    },
-    {
-      "type": "MODIFIED",
-      "msg_id": 1340,
-      "can_id_hex": "0x53C",
-      "msg_name": "PZCU_LIN_100ms",
-      "field_changes": [],
-      "attr_changes": [],
-      "signal_changes": [
-        {
-          "type": "MODIFIED",
-          "signal_name": "PsngSeatTableSwSts",
-          "field_changes": [
-            {
-              "field": "值表",
-              "old": "{0: 'Normal', 1: 'Open', 2: 'Retract', 3: 'valid'}",
-              "new": "{0: 'Normal', 1: 'short press', 2: 'long press', 3: 'Invalid'}"
-            }
-          ],
-          "new_signal": {
-            "start_bit": 79,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
-          }
-        }
-      ]
     },
     {
       "type": "MODIFIED",
@@ -935,17 +339,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 13,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "PZCU"
-            ]
+            "length": 2
           }
         }
       ]

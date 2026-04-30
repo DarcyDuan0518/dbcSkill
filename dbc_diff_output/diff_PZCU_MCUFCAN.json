@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30 16:15:34",
+  "generated_at": "2026-04-30 17:28:30",
   "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_MCUFCAN.dbc",
   "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_MCUFCAN.dbc",
   "stats": {
@@ -30,17 +30,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 71,
-            "length": 8,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 255.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 8
           }
         }
       ]
@@ -59,17 +49,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 205,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]
@@ -88,17 +68,7 @@
           "field_changes": [],
           "new_signal": {
             "start_bit": 13,
-            "length": 2,
-            "byte_order": "Motorola(大端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 3.0,
-            "unit": "",
-            "receivers": [
-              "Vector_XXX"
-            ]
+            "length": 2
           }
         }
       ]

@@ -1,8 +1,6 @@
 ﻿变更类型,报文ID(HEX),报文名称,信号名称,变更字段,旧值,新值
-信号-修改,0x76,ESP_SysSts3_10ms,TDiscMaxEstimd_Mod,单位,K,��
-信号-新增,0x123,EMS_SysSts1_10ms,EnPrignTotCnt,定义,,"起始位=71,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0"
-信号-新增,0x140,BMS_SysSts1_10ms,DCChrgPrtVByOGC,定义,,"起始位=246,长度=15,字节序=Motorola(大端),因子=0.1,偏移=-1500.0"
-信号-新增,0x3AA,PZCU_ACHtMgm_100ms,AtuoChrgSts,定义,,"起始位=205,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"
-信号-修改,0x3D0,ODU_STS1_100ms,ChrgInltLEDSts,值表,"{0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Reserved'}","{0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Invalid'}"
-信号-新增,0x3E0,BMS_ChrgInfo2_100ms,BMS_ChgEndPwrLowWarning,定义,,"起始位=149,长度=1,字节序=Motorola(大端),因子=1.0,偏移=0.0"
-信号-新增,0x5A0,CCU_VehSts_1000ms,OBDDiagDeviceActivated,定义,,"起始位=13,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"
+信号-新增,0x123,EMS_SysSts1_10ms,EnPrignTotCnt,定义,,"起始位=71,长度=8"
+信号-新增,0x140,BMS_SysSts1_10ms,DCChrgPrtVByOGC,定义,,"起始位=246,长度=15"
+信号-新增,0x3AA,PZCU_ACHtMgm_100ms,AtuoChrgSts,定义,,"起始位=205,长度=2"
+信号-新增,0x3E0,BMS_ChrgInfo2_100ms,BMS_ChgEndPwrLowWarning,定义,,"起始位=149,长度=1"
+信号-新增,0x5A0,CCU_VehSts_1000ms,OBDDiagDeviceActivated,定义,,"起始位=13,长度=2"

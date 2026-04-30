@@ -207,20 +207,14 @@ class DBCDiff:
     """
 
     # 信号需要比较的字段列表
+    # 以下字段不影响协议栈代码生成，忽略：
+    #   byte_order(字节序)、value_type(数值类型)、factor(因子)、offset(偏移)、
+    #   min_val(最小值)、max_val(最大值)、unit(单位)、receivers(接收节点)、
+    #   comment(注释)、value_table(值表)
     _SIGNAL_FIELDS = [
-        ("start_bit",   "起始位"),
-        ("length",      "位长度"),
-        ("byte_order",  "字节序"),
-        ("value_type",  "数值类型"),
-        ("factor",      "因子"),
-        ("offset",      "偏移"),
-        ("min_val",     "最小值"),
-        ("max_val",     "最大值"),
-        ("unit",        "单位"),
+        ("start_bit",     "起始位"),
+        ("length",        "位长度"),
         ("mux_indicator", "多路复用"),
-        ("receivers",   "接收节点"),
-        ("comment",     "注释"),
-        ("value_table", "值表"),
     ]
 
     # 报文需要比较的字段列表
