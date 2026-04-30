@@ -1,0 +1,110 @@
+======================================================================
+LDF 差异分析报告
+生成时间: 2026-04-30 16:23:40
+旧文件: data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\LIN\EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN12.ldf
+新文件: data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\LIN\EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN12.ldf
+======================================================================
+
+【变更统计】
+  节点变更:     +0 -0 ~0
+  节点属性变更: +0 -0 ~0
+  帧变更:       +0 -0 ~17
+  信号变更:     +17 -0 ~0
+  调度表:       +0 -0 ~1
+  编码类型:     +2 -0 ~0
+
+--------------------------------------------------
+【帧变更】
+  [~] [修改帧] IPALM1_Status [新增1个信号]
+      [+] 新增信号: IPALM1_WorkMode
+  [~] [修改帧] IPALM2_Status [新增1个信号]
+      [+] 新增信号: IPALM2_WorkMode
+  [~] [修改帧] IPALM3_Status [新增1个信号]
+      [+] 新增信号: IPALM3_WorkMode
+  [~] [修改帧] IPALM4_Status [新增1个信号]
+      [+] 新增信号: IPALM4_WorkMode
+  [~] [修改帧] PDALM1_Status [新增1个信号]
+      [+] 新增信号: PDALM1_WorkMode
+  [~] [修改帧] PDALM2_Status [新增1个信号]
+      [+] 新增信号: PDALM2_WorkMode
+  [~] [修改帧] PDALM3_Status [新增1个信号]
+      [+] 新增信号: PDALM3_WorkMode
+  [~] [修改帧] PDALM4_Status [新增1个信号]
+      [+] 新增信号: PDALM4_WorkMode
+  [~] [修改帧] PDALM5_Status [新增1个信号]
+      [+] 新增信号: PDALM5_WorkMode
+  [~] [修改帧] PDALM6_Status [新增1个信号]
+      [+] 新增信号: PDALM6_WorkMode
+  [~] [修改帧] PRDALM1_Status [新增1个信号]
+      [+] 新增信号: PRDALM1_WorkMode
+  [~] [修改帧] PRDALM2_Status [新增1个信号]
+      [+] 新增信号: PRDALM2_WorkMode
+  [~] [修改帧] PRDALM3_Status [新增1个信号]
+      [+] 新增信号: PRDALM3_WorkMode
+  [~] [修改帧] PRDALM4_Status [新增1个信号]
+      [+] 新增信号: PRDALM4_WorkMode
+  [~] [修改帧] PRDALM5_Status [新增1个信号]
+      [+] 新增信号: PRDALM5_WorkMode
+  [~] [修改帧] PRDALM6_Status [新增1个信号]
+      [+] 新增信号: PRDALM6_WorkMode
+  [~] [修改帧] PZCU_ALMCtrl2 [新增1个信号]
+      [+] 新增信号: PWorkMode
+
+--------------------------------------------------
+【信号变更】
+  [+] [新增信号] IPALM1_Status.IPALM1_WorkMode
+  [+] [新增信号] IPALM2_Status.IPALM2_WorkMode
+  [+] [新增信号] IPALM3_Status.IPALM3_WorkMode
+  [+] [新增信号] IPALM4_Status.IPALM4_WorkMode
+  [+] [新增信号] PDALM1_Status.PDALM1_WorkMode
+  [+] [新增信号] PDALM2_Status.PDALM2_WorkMode
+  [+] [新增信号] PDALM3_Status.PDALM3_WorkMode
+  [+] [新增信号] PDALM4_Status.PDALM4_WorkMode
+  [+] [新增信号] PDALM5_Status.PDALM5_WorkMode
+  [+] [新增信号] PDALM6_Status.PDALM6_WorkMode
+  [+] [新增信号] PRDALM1_Status.PRDALM1_WorkMode
+  [+] [新增信号] PRDALM2_Status.PRDALM2_WorkMode
+  [+] [新增信号] PRDALM3_Status.PRDALM3_WorkMode
+  [+] [新增信号] PRDALM4_Status.PRDALM4_WorkMode
+  [+] [新增信号] PRDALM5_Status.PRDALM5_WorkMode
+  [+] [新增信号] PRDALM6_Status.PRDALM6_WorkMode
+  [+] [新增信号] PZCU_ALMCtrl2.PWorkMode
+
+--------------------------------------------------
+【调度表变更】
+  [~] [修改调度表] PZCU_LIN12 [28条目顺序变更]
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第3位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第5位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第7位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第9位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第11位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl2 顺序: 第12位 -> 第2位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第13位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第15位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第17位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第19位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第21位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl2 顺序: 第22位 -> 第2位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第23位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第25位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第27位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第29位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第31位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl2 顺序: 第32位 -> 第2位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第33位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第35位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第37位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第39位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第41位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl2 顺序: 第42位 -> 第2位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第43位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第45位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第47位 -> 第1位
+      [<>] 帧 PZCU_ALMCtrl 顺序: 第49位 -> 第1位
+
+--------------------------------------------------
+【编码类型变更】
+  [+] [新增编码类型] DDALM1_WorkModeCoding
+  [+] [新增编码类型] PWorkModeCoding
+
+======================================================================

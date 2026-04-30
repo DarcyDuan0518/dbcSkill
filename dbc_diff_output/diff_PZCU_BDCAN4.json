@@ -1,0 +1,516 @@
+{
+  "generated_at": "2026-04-30 16:15:34",
+  "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_BDCAN4.dbc",
+  "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN4.dbc",
+  "stats": {
+    "nodes_added": 0,
+    "nodes_removed": 0,
+    "msg_id_changes": 0,
+    "msgs_added": 3,
+    "msgs_removed": 0,
+    "msgs_modified": 10,
+    "sigs_added": 8,
+    "sigs_removed": 0,
+    "sigs_modified": 7
+  },
+  "node_changes": [],
+  "message_id_changes": [],
+  "message_changes": [
+    {
+      "type": "ADDED",
+      "msg_id": 415,
+      "can_id_hex": "0x19F",
+      "msg_name": "ETC_Info3_Event",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": []
+    },
+    {
+      "type": "ADDED",
+      "msg_id": 994,
+      "can_id_hex": "0x3E2",
+      "msg_name": "EMS_STS2_100ms_GW2",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": []
+    },
+    {
+      "type": "ADDED",
+      "msg_id": 1581,
+      "can_id_hex": "0x62D",
+      "msg_name": "ETC_OBUCardID_1000ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": []
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 308,
+      "can_id_hex": "0x134",
+      "msg_name": "EMS_SysSts1_10ms_GW2",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "EnPrignTotCnt",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 7,
+            "length": 8,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 255.0,
+            "unit": "",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 441,
+      "can_id_hex": "0x1B9",
+      "msg_name": "ETC_Info2_Event",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "MODIFIED",
+          "signal_name": "ETC_TradeAmou",
+          "field_changes": [
+            {
+              "field": "起始位",
+              "old": "3",
+              "new": "15"
+            }
+          ],
+          "new_signal": {
+            "start_bit": 15,
+            "length": 32,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 0.01,
+            "offset": 0.0,
+            "min": 8.0,
+            "max": 42949672.96,
+            "unit": "yuan",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        },
+        {
+          "type": "MODIFIED",
+          "signal_name": "ETC_TradeSts",
+          "field_changes": [
+            {
+              "field": "起始位",
+              "old": "7",
+              "new": "3"
+            },
+            {
+              "field": "位长度",
+              "old": "2",
+              "new": "3"
+            },
+            {
+              "field": "最大值",
+              "old": "3.0",
+              "new": "7.0"
+            },
+            {
+              "field": "值表",
+              "old": "{0: 'Trade success', 1: 'Trade fail', 2: 'Please contact the operator', 3: 'No card'}",
+              "new": "{0: 'Invalid', 1: 'Trade success', 2: 'Trade fail', 3: 'Please contact the operator', 4: 'No card'}"
+            }
+          ],
+          "new_signal": {
+            "start_bit": 3,
+            "length": 3,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 7.0,
+            "unit": "",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 539,
+      "can_id_hex": "0x21B",
+      "msg_name": "DZCU_PSDCmd_20ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "MODIFIED",
+          "signal_name": "LPSDCtrlCmdSour",
+          "field_changes": [
+            {
+              "field": "值表",
+              "old": "{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock'}",
+              "new": "{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock', 5: 'inside rear manual handle', 6: 'outside manual handle'}"
+            }
+          ],
+          "new_signal": {
+            "start_bit": 20,
+            "length": 3,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 7.0,
+            "unit": "",
+            "receivers": [
+              "Vector_XXX"
+            ]
+          }
+        },
+        {
+          "type": "MODIFIED",
+          "signal_name": "RPSDCtrlCmdSour",
+          "field_changes": [
+            {
+              "field": "值表",
+              "old": "{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock'}",
+              "new": "{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock', 5: 'inside rear manual handle', 6: 'outside manual handle'}"
+            }
+          ],
+          "new_signal": {
+            "start_bit": 31,
+            "length": 3,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 7.0,
+            "unit": "",
+            "receivers": [
+              "Vector_XXX"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 696,
+      "can_id_hex": "0x2B8",
+      "msg_name": "PZCU_Sig3RTBD4_20ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "LatGrd",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 31,
+            "length": 8,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 0.01,
+            "offset": -1.0,
+            "min": -1.0,
+            "max": 1.0,
+            "unit": "",
+            "receivers": [
+              "Vector_XXX"
+            ]
+          }
+        },
+        {
+          "type": "ADDED",
+          "signal_name": "LongtGrd",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 39,
+            "length": 8,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 0.01,
+            "offset": -1.0,
+            "min": -1.0,
+            "max": 1.0,
+            "unit": "",
+            "receivers": [
+              "Vector_XXX"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 940,
+      "can_id_hex": "0x3AC",
+      "msg_name": "RRSCU_Sts1_100ms",
+      "field_changes": [],
+      "attr_changes": [
+        {
+          "field": "GenMsgStartDelayTime",
+          "old": "0.0",
+          "new": "30.0"
+        }
+      ],
+      "signal_changes": [
+        {
+          "type": "MODIFIED",
+          "signal_name": "RRSCU_SecRSeatPosChng",
+          "field_changes": [
+            {
+              "field": "值表",
+              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
+              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
+            }
+          ],
+          "new_signal": {
+            "start_bit": 58,
+            "length": 2,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 3.0,
+            "unit": "",
+            "receivers": [
+              "Vector_XXX"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 993,
+      "can_id_hex": "0x3E1",
+      "msg_name": "EMS_STS2_100ms_GW1",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "EnBstPre",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 55,
+            "length": 9,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 300.0,
+            "unit": "kPa",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 1018,
+      "can_id_hex": "0x3FA",
+      "msg_name": "PSCU_Sts2_100ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "MODIFIED",
+          "signal_name": "PsngSeatPosChng",
+          "field_changes": [
+            {
+              "field": "值表",
+              "old": "{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}",
+              "new": "{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
+            }
+          ],
+          "new_signal": {
+            "start_bit": 11,
+            "length": 2,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 3.0,
+            "unit": "",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 1314,
+      "can_id_hex": "0x522",
+      "msg_name": "RRSCU_Sts11_100ms",
+      "field_changes": [],
+      "attr_changes": [
+        {
+          "field": "GenMsgStartDelayTime",
+          "old": "0.0",
+          "new": "65.0"
+        }
+      ],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "PsngSeatMovReq",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 63,
+            "length": 4,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 15.0,
+            "unit": "",
+            "receivers": [
+              "Vector_XXX"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 1440,
+      "can_id_hex": "0x5A0",
+      "msg_name": "CCU_VehSts_1000ms_GW",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "OBDDiagDeviceActivated",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 13,
+            "length": 2,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 3.0,
+            "unit": "",
+            "receivers": [
+              "Vector_XXX"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 1531,
+      "can_id_hex": "0x5FB",
+      "msg_name": "ETC_Info1_1000ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "ETC_EmsnIntnst",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 63,
+            "length": 8,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 255.0,
+            "unit": "",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        },
+        {
+          "type": "ADDED",
+          "signal_name": "ETC_WkupSnstvt",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 55,
+            "length": 8,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 255.0,
+            "unit": "",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        },
+        {
+          "type": "MODIFIED",
+          "signal_name": "ETC_DisasSts",
+          "field_changes": [
+            {
+              "field": "起始位",
+              "old": "3",
+              "new": "13"
+            },
+            {
+              "field": "位长度",
+              "old": "2",
+              "new": "3"
+            },
+            {
+              "field": "最大值",
+              "old": "3.0",
+              "new": "7.0"
+            },
+            {
+              "field": "值表",
+              "old": "{0: 'Invalid', 1: 'ETC not actived/disassembled', 2: 'ETC actived, anti disassembly verification is normal', 3: 'ETC actived, anti disassembly verification overtime'}",
+              "new": "{0: 'Invalid', 1: 'ETC not actived', 2: 'ETC actived, anti disassembly verification is normal', 3: 'ETC actived, anti disassembly verification overtime', 4: 'disassembled'}"
+            }
+          ],
+          "new_signal": {
+            "start_bit": 13,
+            "length": 3,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 7.0,
+            "unit": "",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

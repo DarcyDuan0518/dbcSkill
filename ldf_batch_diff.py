@@ -120,7 +120,7 @@ def parse_ldf_filename(filepath: str) -> Optional[LDFFileInfo]:
 
 def scan_ldf_files(directory: str) -> Dict[str, LDFFileInfo]:
     """
-    扫描目录中的所有LDF文件，按通道名分组，每个通道保留最高版本。
+    递归扫描目录（含子目录）中的所有LDF文件，按通道名分组，每个通道保留最高版本。
     返回 {channel: LDFFileInfo}
     """
     channel_map: Dict[str, LDFFileInfo] = {}
@@ -128,18 +128,19 @@ def scan_ldf_files(directory: str) -> Dict[str, LDFFileInfo]:
     if not os.path.isdir(directory):
         raise ValueError(f"目录不存在: {directory}")
 
-    for fname in os.listdir(directory):
-        if not fname.lower().endswith(".ldf"):
-            continue
-        fpath = os.path.join(directory, fname)
-        info = parse_ldf_filename(fpath)
-        if info is None:
-            print(f"  [跳过] 无法解析文件名: {fname}")
-            continue
+    for root, dirs, files in os.walk(directory):
+        for fname in files:
+            if not fname.lower().endswith(".ldf"):
+                continue
+            fpath = os.path.join(root, fname)
+            info = parse_ldf_filename(fpath)
+            if info is None:
+                print(f"  [跳过] 无法解析文件名: {fname}")
+                continue
 
-        existing = channel_map.get(info.channel)
-        if existing is None or info.version > existing.version:
-            channel_map[info.channel] = info
+            existing = channel_map.get(info.channel)
+            if existing is None or info.version > existing.version:
+                channel_map[info.channel] = info
 
     return channel_map
 

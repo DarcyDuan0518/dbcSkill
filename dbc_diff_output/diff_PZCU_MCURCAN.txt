@@ -1,0 +1,47 @@
+======================================================================
+  DBC 变更差异报告
+  生成时间: 2026-04-30 16:15:34
+  旧版本: EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_MCURCAN.dbc
+  新版本: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_MCURCAN.dbc
+======================================================================
+
+【变更摘要】
+  节点: 新增 0  删除 0
+  报文ID变更: 0
+  报文: 新增 0  删除 0  修改 7
+  信号: 新增 5  删除 0  修改 2
+
+【修改报文】
+  [~] ESP_SysSts3_10ms (0x76)
+      [~] [修改信号] TDiscMaxEstimd_Mod
+          单位: 'K' -> '��'
+  [~] EMS_SysSts1_10ms (0x123)
+      [+] [新增信号] EnPrignTotCnt
+          起始位=71  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['Vector_XXX']
+  [~] BMS_SysSts1_10ms (0x140)
+      [+] [新增信号] DCChrgPrtVByOGC
+          起始位=246  长度=15bit  Motorola(大端)  无符号
+          因子=0.1  偏移=-1500.0  范围=[-1500.0, 1500.0]  单位='V'
+          接收节点=['Vector_XXX']
+  [~] PZCU_ACHtMgm_100ms (0x3AA)
+      [+] [新增信号] AtuoChrgSts
+          起始位=205  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+  [~] ODU_STS1_100ms (0x3D0)
+      [~] [修改信号] ChrgInltLEDSts
+          值表: {0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Reserved'} -> {0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Invalid'}
+  [~] BMS_ChrgInfo2_100ms (0x3E0)
+      [+] [新增信号] BMS_ChgEndPwrLowWarning
+          起始位=149  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['Vector_XXX']
+  [~] CCU_VehSts_1000ms (0x5A0)
+      [+] [新增信号] OBDDiagDeviceActivated
+          起始位=13  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+
+======================================================================

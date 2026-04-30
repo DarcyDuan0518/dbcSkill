@@ -1,0 +1,51 @@
+======================================================================
+  DBC 变更差异报告
+  生成时间: 2026-04-30 16:15:34
+  旧版本: EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_CHCAN1.dbc
+  新版本: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_CHCAN1.dbc
+======================================================================
+
+【变更摘要】
+  节点: 新增 0  删除 0
+  报文ID变更: 0
+  报文: 新增 2  删除 0  修改 4
+  信号: 新增 3  删除 0  修改 1
+
+【新增报文】
+  [+] PZCU_ChassisCtrl2_Event (0xF4)  DLC=16  发送节点=PZCU
+      + 信号: GameModeHWAForceFb  起始位=47  长度=9bit  Motorola(大端)  因子=0.1  偏移=-22.78  单位='Nm'
+      + 信号: GameModeInitReq  起始位=15  长度=1bit  Motorola(大端)  因子=1.0  偏移=0.0  单位=''
+      + 信号: GameModeResdSig  起始位=103  长度=32bit  Motorola(大端)  因子=1.0  偏移=0.0  单位='NA'
+      + 信号: GameModeSetHWAAng  起始位=23  长度=16bit  Motorola(大端)  因子=0.1  偏移=-780.0  单位='deg'
+      + 信号: GameModeSteerFeelMode  起始位=14  长度=2bit  Motorola(大端)  因子=1.0  偏移=0.0  单位=''
+      + 信号: GameModeVehSpd  起始位=39  长度=8bit  Motorola(大端)  因子=1.804  偏移=0.0  单位='kph'
+      + 信号: SigGroup_0x0F4_ChkSm_F  起始位=7  长度=8bit  Motorola(大端)  因子=1.0  偏移=0.0  单位='NA'
+      + 信号: SigGroup_0x0F4_RlngCtr_F  起始位=11  长度=4bit  Motorola(大端)  因子=1.0  偏移=0.0  单位='NA'
+  [+] HWA_Info4_Event (0x2CE)  DLC=16  发送节点=Vector_XXX
+      + 信号: GameModeHWAFbResd  起始位=103  长度=32bit  Motorola(大端)  因子=1.0  偏移=0.0  单位='NA'
+      + 信号: GameModeHWAInitErrCode  起始位=23  长度=3bit  Motorola(大端)  因子=1.0  偏移=0.0  单位=''
+      + 信号: GameModeHWAInitSts  起始位=15  长度=3bit  Motorola(大端)  因子=1.0  偏移=0.0  单位=''
+      + 信号: SigGroup_0x2CE_ChkSm_F  起始位=7  长度=8bit  Motorola(大端)  因子=1.0  偏移=0.0  单位='NA'
+      + 信号: SigGroup_0x2CE_RlngCtr_F  起始位=11  长度=4bit  Motorola(大端)  因子=1.0  偏移=0.0  单位='NA'
+
+【修改报文】
+  [~] ESP_SysSts3_10ms (0x76)
+      [~] [修改信号] TDiscMaxEstimd_Mod
+          单位: 'K' -> '��'
+  [~] CCU_ChassisInfo1_10ms (0x196)
+      [+] [新增信号] VMM_SusBrkCtrlReq
+          起始位=248  长度=1bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 1.0]  单位=''
+          接收节点=['PZCU']
+  [~] ESP_SysSts3_20ms (0x216)
+      [+] [新增信号] ESP_WssCoreMonRob
+          起始位=127  长度=8bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 255.0]  单位=''
+          接收节点=['PZCU']
+  [~] PZCU_ACHtMgm_100ms (0x3AA)
+      [+] [新增信号] AtuoChrgSts
+          起始位=205  长度=2bit  Motorola(大端)  无符号
+          因子=1.0  偏移=0.0  范围=[0.0, 3.0]  单位=''
+          接收节点=['Vector_XXX']
+
+======================================================================

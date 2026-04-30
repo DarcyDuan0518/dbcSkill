@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>LDF差异分析报告</title>
+<style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+    h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+    h2 { color: #34495e; border-left: 4px solid #3498db; padding-left: 10px; margin-top: 30px; }
+    h3 { color: #555; margin-top: 15px; }
+    .meta { background: #ecf0f1; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
+    .meta table { border-collapse: collapse; }
+    .meta td { padding: 4px 12px; }
+    .stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 15px 0; }
+    .stat-card { background: white; border-radius: 8px; padding: 12px 20px;
+                 box-shadow: 0 2px 6px rgba(0,0,0,0.1); min-width: 120px; text-align: center; }
+    .stat-card .label { font-size: 12px; color: #888; }
+    .stat-card .value { font-size: 22px; font-weight: bold; color: #2c3e50; }
+    table.diff { width: 100%; border-collapse: collapse; margin: 10px 0; background: white;
+                 box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 6px; overflow: hidden; }
+    table.diff th { background: #3498db; color: white; padding: 8px 12px; text-align: left; }
+    table.diff td { padding: 7px 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+    table.diff tr:last-child td { border-bottom: none; }
+    .added    { background: #e8f8e8; color: #27ae60; }
+    .removed  { background: #fde8e8; color: #e74c3c; }
+    .modified { background: #fef9e7; color: #f39c12; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px;
+             font-size: 12px; font-weight: bold; }
+    .badge-add  { background: #27ae60; color: white; }
+    .badge-del  { background: #e74c3c; color: white; }
+    .badge-mod  { background: #f39c12; color: white; }
+    .no-change  { color: #27ae60; font-size: 16px; padding: 20px; }
+    code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+    .section { background: white; border-radius: 8px; padding: 16px 20px;
+               box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<h1>📋 LDF 差异分析报告</h1>
+<div class="meta">
+  <table>
+    <tr><td><b>生成时间</b></td><td>2026-04-30 16:23:40</td></tr>
+    <tr><td><b>旧文件</b></td><td><code>data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\LIN\EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN12.ldf</code></td></tr>
+    <tr><td><b>新文件</b></td><td><code>data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\LIN\EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN12.ldf</code></td></tr>
+  </table>
+</div>
+<h2>变更统计</h2><div class="stats">
+<div class="stat-card"><div class="label">节点新增</div><div class="value" style="color:#27ae60">0</div></div>
+<div class="stat-card"><div class="label">节点删除</div><div class="value" style="color:#e74c3c">0</div></div>
+<div class="stat-card"><div class="label">帧新增</div><div class="value" style="color:#27ae60">0</div></div>
+<div class="stat-card"><div class="label">帧删除</div><div class="value" style="color:#e74c3c">0</div></div>
+<div class="stat-card"><div class="label">帧修改</div><div class="value" style="color:#f39c12">17</div></div>
+<div class="stat-card"><div class="label">信号新增</div><div class="value" style="color:#27ae60">17</div></div>
+<div class="stat-card"><div class="label">信号删除</div><div class="value" style="color:#e74c3c">0</div></div>
+<div class="stat-card"><div class="label">信号修改</div><div class="value" style="color:#f39c12">0</div></div>
+</div>
+<h2>帧变更</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>帧名</th><th>帧ID</th><th>变更详情</th></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>IPALM1_Status</b></td><td><code>0x1F</code></td><td><span style="color:#27ae60">+信号:IPALM1_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>IPALM2_Status</b></td><td><code>0x20</code></td><td><span style="color:#27ae60">+信号:IPALM2_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>IPALM3_Status</b></td><td><code>0x21</code></td><td><span style="color:#27ae60">+信号:IPALM3_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>IPALM4_Status</b></td><td><code>0x22</code></td><td><span style="color:#27ae60">+信号:IPALM4_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM1_Status</b></td><td><code>0x25</code></td><td><span style="color:#27ae60">+信号:PDALM1_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM2_Status</b></td><td><code>0x26</code></td><td><span style="color:#27ae60">+信号:PDALM2_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM3_Status</b></td><td><code>0x23</code></td><td><span style="color:#27ae60">+信号:PDALM3_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM4_Status</b></td><td><code>0x24</code></td><td><span style="color:#27ae60">+信号:PDALM4_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM5_Status</b></td><td><code>0x12</code></td><td><span style="color:#27ae60">+信号:PDALM5_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM6_Status</b></td><td><code>0x13</code></td><td><span style="color:#27ae60">+信号:PDALM6_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM1_Status</b></td><td><code>0x27</code></td><td><span style="color:#27ae60">+信号:PRDALM1_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM2_Status</b></td><td><code>0x28</code></td><td><span style="color:#27ae60">+信号:PRDALM2_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM3_Status</b></td><td><code>0x29</code></td><td><span style="color:#27ae60">+信号:PRDALM3_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM4_Status</b></td><td><code>0x2A</code></td><td><span style="color:#27ae60">+信号:PRDALM4_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM5_Status</b></td><td><code>0x14</code></td><td><span style="color:#27ae60">+信号:PRDALM5_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM6_Status</b></td><td><code>0x15</code></td><td><span style="color:#27ae60">+信号:PRDALM6_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PZCU_ALMCtrl2</b></td><td><code>0x11</code></td><td><span style="color:#27ae60">+信号:PWorkMode</span></td></tr>
+</table></div>
+<h2>信号变更</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>所属帧</th><th>信号名</th><th>位长度</th><th>发布节点</th><th>变更详情</th></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>IPALM1_Status</td><td><b>IPALM1_WorkMode</b></td><td>4</td><td>IPALM1</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>IPALM2_Status</td><td><b>IPALM2_WorkMode</b></td><td>4</td><td>IPALM2</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>IPALM3_Status</td><td><b>IPALM3_WorkMode</b></td><td>4</td><td>IPALM3</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>IPALM4_Status</td><td><b>IPALM4_WorkMode</b></td><td>4</td><td>IPALM4</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM1_Status</td><td><b>PDALM1_WorkMode</b></td><td>4</td><td>PDALM1</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM2_Status</td><td><b>PDALM2_WorkMode</b></td><td>4</td><td>PDALM2</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM3_Status</td><td><b>PDALM3_WorkMode</b></td><td>4</td><td>PDALM3</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM4_Status</td><td><b>PDALM4_WorkMode</b></td><td>4</td><td>PDALM4</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM5_Status</td><td><b>PDALM5_WorkMode</b></td><td>4</td><td>PDALM5</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM6_Status</td><td><b>PDALM6_WorkMode</b></td><td>4</td><td>PDALM6</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM1_Status</td><td><b>PRDALM1_WorkMode</b></td><td>4</td><td>PRDALM1</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM2_Status</td><td><b>PRDALM2_WorkMode</b></td><td>4</td><td>PRDALM2</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM3_Status</td><td><b>PRDALM3_WorkMode</b></td><td>4</td><td>PRDALM3</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM4_Status</td><td><b>PRDALM4_WorkMode</b></td><td>4</td><td>PRDALM4</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM5_Status</td><td><b>PRDALM5_WorkMode</b></td><td>4</td><td>PRDALM5</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM6_Status</td><td><b>PRDALM6_WorkMode</b></td><td>4</td><td>PRDALM6</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_ALMCtrl2</td><td><b>PWorkMode</b></td><td>4</td><td>PZCU</td><td></td></tr>
+</table></div>
+<h2>调度表变更</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>调度表名</th><th>变更详情</th></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PZCU_LIN12</b></td><td><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第3->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第5->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第7->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第9->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第11->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl2: 第12->第2位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第13->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第15->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第17->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第19->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第21->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl2: 第22->第2位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第23->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第25->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第27->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第29->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第31->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl2: 第32->第2位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第33->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第35->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第37->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第39->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第41->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl2: 第42->第2位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第43->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第45->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第47->第1位</span><br><span style="color:#8e44ad"><>PZCU_ALMCtrl: 第49->第1位</span></td></tr>
+</table></div>
+<h2>编码类型变更</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>编码类型名</th></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td><b>DDALM1_WorkModeCoding</b></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td><b>PWorkModeCoding</b></td></tr>
+</table></div>
+</body></html>

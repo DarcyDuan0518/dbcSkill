@@ -1,0 +1,160 @@
+{
+  "generated_at": "2026-04-30 16:15:34",
+  "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_CHCAN1.dbc",
+  "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_CHCAN1.dbc",
+  "stats": {
+    "nodes_added": 0,
+    "nodes_removed": 0,
+    "msg_id_changes": 0,
+    "msgs_added": 2,
+    "msgs_removed": 0,
+    "msgs_modified": 4,
+    "sigs_added": 3,
+    "sigs_removed": 0,
+    "sigs_modified": 1
+  },
+  "node_changes": [],
+  "message_id_changes": [],
+  "message_changes": [
+    {
+      "type": "ADDED",
+      "msg_id": 244,
+      "can_id_hex": "0xF4",
+      "msg_name": "PZCU_ChassisCtrl2_Event",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": []
+    },
+    {
+      "type": "ADDED",
+      "msg_id": 718,
+      "can_id_hex": "0x2CE",
+      "msg_name": "HWA_Info4_Event",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": []
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 118,
+      "can_id_hex": "0x76",
+      "msg_name": "ESP_SysSts3_10ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "MODIFIED",
+          "signal_name": "TDiscMaxEstimd_Mod",
+          "field_changes": [
+            {
+              "field": "单位",
+              "old": "K",
+              "new": "��"
+            }
+          ],
+          "new_signal": {
+            "start_bit": 223,
+            "length": 16,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 0.0625,
+            "offset": -128.0,
+            "min": -128.0,
+            "max": 1920.0,
+            "unit": "��",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 406,
+      "can_id_hex": "0x196",
+      "msg_name": "CCU_ChassisInfo1_10ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "VMM_SusBrkCtrlReq",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 248,
+            "length": 1,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 1.0,
+            "unit": "",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 534,
+      "can_id_hex": "0x216",
+      "msg_name": "ESP_SysSts3_20ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "ESP_WssCoreMonRob",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 127,
+            "length": 8,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 255.0,
+            "unit": "",
+            "receivers": [
+              "PZCU"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 938,
+      "can_id_hex": "0x3AA",
+      "msg_name": "PZCU_ACHtMgm_100ms",
+      "field_changes": [],
+      "attr_changes": [],
+      "signal_changes": [
+        {
+          "type": "ADDED",
+          "signal_name": "AtuoChrgSts",
+          "field_changes": [],
+          "new_signal": {
+            "start_bit": 205,
+            "length": 2,
+            "byte_order": "Motorola(大端)",
+            "value_type": "无符号",
+            "factor": 1.0,
+            "offset": 0.0,
+            "min": 0.0,
+            "max": 3.0,
+            "unit": "",
+            "receivers": [
+              "Vector_XXX"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
