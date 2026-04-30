@@ -4,51 +4,70 @@
 <meta charset="UTF-8">
 <title>LDF批量差异摘要</title>
 <style>
-body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; color: #2c3e50; }
 h1 { color: #2c3e50; }
+h2 { color: #2980b9; border-left: 4px solid #3498db; padding-left: 10px; margin-top: 30px; }
+h3 { color: #555; margin: 14px 0 6px; font-size: 15px; }
 .summary { display: flex; gap: 20px; margin: 15px 0; }
 .card { background: white; border-radius: 8px; padding: 15px 25px;
          box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center; }
 .card .num { font-size: 28px; font-weight: bold; }
 table { width: 100%; border-collapse: collapse; background: white;
-         box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 8px; overflow: hidden; }
-th { background: #3498db; color: white; padding: 10px 14px; text-align: left; }
-td { padding: 8px 14px; border-bottom: 1px solid #eee; }
+         box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 6px;
+         overflow: hidden; margin-bottom: 10px; }
+th { background: #3498db; color: white; padding: 8px 12px; text-align: left; font-size: 13px; }
+td { padding: 7px 12px; border-bottom: 1px solid #eee; font-size: 13px; vertical-align: top; }
 tr:last-child td { border-bottom: none; }
+tr.added   td { background: #f0fff4; }
+tr.removed td { background: #fff5f5; }
+tr.modified td { background: #fffbf0; }
+.badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:12px; font-weight:bold; }
+.badge-add { background:#d4edda; color:#155724; }
+.badge-del { background:#f8d7da; color:#721c24; }
+.badge-mod { background:#fff3cd; color:#856404; }
+.channel-block { background: white; border-radius: 8px; padding: 20px 24px;
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-top: 24px; }
+.dtbl th { background: #546e7a; }
+code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
 </style>
 </head>
 <body>
-<h1> LDF 批量差异分析摘要</h1>
-<p>生成时间: 2026-04-30 16:23:40 &nbsp;|&nbsp; 共 5 个通道</p>
+<h1>📋 LDF 批量差异分析报告</h1>
+<p style="color:#888">生成时间: 2026-04-30 16:57:04 &nbsp;|&nbsp; 共 5 个通道</p>
 <div class="summary">
-  <div class="card"><div class="num" style="color:#e74c3c">4</div><div>有变更</div></div>
-  <div class="card"><div class="num" style="color:#27ae60">1</div><div>无变更</div></div>
+  <div class="card"><div class="num" style="color:#e74c3c">3</div><div>有变更</div></div>
+  <div class="card"><div class="num" style="color:#27ae60">2</div><div>无变更</div></div>
 </div>
+
+<h2>📊 通道概览</h2>
 <table>
 <tr><th>通道</th><th>状态</th><th>节点(+/-/~)</th><th>帧(+/-/~)</th>
-    <th>信号(+/-/~)</th><th>旧文件</th><th>新文件</th></tr>
+    <th>信号(+/-/~)</th><th>调度表(+/-/~)</th><th>旧文件</th><th>新文件</th></tr>
 <tr>
-  <td>LIN11</td>
+  <td><a href="#LIN11" style="color:inherit;text-decoration:none">LIN11</a></td>
   <td style="color:#e74c3c;font-weight:bold">有变更</td>
   <td>0/0/0</td>
   <td>0/0/2</td>
   <td>4/1/0</td>
+  <td>0/0/0</td>
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN11.ldf</td>
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN11.ldf</td>
 </tr><tr>
-  <td>LIN12</td>
+  <td><a href="#LIN12" style="color:inherit;text-decoration:none">LIN12</a></td>
   <td style="color:#e74c3c;font-weight:bold">有变更</td>
   <td>0/0/0</td>
   <td>0/0/17</td>
   <td>17/0/0</td>
+  <td>0/0/0</td>
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN12.ldf</td>
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN12.ldf</td>
 </tr><tr>
-  <td>LIN7</td>
+  <td><a href="#LIN7" style="color:inherit;text-decoration:none">LIN7</a></td>
   <td style="color:#e74c3c;font-weight:bold">有变更</td>
   <td>0/0/0</td>
   <td>1/0/1</td>
   <td>24/0/0</td>
+  <td>0/0/1</td>
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN7.ldf</td>
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN7.ldf</td>
 </tr><tr>
@@ -57,11 +76,13 @@ tr:last-child td { border-bottom: none; }
   <td>0/0/0</td>
   <td>0/0/0</td>
   <td>0/0/0</td>
+  <td>0/0/0</td>
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V10.0.0_20260116_LIN8.ldf</td>
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V10.0.0_20260116_LIN8.ldf</td>
 </tr><tr>
   <td>LIN9</td>
-  <td style="color:#e74c3c;font-weight:bold">有变更</td>
+  <td style="color:#27ae60">无变更</td>
+  <td>0/0/0</td>
   <td>0/0/0</td>
   <td>0/0/0</td>
   <td>0/0/0</td>
@@ -69,4 +90,104 @@ tr:last-child td { border-bottom: none; }
   <td style="font-size:12px;color:#888">EEA3.0_LIN_Matrix_V7.0.0_20250819_LIN9.ldf</td>
 </tr>
 </table>
+
+<div class="channel-block" id="LIN11">
+<h2>🔔 通道 LIN11</h2>
+<p style="color:#888;font-size:13px">旧: data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\LIN\EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN11.ldf<br>新: data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\LIN\EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN11.ldf</p>
+<h3>帧变更</h3>
+<table class="dtbl"><tr><th>类型</th><th>帧名</th><th>帧ID</th><th>变更详情</th></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PSTM_StatusInfo</b></td><td><code>0x0B</code></td><td><span style="color:#27ae60">+信号:PsngSeatTableAutoLvlSts</span><br><span style="color:#27ae60">+信号:PsngSeatTableSwEnbSts</span><br><span style="color:#27ae60">+信号:PsngSeatTableSwPressSts</span><br><span style="color:#e74c3c">-信号:PsngSeatTableAutoLevelSwSts</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PZCU_LIN11CtrlCmd2</b></td><td><code>0x05</code></td><td><span style="color:#27ae60">+信号:PsngSeatTableSwEnbReq</span></td></tr>
+</table>
+<h3>信号变更</h3>
+<table class="dtbl"><tr><th>类型</th><th>所属帧</th><th>信号名</th><th>位长度</th><th>发布节点</th><th>变更详情</th></tr>
+<tr class="removed"><td><span class="badge badge-del">删除</span></td><td>PSTM_StatusInfo</td><td><b>PsngSeatTableAutoLevelSwSts</b></td><td>1</td><td>PSTM</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PSTM_StatusInfo</td><td><b>PsngSeatTableAutoLvlSts</b></td><td>1</td><td>PSTM</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_LIN11CtrlCmd2</td><td><b>PsngSeatTableSwEnbReq</b></td><td>1</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PSTM_StatusInfo</td><td><b>PsngSeatTableSwEnbSts</b></td><td>1</td><td>PSTM</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PSTM_StatusInfo</td><td><b>PsngSeatTableSwPressSts</b></td><td>1</td><td>PSTM</td><td></td></tr>
+</table>
+</div><div class="channel-block" id="LIN12">
+<h2>🔔 通道 LIN12</h2>
+<p style="color:#888;font-size:13px">旧: data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\LIN\EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN12.ldf<br>新: data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\LIN\EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN12.ldf</p>
+<h3>帧变更</h3>
+<table class="dtbl"><tr><th>类型</th><th>帧名</th><th>帧ID</th><th>变更详情</th></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>IPALM1_Status</b></td><td><code>0x1F</code></td><td><span style="color:#27ae60">+信号:IPALM1_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>IPALM2_Status</b></td><td><code>0x20</code></td><td><span style="color:#27ae60">+信号:IPALM2_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>IPALM3_Status</b></td><td><code>0x21</code></td><td><span style="color:#27ae60">+信号:IPALM3_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>IPALM4_Status</b></td><td><code>0x22</code></td><td><span style="color:#27ae60">+信号:IPALM4_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM1_Status</b></td><td><code>0x25</code></td><td><span style="color:#27ae60">+信号:PDALM1_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM2_Status</b></td><td><code>0x26</code></td><td><span style="color:#27ae60">+信号:PDALM2_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM3_Status</b></td><td><code>0x23</code></td><td><span style="color:#27ae60">+信号:PDALM3_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM4_Status</b></td><td><code>0x24</code></td><td><span style="color:#27ae60">+信号:PDALM4_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM5_Status</b></td><td><code>0x12</code></td><td><span style="color:#27ae60">+信号:PDALM5_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PDALM6_Status</b></td><td><code>0x13</code></td><td><span style="color:#27ae60">+信号:PDALM6_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM1_Status</b></td><td><code>0x27</code></td><td><span style="color:#27ae60">+信号:PRDALM1_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM2_Status</b></td><td><code>0x28</code></td><td><span style="color:#27ae60">+信号:PRDALM2_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM3_Status</b></td><td><code>0x29</code></td><td><span style="color:#27ae60">+信号:PRDALM3_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM4_Status</b></td><td><code>0x2A</code></td><td><span style="color:#27ae60">+信号:PRDALM4_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM5_Status</b></td><td><code>0x14</code></td><td><span style="color:#27ae60">+信号:PRDALM5_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PRDALM6_Status</b></td><td><code>0x15</code></td><td><span style="color:#27ae60">+信号:PRDALM6_WorkMode</span></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PZCU_ALMCtrl2</b></td><td><code>0x11</code></td><td><span style="color:#27ae60">+信号:PWorkMode</span></td></tr>
+</table>
+<h3>信号变更</h3>
+<table class="dtbl"><tr><th>类型</th><th>所属帧</th><th>信号名</th><th>位长度</th><th>发布节点</th><th>变更详情</th></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>IPALM1_Status</td><td><b>IPALM1_WorkMode</b></td><td>4</td><td>IPALM1</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>IPALM2_Status</td><td><b>IPALM2_WorkMode</b></td><td>4</td><td>IPALM2</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>IPALM3_Status</td><td><b>IPALM3_WorkMode</b></td><td>4</td><td>IPALM3</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>IPALM4_Status</td><td><b>IPALM4_WorkMode</b></td><td>4</td><td>IPALM4</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM1_Status</td><td><b>PDALM1_WorkMode</b></td><td>4</td><td>PDALM1</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM2_Status</td><td><b>PDALM2_WorkMode</b></td><td>4</td><td>PDALM2</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM3_Status</td><td><b>PDALM3_WorkMode</b></td><td>4</td><td>PDALM3</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM4_Status</td><td><b>PDALM4_WorkMode</b></td><td>4</td><td>PDALM4</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM5_Status</td><td><b>PDALM5_WorkMode</b></td><td>4</td><td>PDALM5</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PDALM6_Status</td><td><b>PDALM6_WorkMode</b></td><td>4</td><td>PDALM6</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM1_Status</td><td><b>PRDALM1_WorkMode</b></td><td>4</td><td>PRDALM1</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM2_Status</td><td><b>PRDALM2_WorkMode</b></td><td>4</td><td>PRDALM2</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM3_Status</td><td><b>PRDALM3_WorkMode</b></td><td>4</td><td>PRDALM3</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM4_Status</td><td><b>PRDALM4_WorkMode</b></td><td>4</td><td>PRDALM4</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM5_Status</td><td><b>PRDALM5_WorkMode</b></td><td>4</td><td>PRDALM5</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PRDALM6_Status</td><td><b>PRDALM6_WorkMode</b></td><td>4</td><td>PRDALM6</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_ALMCtrl2</td><td><b>PWorkMode</b></td><td>4</td><td>PZCU</td><td></td></tr>
+</table>
+</div><div class="channel-block" id="LIN7">
+<h2>🔔 通道 LIN7</h2>
+<p style="color:#888;font-size:13px">旧: data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\LIN\EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN7.ldf<br>新: data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\LIN\EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN7.ldf</p>
+<h3>帧变更</h3>
+<table class="dtbl"><tr><th>类型</th><th>帧名</th><th>帧ID</th><th>变更详情</th></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td><b>VFRIDGE_Info3</b></td><td><code>0x38</code></td><td>发布:VFRIDGE, 长度:8B<br>信号: vfridge_CldAirOutletTemNTC, vfridge_CldAirOutletTemNTCFault, vfridge_CldStrgAssemblyTemNTC, vfridge_CldStrgAssemblyTemNTCFault, vfridge_FridgeDoorSolenoidValveFault, vfridge_FrzFan1Fault, vfridge_FrzFan1Spd, vfridge_FrzFan2Fault, vfridge_FrzFan2Spd, vfridge_TECAirOutletTemNTC, vfridge_TECAirOutletTemNTCFault, vfridge_TECFault, vfridge_TECVoltage</td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PZCU_IAQSCtrl</b></td><td><code>0x21</code></td><td><span style="color:#27ae60">+信号:FridgeFastCld_vfridge</span><br><span style="color:#27ae60">+信号:FridgeFaultThermalmanagementsystem_vfridge</span><br><span style="color:#27ae60">+信号:FrzFan1SpdReq_vfridge</span><br><span style="color:#27ae60">+信号:FrzFan2SpdReq_vfridge</span><br><span style="color:#27ae60">+信号:TECVoltageReq_vfridge</span><br><span style="color:#27ae60">+信号:vfridgeTM_FridgeClTempSts</span><br><span style="color:#27ae60">+信号:vfridgeTM_FridgeHtTempSts</span><br><span style="color:#27ae60">+信号:vfridgeTM_FridgeSlncLvlSts</span><br><span style="color:#27ae60">+信号:vfridgeTM_FridgeWorkMdSts</span><br><span style="color:#27ae60">+信号:vfridgeTM_FridgeWorkSt</span><br><span style="color:#27ae60">+信号:vfridge_FridgeFastCldSts</span></td></tr>
+</table>
+<h3>信号变更</h3>
+<table class="dtbl"><tr><th>类型</th><th>所属帧</th><th>信号名</th><th>位长度</th><th>发布节点</th><th>变更详情</th></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>FridgeFastCld_vfridge</b></td><td>2</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>FridgeFaultThermalmanagementsystem_vfridge</b></td><td>3</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>FrzFan1SpdReq_vfridge</b></td><td>7</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>FrzFan2SpdReq_vfridge</b></td><td>7</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>TECVoltageReq_vfridge</b></td><td>7</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>vfridgeTM_FridgeClTempSts</b></td><td>7</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>vfridgeTM_FridgeHtTempSts</b></td><td>7</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>vfridgeTM_FridgeSlncLvlSts</b></td><td>3</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>vfridgeTM_FridgeWorkMdSts</b></td><td>2</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>vfridgeTM_FridgeWorkSt</b></td><td>2</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_CldAirOutletTemNTC</b></td><td>11</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_CldAirOutletTemNTCFault</b></td><td>1</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_CldStrgAssemblyTemNTC</b></td><td>11</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_CldStrgAssemblyTemNTCFault</b></td><td>1</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_FridgeDoorSolenoidValveFault</b></td><td>1</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>PZCU_IAQSCtrl</td><td><b>vfridge_FridgeFastCldSts</b></td><td>2</td><td>PZCU</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_FrzFan1Fault</b></td><td>1</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_FrzFan1Spd</b></td><td>7</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_FrzFan2Fault</b></td><td>1</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_FrzFan2Spd</b></td><td>7</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_TECAirOutletTemNTC</b></td><td>11</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_TECAirOutletTemNTCFault</b></td><td>1</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_TECFault</b></td><td>1</td><td>VFRIDGE</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>VFRIDGE_Info3</td><td><b>vfridge_TECVoltage</b></td><td>7</td><td>VFRIDGE</td><td></td></tr>
+</table>
+<h3>调度表变更</h3>
+<table class="dtbl"><tr><th>类型</th><th>调度表名</th><th>变更详情</th></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>PZCU_LIN7</b></td><td><span style="color:#27ae60">+VFRIDGE_Info3</span></td></tr>
+</table>
+</div>
 </body></html>

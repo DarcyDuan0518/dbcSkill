@@ -61,7 +61,6 @@ class LDFTextReporter:
         lines.append(f"  帧变更:       +{stats['frames_added']} -{stats['frames_removed']} ~{stats['frames_modified']}")
         lines.append(f"  信号变更:     +{stats['signals_added']} -{stats['signals_removed']} ~{stats['signals_modified']}")
         lines.append(f"  调度表:       +{stats['schedules_added']} -{stats['schedules_removed']} ~{stats['schedules_modified']}")
-        lines.append(f"  编码类型:     +{stats['encodings_added']} -{stats['encodings_removed']} ~{stats['encodings_modified']}")
 
         # 节点变更
         if result.node_changes:
@@ -130,13 +129,6 @@ class LDFTextReporter:
                     for oc in sc.entries_reordered:
                         lines.append(f"      [<>] {oc.summary()}")
 
-        # 编码类型变更
-        if result.encoding_changes:
-            lines.append("\n" + "-" * 50)
-            lines.append("【编码类型变更】")
-            for ec in result.encoding_changes:
-                lines.append(f"  [{_change_icon(ec.change_type)}] {ec.summary()}")
-
         lines.append("\n" + "=" * 70)
         return "\n".join(lines)
 
@@ -174,7 +166,6 @@ class LDFMarkdownReporter:
         lines.append(f"| 帧   | {stats['frames_added']} | {stats['frames_removed']} | {stats['frames_modified']} |")
         lines.append(f"| 信号 | {stats['signals_added']} | {stats['signals_removed']} | {stats['signals_modified']} |")
         lines.append(f"| 调度表 | {stats['schedules_added']} | {stats['schedules_removed']} | {stats['schedules_modified']} |")
-        lines.append(f"| 编码类型 | {stats['encodings_added']} | {stats['encodings_removed']} | {stats['encodings_modified']} |")
 
         # 节点变更
         if result.node_changes:
@@ -264,13 +255,6 @@ class LDFMarkdownReporter:
                         lines.append(f"- 🟡 `{fld.field_name}`: `{fld.old_value}ms` -> `{fld.new_value}ms`")
                     for oc in sc.entries_reordered:
                         lines.append(f"- <> `{oc.frame_name}`: 第{oc.old_index+1}位 -> 第{oc.new_index+1}位")
-
-        # 编码类型变更
-        if result.encoding_changes:
-            lines.append("\n## 编码类型变更\n")
-            for ec in result.encoding_changes:
-                icon = {"ADDED": "🟢", "REMOVED": "🔴", "MODIFIED": "🟡"}.get(ec.change_type, "⚪")
-                lines.append(f"- {icon} **{ec.summary()}**")
 
         return "\n".join(lines)
 
@@ -487,18 +471,6 @@ class LDFHTMLReporter:
                              f'<td>{detail}</td></tr>')
             parts.append("</table></div>")
 
-        # 编码类型变更
-        if result.encoding_changes:
-            parts.append('<h2>编码类型变更</h2><div class="section">')
-            parts.append('<table class="diff"><tr><th>类型</th><th>编码类型名</th></tr>')
-            for ec in result.encoding_changes:
-                cls = ec.change_type.lower()
-                badge = {"ADDED": '<span class="badge badge-add">新增</span>',
-                         "REMOVED": '<span class="badge badge-del">删除</span>',
-                         "MODIFIED": '<span class="badge badge-mod">修改</span>'}.get(ec.change_type, ec.change_type)
-                parts.append(f'<tr class="{cls}"><td>{badge}</td><td><b>{ec.encoding_name}</b></td></tr>')
-            parts.append("</table></div>")
-
         parts.append("</body></html>")
         return "\n".join(parts)
 
@@ -607,11 +579,6 @@ class LDFCSVReporter:
                 writer.writerow(["调度表", _change_label(sc.change_type),
                                  sc.table_name, "", "", "", ""])
 
-        # 编码类型
-        for ec in result.encoding_changes:
-            writer.writerow(["编码类型", _change_label(ec.change_type),
-                             ec.encoding_name, "", "", "", ""])
-
         return output.getvalue()
 
     def save(self, result: LDFDiffResult, filepath: str):
@@ -640,7 +607,6 @@ class LDFJSONReporter:
             "frame_changes": [self._frame_change(fc) for fc in result.frame_changes],
             "signal_changes": [self._signal_change(sc) for sc in result.signal_changes],
             "schedule_changes": [self._schedule_change(sc) for sc in result.schedule_changes],
-            "encoding_changes": [self._encoding_change(ec) for ec in result.encoding_changes],
         }
         return json.dumps(data, ensure_ascii=False, indent=2)
 
@@ -824,23 +790,117 @@ class LDFSummaryReporter:
         return "\n".join(lines)
 
     def generate_html(self, results: List[tuple]) -> str:
+        from ldf_diff import ChangeType
         changed = [(ch, r) for ch, r in results if r.has_changes()]
         unchanged = [(ch, r) for ch, r in results if not r.has_changes()]
 
+        # ---- 概览表格行 ----
         rows = []
         for ch, r in results:
             stats = r.stats()
             status = "有变更" if r.has_changes() else "无变更"
             status_style = "color:#e74c3c;font-weight:bold" if r.has_changes() else "color:#27ae60"
+            anchor = f'<a href="#{ch}" style="color:inherit;text-decoration:none">{ch}</a>' if r.has_changes() else ch
+            old_fname = r.old_file.replace('\\', '/').split('/')[-1]
+            new_fname = r.new_file.replace('\\', '/').split('/')[-1]
+            na = stats['nodes_added']; nr = stats['nodes_removed']; nm = stats['nodes_modified']
+            fa = stats['frames_added']; fr = stats['frames_removed']; fm = stats['frames_modified']
+            sa = stats['signals_added']; sr = stats['signals_removed']; sm = stats['signals_modified']
+            sca = stats['schedules_added']; scr = stats['schedules_removed']; scm = stats['schedules_modified']
             rows.append(f"""<tr>
-  <td>{ch}</td>
+  <td>{anchor}</td>
   <td style="{status_style}">{status}</td>
-  <td>{stats['nodes_added']}/{stats['nodes_removed']}/{stats['nodes_modified']}</td>
-  <td>{stats['frames_added']}/{stats['frames_removed']}/{stats['frames_modified']}</td>
-  <td>{stats['signals_added']}/{stats['signals_removed']}/{stats['signals_modified']}</td>
-  <td style="font-size:12px;color:#888">{r.old_file.split('/')[-1].split(chr(92))[-1]}</td>
-  <td style="font-size:12px;color:#888">{r.new_file.split('/')[-1].split(chr(92))[-1]}</td>
+  <td>{na}/{nr}/{nm}</td>
+  <td>{fa}/{fr}/{fm}</td>
+  <td>{sa}/{sr}/{sm}</td>
+  <td>{sca}/{scr}/{scm}</td>
+  <td style="font-size:12px;color:#888">{old_fname}</td>
+  <td style="font-size:12px;color:#888">{new_fname}</td>
 </tr>""")
+
+        # ---- 每通道详细变更 ----
+        def badge(ct):
+            if ct == ChangeType.ADDED:   return '<span class="badge badge-add">新增</span>'
+            if ct == ChangeType.REMOVED: return '<span class="badge badge-del">删除</span>'
+            return '<span class="badge badge-mod">修改</span>'
+
+        detail_sections = []
+        for ch, r in changed:
+            parts = [f'<div class="channel-block" id="{ch}">']
+            parts.append(f'<h2>🔔 通道 {ch}</h2>')
+            parts.append(f'<p style="color:#888;font-size:13px">旧: {r.old_file}<br>新: {r.new_file}</p>')
+
+            # 节点变更
+            if r.node_changes:
+                parts.append('<h3>节点变更</h3>')
+                parts.append('<table class="dtbl"><tr><th>类型</th><th>节点名</th><th>角色</th><th>变更详情</th></tr>')
+                for nc in r.node_changes:
+                    role = "主节点" if nc.is_master else "从节点"
+                    detail = "<br>".join(f"<code>{fc.field_name}</code>: {fc.old_value!r} → {fc.new_value!r}" for fc in nc.field_changes)
+                    parts.append(f'<tr class="{nc.change_type.lower()}"><td>{badge(nc.change_type)}</td><td><b>{nc.node_name}</b></td><td>{role}</td><td>{detail}</td></tr>')
+                parts.append('</table>')
+
+            # 帧变更
+            if r.frame_changes:
+                parts.append('<h3>帧变更</h3>')
+                parts.append('<table class="dtbl"><tr><th>类型</th><th>帧名</th><th>帧ID</th><th>变更详情</th></tr>')
+                for fc in r.frame_changes:
+                    fid = ""
+                    detail_parts = []
+                    if fc.change_type == ChangeType.ADDED and fc.new_frame:
+                        fid = f"0x{fc.new_frame.frame_id:02X}"
+                        detail_parts.append(f"发布:{fc.new_frame.publisher}, 长度:{fc.new_frame.length}B")
+                        if fc.new_frame.signals:
+                            detail_parts.append("信号: " + ", ".join(s.signal_name for s in fc.new_frame.signals))
+                    elif fc.change_type == ChangeType.REMOVED and fc.old_frame:
+                        fid = f"0x{fc.old_frame.frame_id:02X}"
+                    elif fc.change_type == ChangeType.MODIFIED:
+                        if fc.old_frame: fid = f"0x{fc.old_frame.frame_id:02X}"
+                        for fld in fc.field_changes:
+                            detail_parts.append(f"<code>{fld.field_name}</code>: {fld.old_value!r} → {fld.new_value!r}")
+                        for s in fc.signal_added:
+                            detail_parts.append(f'<span style="color:#27ae60">+信号:{s}</span>')
+                        for s in fc.signal_removed:
+                            detail_parts.append(f'<span style="color:#e74c3c">-信号:{s}</span>')
+                        for pc in fc.signal_pos_changes:
+                            detail_parts.append(f"<code>{pc.signal_name}</code>起始位:{pc.old_start_bit}→{pc.new_start_bit}")
+                    detail = "<br>".join(detail_parts)
+                    parts.append(f'<tr class="{fc.change_type.lower()}"><td>{badge(fc.change_type)}</td><td><b>{fc.frame_name}</b></td><td><code>{fid}</code></td><td>{detail}</td></tr>')
+                parts.append('</table>')
+
+            # 信号变更
+            if r.signal_changes:
+                parts.append('<h3>信号变更</h3>')
+                parts.append('<table class="dtbl"><tr><th>类型</th><th>所属帧</th><th>信号名</th><th>位长度</th><th>发布节点</th><th>变更详情</th></tr>')
+                for sc in r.signal_changes:
+                    sig = sc.new_signal or sc.old_signal
+                    length_str = str(sig.length) if sig else ""
+                    pub_str = sig.publisher if sig else ""
+                    detail = "<br>".join(f"<code>{c.field_name}</code>: {c.old_value!r} → {c.new_value!r}" for c in sc.field_changes)
+                    parts.append(f'<tr class="{sc.change_type.lower()}"><td>{badge(sc.change_type)}</td><td>{sc.frame_name}</td><td><b>{sc.signal_name}</b></td><td>{length_str}</td><td>{pub_str}</td><td>{detail}</td></tr>')
+                parts.append('</table>')
+
+            # 调度表变更
+            if r.schedule_changes:
+                parts.append('<h3>调度表变更</h3>')
+                parts.append('<table class="dtbl"><tr><th>类型</th><th>调度表名</th><th>变更详情</th></tr>')
+                for sc in r.schedule_changes:
+                    detail_parts = []
+                    if sc.change_type == ChangeType.MODIFIED:
+                        for fn in sc.entries_added:
+                            detail_parts.append(f'<span style="color:#27ae60">+{fn}</span>')
+                        for fn in sc.entries_removed:
+                            detail_parts.append(f'<span style="color:#e74c3c">-{fn}</span>')
+                        for fld in sc.entries_modified:
+                            detail_parts.append(f"<code>{fld.field_name}</code>: {fld.old_value}ms → {fld.new_value}ms")
+                        for oc in sc.entries_reordered:
+                            detail_parts.append(f"<code>{oc.frame_name}</code> 顺序: 第{oc.old_index+1}位 → 第{oc.new_index+1}位")
+                    detail = "<br>".join(detail_parts)
+                    parts.append(f'<tr class="{sc.change_type.lower()}"><td>{badge(sc.change_type)}</td><td><b>{sc.table_name}</b></td><td>{detail}</td></tr>')
+                parts.append('</table>')
+
+            parts.append('</div>')
+            detail_sections.append("\n".join(parts))
 
         return f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -848,31 +908,49 @@ class LDFSummaryReporter:
 <meta charset="UTF-8">
 <title>LDF批量差异摘要</title>
 <style>
-body {{ font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; }}
+body {{ font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; color: #2c3e50; }}
 h1 {{ color: #2c3e50; }}
+h2 {{ color: #2980b9; border-left: 4px solid #3498db; padding-left: 10px; margin-top: 30px; }}
+h3 {{ color: #555; margin: 14px 0 6px; font-size: 15px; }}
 .summary {{ display: flex; gap: 20px; margin: 15px 0; }}
 .card {{ background: white; border-radius: 8px; padding: 15px 25px;
          box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center; }}
 .card .num {{ font-size: 28px; font-weight: bold; }}
 table {{ width: 100%; border-collapse: collapse; background: white;
-         box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 8px; overflow: hidden; }}
-th {{ background: #3498db; color: white; padding: 10px 14px; text-align: left; }}
-td {{ padding: 8px 14px; border-bottom: 1px solid #eee; }}
+         box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 6px;
+         overflow: hidden; margin-bottom: 10px; }}
+th {{ background: #3498db; color: white; padding: 8px 12px; text-align: left; font-size: 13px; }}
+td {{ padding: 7px 12px; border-bottom: 1px solid #eee; font-size: 13px; vertical-align: top; }}
 tr:last-child td {{ border-bottom: none; }}
+tr.added   td {{ background: #f0fff4; }}
+tr.removed td {{ background: #fff5f5; }}
+tr.modified td {{ background: #fffbf0; }}
+.badge {{ display:inline-block; padding:2px 8px; border-radius:4px; font-size:12px; font-weight:bold; }}
+.badge-add {{ background:#d4edda; color:#155724; }}
+.badge-del {{ background:#f8d7da; color:#721c24; }}
+.badge-mod {{ background:#fff3cd; color:#856404; }}
+.channel-block {{ background: white; border-radius: 8px; padding: 20px 24px;
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-top: 24px; }}
+.dtbl th {{ background: #546e7a; }}
+code {{ background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 12px; }}
 </style>
 </head>
 <body>
-<h1> LDF 批量差异分析摘要</h1>
-<p>生成时间: {_now()} &nbsp;|&nbsp; 共 {len(results)} 个通道</p>
+<h1>📋 LDF 批量差异分析报告</h1>
+<p style="color:#888">生成时间: {_now()} &nbsp;|&nbsp; 共 {len(results)} 个通道</p>
 <div class="summary">
   <div class="card"><div class="num" style="color:#e74c3c">{len(changed)}</div><div>有变更</div></div>
   <div class="card"><div class="num" style="color:#27ae60">{len(unchanged)}</div><div>无变更</div></div>
 </div>
+
+<h2>📊 通道概览</h2>
 <table>
 <tr><th>通道</th><th>状态</th><th>节点(+/-/~)</th><th>帧(+/-/~)</th>
-    <th>信号(+/-/~)</th><th>旧文件</th><th>新文件</th></tr>
+    <th>信号(+/-/~)</th><th>调度表(+/-/~)</th><th>旧文件</th><th>新文件</th></tr>
 {"".join(rows)}
 </table>
+
+{"".join(detail_sections)}
 </body></html>"""
 
     def save_text(self, results: List[tuple], filepath: str):

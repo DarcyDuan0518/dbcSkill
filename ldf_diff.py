@@ -267,9 +267,10 @@ class LDFDiffResult:
         return [c for c in self.signal_changes if c.change_type == ChangeType.MODIFIED]
 
     def has_changes(self) -> bool:
+        # 编码类型变更不影响协议栈代码生成，不计入变更判断
         return bool(self.node_changes or self.node_attr_changes or
                     self.frame_changes or self.signal_changes or
-                    self.schedule_changes or self.encoding_changes)
+                    self.schedule_changes)
 
     def stats(self) -> Dict[str, int]:
         return {
@@ -288,9 +289,9 @@ class LDFDiffResult:
             "schedules_added":    sum(1 for c in self.schedule_changes if c.change_type == ChangeType.ADDED),
             "schedules_removed":  sum(1 for c in self.schedule_changes if c.change_type == ChangeType.REMOVED),
             "schedules_modified": sum(1 for c in self.schedule_changes if c.change_type == ChangeType.MODIFIED),
-            "encodings_added":    sum(1 for c in self.encoding_changes if c.change_type == ChangeType.ADDED),
-            "encodings_removed":  sum(1 for c in self.encoding_changes if c.change_type == ChangeType.REMOVED),
-            "encodings_modified": sum(1 for c in self.encoding_changes if c.change_type == ChangeType.MODIFIED),
+            "encodings_added":    0,
+            "encodings_removed":  0,
+            "encodings_modified": 0,
         }
 
 
@@ -306,13 +307,12 @@ class LDFDiff:
         result = diff.compare(old_ldf, new_ldf)
     """
 
-    # 信号需要比较的字段
+    # 信号需要比较的字段（编码类型不影响协议栈代码生成，不纳入比较）
     _SIGNAL_FIELDS = [
         ("length",      "位长度"),
         ("init_value",  "初始值"),
         ("publisher",   "发布节点"),
         ("subscribers", "订阅节点"),
-        ("encoding_type", "编码类型"),
         ("comment",     "注释"),
     ]
 
@@ -353,7 +353,8 @@ class LDFDiff:
         self._compare_signals(old_ldf, new_ldf, result)
         self._compare_frames(old_ldf, new_ldf, result)
         self._compare_schedules(old_ldf, new_ldf, result)
-        self._compare_encodings(old_ldf, new_ldf, result)
+        # 编码类型变更不影响协议栈代码生成，忽略不比较
+        # self._compare_encodings(old_ldf, new_ldf, result)
         return result
 
     # -- 节点比较 ------------------------------
@@ -607,34 +608,39 @@ class LDFDiff:
                 old_table=old_t,
                 new_table=new_t,
             )
-            # 比较条目（以帧名为key，delay为value）
-            old_entries = {e.frame_name: e.delay_ms for e in old_t.entries}
-            new_entries = {e.frame_name: e.delay_ms for e in new_t.entries}
+            # 调度表中同一帧名可能重复出现，必须用完整有序列表比较，不能用字典
+            old_seq = [(e.frame_name, e.delay_ms) for e in old_t.entries]
+            new_seq = [(e.frame_name, e.delay_ms) for e in new_t.entries]
 
-            for fname in sorted(set(old_entries) - set(new_entries)):
-                sc.entries_removed.append(fname)
-            for fname in sorted(set(new_entries) - set(old_entries)):
-                sc.entries_added.append(fname)
-            for fname in sorted(set(old_entries) & set(new_entries)):
-                if old_entries[fname] != new_entries[fname]:
-                    sc.entries_modified.append(FieldChange(
-                        fname,
-                        old_entries[fname],
-                        new_entries[fname],
-                    ))
+            if old_seq != new_seq:
+                # 用帧名集合检测新增/删除（去重后比较）
+                old_names = set(e.frame_name for e in old_t.entries)
+                new_names = set(e.frame_name for e in new_t.entries)
+                for fname in sorted(old_names - new_names):
+                    sc.entries_removed.append(fname)
+                for fname in sorted(new_names - old_names):
+                    sc.entries_added.append(fname)
 
-            # 比较公共条目的顺序（仅对两边都存在的帧）
-            common = set(old_entries) & set(new_entries)
-            old_order = [e.frame_name for e in old_t.entries if e.frame_name in common]
-            new_order = [e.frame_name for e in new_t.entries if e.frame_name in common]
-            for old_idx, fname in enumerate(old_order):
-                new_idx = new_order.index(fname) if fname in new_order else -1
-                if new_idx != -1 and new_idx != old_idx:
-                    sc.entries_reordered.append(LDFScheduleOrderChange(
-                        frame_name=fname,
-                        old_index=old_idx,
-                        new_index=new_idx,
-                    ))
+                # 检测 delay 变更（仅对两边都存在且不重复的帧名）
+                for fname in sorted(old_names & new_names):
+                    old_delays = [e.delay_ms for e in old_t.entries if e.frame_name == fname]
+                    new_delays = [e.delay_ms for e in new_t.entries if e.frame_name == fname]
+                    if old_delays != new_delays and len(old_delays) == 1 and len(new_delays) == 1:
+                        sc.entries_modified.append(FieldChange(
+                            fname, old_delays[0], new_delays[0],
+                        ))
+
+                # 若帧集合相同但顺序/内容不同，记录为顺序变更（找第一处差异）
+                if not sc.entries_removed and not sc.entries_added:
+                    min_len = min(len(old_seq), len(new_seq))
+                    for idx in range(min_len):
+                        if old_seq[idx] != new_seq[idx]:
+                            sc.entries_reordered.append(LDFScheduleOrderChange(
+                                frame_name=new_seq[idx][0],
+                                old_index=idx,
+                                new_index=idx,
+                            ))
+                            break
 
             if sc.has_changes():
                 result.schedule_changes.append(sc)

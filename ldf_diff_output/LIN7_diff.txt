@@ -1,6 +1,6 @@
 ======================================================================
 LDF 差异分析报告
-生成时间: 2026-04-30 16:23:40
+生成时间: 2026-04-30 16:57:04
 旧文件: data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\LIN\EEA3.0_LIN_Matrix_V10.1.0_20260212_LIN7.ldf
 新文件: data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\LIN\EEA3.0_LIN_Matrix_V11.1.0_20260415_LIN7.ldf
 ======================================================================
@@ -11,7 +11,6 @@ LDF 差异分析报告
   帧变更:       +1 -0 ~1
   信号变更:     +24 -0 ~0
   调度表:       +0 -0 ~1
-  编码类型:     +11 -0 ~19
 
 --------------------------------------------------
 【帧变更】
@@ -60,38 +59,5 @@ LDF 差异分析报告
 【调度表变更】
   [~] [修改调度表] PZCU_LIN7 [新增1条目]
       [+] 新增条目: VFRIDGE_Info3
-
---------------------------------------------------
-【编码类型变更】
-  [+] [新增编码类型] FridgeFastCld_vfridgeCoding
-  [+] [新增编码类型] FridgeFaultThermalmanagementsystem_vfridgeCoding
-  [+] [新增编码类型] FrzFan1SpdReq_vfridgeCoding
-  [+] [新增编码类型] TECVoltageReq_vfridgeCoding
-  [+] [新增编码类型] vfridgeTM_FridgeClTempStsCoding
-  [+] [新增编码类型] vfridgeTM_FridgeSlncLvlStsCoding
-  [+] [新增编码类型] vfridgeTM_FridgeWorkMdStsCoding
-  [+] [新增编码类型] vfridgeTM_FridgeWorkStCoding
-  [+] [新增编码类型] vfridge_CldAirOutletTemNTCCoding
-  [+] [新增编码类型] vfridge_CldAirOutletTemNTCFaultCoding
-  [+] [新增编码类型] vfridge_FridgeFastCldStsCoding
-  [~] [修改编码类型] AFCh1LevStsCoding [1处变更]
-  [~] [修改编码类型] BlwrTempCoding [1处变更]
-  [~] [修改编码类型] DOSCalErrorCoding [1处变更]
-  [~] [修改编码类型] DOSHeaterErrorCoding [1处变更]
-  [~] [修改编码类型] DOSResponseErrorCoding [1处变更]
-  [~] [修改编码类型] DOSSignalErrorCoding [1处变更]
-  [~] [修改编码类型] DOSTempErrorCoding [1处变更]
-  [~] [修改编码类型] DOSVoltageErrorCoding [1处变更]
-  [~] [修改编码类型] DOSWorkModeCoding [1处变更]
-  [~] [修改编码类型] DOSWorkStateCoding [1处变更]
-  [~] [修改编码类型] FridgeClTempStsCoding2 [1处变更]
-  [~] [修改编码类型] FridgeCompressFaultCoding [1处变更]
-  [~] [修改编码类型] FridgeDoorOpenValueReq_vfridgeCoding [1处变更]
-  [~] [修改编码类型] FridgeOpeStCoding [1处变更]
-  [~] [修改编码类型] FridgeWorkMdReq_vfridgeCoding [1处变更]
-  [~] [修改编码类型] FridgeWorkMdStsCoding2 [1处变更]
-  [~] [修改编码类型] PM2_5LevelCoding [1处变更]
-  [~] [修改编码类型] vfridge_FridgeActTemCoding [1处变更]
-  [~] [修改编码类型] vfridge_FridgeSlncLvlStsCoding [1处变更]
 
 ======================================================================
