@@ -22,11 +22,11 @@
 信号-修改,0x21B,DZCU_PSDCmd_20ms,RPSDCtrlCmdSour,值表,"{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock'}","{0: 'Init', 1: 'inside front', 2: 'inside rear', 3: 'outside with smart unlock', 4: 'outside without smart unlock', 5: 'inside rear manual handle', 6: 'outside manual handle'}"
 信号-新增,0x2B8,PZCU_Sig3RTBD4_20ms,LatGrd,定义,,"起始位=31,长度=8,字节序=Motorola(大端),因子=0.01,偏移=-1.0"
 信号-新增,0x2B8,PZCU_Sig3RTBD4_20ms,LongtGrd,定义,,"起始位=39,长度=8,字节序=Motorola(大端),因子=0.01,偏移=-1.0"
-报文-修改,0x3AC,RRSCU_Sts1_100ms,,属性.GenMsgStartDelayTime,0.0,30.0
+报文-修改(属性),0x3AC,RRSCU_Sts1_100ms,,GenMsgStartDelayTime,0.0,30.0
 信号-修改,0x3AC,RRSCU_Sts1_100ms,RRSCU_SecRSeatPosChng,值表,"{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}","{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
 信号-新增,0x3E1,EMS_STS2_100ms_GW1,EnBstPre,定义,,"起始位=55,长度=9,字节序=Motorola(大端),因子=1.0,偏移=0.0"
 信号-修改,0x3FA,PSCU_Sts2_100ms,PsngSeatPosChng,值表,"{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}","{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-报文-修改,0x522,RRSCU_Sts11_100ms,,属性.GenMsgStartDelayTime,0.0,65.0
+报文-修改(属性),0x522,RRSCU_Sts11_100ms,,GenMsgStartDelayTime,0.0,65.0
 信号-新增,0x522,RRSCU_Sts11_100ms,PsngSeatMovReq,定义,,"起始位=63,长度=4,字节序=Motorola(大端),因子=1.0,偏移=0.0"
 信号-新增,0x5A0,CCU_VehSts_1000ms_GW,OBDDiagDeviceActivated,定义,,"起始位=13,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"
 信号-新增,0x5FB,ETC_Info1_1000ms,ETC_EmsnIntnst,定义,,"起始位=63,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0"

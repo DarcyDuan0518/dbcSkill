@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-04-29 13:48:42",
-  "old_file": "PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_BDCAN6.dbc",
-  "new_file": "PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN6.dbc",
+  "generated_at": "2026-04-30 08:55:10",
+  "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_BDCAN6.dbc",
+  "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN6.dbc",
   "stats": {
     "nodes_added": 0,
     "nodes_removed": 0,
+    "msg_id_changes": 0,
     "msgs_added": 0,
     "msgs_removed": 0,
     "msgs_modified": 8,
@@ -13,6 +14,7 @@
     "sigs_modified": 5
   },
   "node_changes": [],
+  "message_id_changes": [],
   "message_changes": [
     {
       "type": "MODIFIED",
@@ -20,6 +22,7 @@
       "can_id_hex": "0x219",
       "msg_name": "DZCU_DrLockCtrl_20ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -86,6 +89,7 @@
       "can_id_hex": "0x247",
       "msg_name": "PZCU_ECGMCmd_20ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -266,6 +270,7 @@
       "can_id_hex": "0x259",
       "msg_name": "PZCU_BodySts_20ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -336,14 +341,16 @@
           "field": "报文名称",
           "old": "LECGM_Sts1_100ms",
           "new": "LECGM_Sts1_100msMixed"
-        },
+        }
+      ],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgDelayTime",
+          "field": "GenMsgDelayTime",
           "old": "<不存在>",
           "new": "20.0"
         },
         {
-          "field": "属性.GenMsgSendType",
+          "field": "GenMsgSendType",
           "old": "0",
           "new": "5"
         }
@@ -360,14 +367,16 @@
           "field": "报文名称",
           "old": "RECGM_Sts1_100ms",
           "new": "RECGM_Sts1_100msMixed"
-        },
+        }
+      ],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgDelayTime",
+          "field": "GenMsgDelayTime",
           "old": "<不存在>",
           "new": "20.0"
         },
         {
-          "field": "属性.GenMsgSendType",
+          "field": "GenMsgSendType",
           "old": "0",
           "new": "5"
         }
@@ -380,6 +389,7 @@
       "can_id_hex": "0x3EC",
       "msg_name": "BZCU_SecSeatSts_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -439,6 +449,7 @@
       "can_id_hex": "0x51A",
       "msg_name": "BZCU_BodySts_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -523,6 +534,7 @@
       "can_id_hex": "0x5A0",
       "msg_name": "CCU_VehSts_1000ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",

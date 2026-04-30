@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-04-29 13:48:42",
-  "old_file": "PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.0_20260212_PZCU_VirtCAN4.dbc",
-  "new_file": "PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_VirtCAN4.dbc",
+  "generated_at": "2026-04-30 08:55:10",
+  "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.0_20260212_PZCU_VirtCAN4.dbc",
+  "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_VirtCAN4.dbc",
   "stats": {
     "nodes_added": 0,
     "nodes_removed": 0,
+    "msg_id_changes": 0,
     "msgs_added": 1,
     "msgs_removed": 0,
     "msgs_modified": 3,
@@ -13,6 +14,7 @@
     "sigs_modified": 2
   },
   "node_changes": [],
+  "message_id_changes": [],
   "message_changes": [
     {
       "type": "ADDED",
@@ -20,6 +22,7 @@
       "can_id_hex": "0x1FFC0007",
       "msg_name": "PZCU_Monitor4_1000ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": []
     },
     {
@@ -34,6 +37,7 @@
           "new": "16"
         }
       ],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -119,6 +123,7 @@
       "can_id_hex": "0x393",
       "msg_name": "PZCU_Monitor1_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -327,6 +332,7 @@
       "can_id_hex": "0x1FFC0001",
       "msg_name": "PZCU_Monitor3_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",

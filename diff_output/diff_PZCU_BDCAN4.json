@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-04-29 13:48:42",
-  "old_file": "PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_BDCAN4.dbc",
-  "new_file": "PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN4.dbc",
+  "generated_at": "2026-04-30 08:55:10",
+  "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_BDCAN4.dbc",
+  "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN4.dbc",
   "stats": {
     "nodes_added": 0,
     "nodes_removed": 0,
+    "msg_id_changes": 0,
     "msgs_added": 3,
     "msgs_removed": 0,
     "msgs_modified": 10,
@@ -13,6 +14,7 @@
     "sigs_modified": 7
   },
   "node_changes": [],
+  "message_id_changes": [],
   "message_changes": [
     {
       "type": "ADDED",
@@ -20,6 +22,7 @@
       "can_id_hex": "0x19F",
       "msg_name": "ETC_Info3_Event",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": []
     },
     {
@@ -28,6 +31,7 @@
       "can_id_hex": "0x3E2",
       "msg_name": "EMS_STS2_100ms_GW2",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": []
     },
     {
@@ -36,6 +40,7 @@
       "can_id_hex": "0x62D",
       "msg_name": "ETC_OBUCardID_1000ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": []
     },
     {
@@ -44,6 +49,7 @@
       "can_id_hex": "0x134",
       "msg_name": "EMS_SysSts1_10ms_GW2",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -72,6 +78,7 @@
       "can_id_hex": "0x1B9",
       "msg_name": "ETC_Info2_Event",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -146,6 +153,7 @@
       "can_id_hex": "0x21B",
       "msg_name": "DZCU_PSDCmd_20ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -205,6 +213,7 @@
       "can_id_hex": "0x2B8",
       "msg_name": "PZCU_Sig3RTBD4_20ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -251,9 +260,10 @@
       "msg_id": 940,
       "can_id_hex": "0x3AC",
       "msg_name": "RRSCU_Sts1_100ms",
-      "field_changes": [
+      "field_changes": [],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgStartDelayTime",
+          "field": "GenMsgStartDelayTime",
           "old": "0.0",
           "new": "30.0"
         }
@@ -292,6 +302,7 @@
       "can_id_hex": "0x3E1",
       "msg_name": "EMS_STS2_100ms_GW1",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -320,6 +331,7 @@
       "can_id_hex": "0x3FA",
       "msg_name": "PSCU_Sts2_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -353,9 +365,10 @@
       "msg_id": 1314,
       "can_id_hex": "0x522",
       "msg_name": "RRSCU_Sts11_100ms",
-      "field_changes": [
+      "field_changes": [],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgStartDelayTime",
+          "field": "GenMsgStartDelayTime",
           "old": "0.0",
           "new": "65.0"
         }
@@ -388,6 +401,7 @@
       "can_id_hex": "0x5A0",
       "msg_name": "CCU_VehSts_1000ms_GW",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -416,6 +430,7 @@
       "can_id_hex": "0x5FB",
       "msg_name": "ETC_Info1_1000ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",

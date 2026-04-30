@@ -21,14 +21,14 @@ V1_PATH = os.path.join(EXAMPLES_DIR, "sample_v1.dbc")
 V2_PATH = os.path.join(EXAMPLES_DIR, "sample_v2.dbc")
 OUT_DIR  = os.path.join(os.path.dirname(os.path.abspath(__file__)), "examples", "output")
 
-PASS = "✅ PASS"
-FAIL = "❌ FAIL"
+PASS = "[PASS]"
+FAIL = "[FAIL]"
 
 
 def section(title: str):
-    print(f"\n{'─'*60}")
+    print(f"\n{'-'*60}")
     print(f"  {title}")
-    print(f"{'─'*60}")
+    print(f"{'-'*60}")
 
 
 def check(desc: str, condition: bool):
@@ -38,9 +38,9 @@ def check(desc: str, condition: bool):
         raise AssertionError(f"测试失败: {desc}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 测试1：解析器基础功能
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def test_parser():
     section("测试1: DBC解析器 (dbc_parser.py)")
@@ -94,9 +94,9 @@ def test_parser():
           f"{sum(len(m.signals) for m in dbc.messages.values())}信号")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 测试2：差异分析功能
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def test_diff():
     section("测试2: DBC差异分析 (dbc_diff.py)")
@@ -117,11 +117,20 @@ def test_diff():
     check("无删除节点", len(result.removed_nodes) == 0)
 
     # 报文变更
-    # v2: 删除GW_TimeSync(1024)，新增ADAS_CtrlCmd(1280)
+    # v2: GW_TimeSync ID从1024改为1040（ID变更），新增ADAS_CtrlCmd(1280)
     added_msg_ids = [mc.msg_id for mc in result.added_messages]
     removed_msg_ids = [mc.msg_id for mc in result.removed_messages]
     check("新增报文1280(ADAS_CtrlCmd)", 1280 in added_msg_ids)
-    check("删除报文1024(GW_TimeSync)", 1024 in removed_msg_ids)
+    check("无删除报文（GW_TimeSync是ID变更，不是删除）", len(removed_msg_ids) == 0)
+
+    # 报文ID变更
+    check("报文ID变更存在", len(result.message_id_changes) > 0)
+    id_change = next((ic for ic in result.message_id_changes if ic.msg_name == "GW_TimeSync"), None)
+    check("GW_TimeSync ID变更被检测到", id_change is not None)
+    check("GW_TimeSync旧ID=0x400(1024)", id_change.old_id == 1024)
+    check("GW_TimeSync新ID=0x410(1040)", id_change.new_id == 1040)
+    check("GW_TimeSync旧ID_hex=0x400", id_change.old_id_hex == "0x400")
+    check("GW_TimeSync新ID_hex=0x410", id_change.new_id_hex == "0x410")
 
     # 修改报文
     modified_msg_ids = [mc.msg_id for mc in result.modified_messages]
@@ -157,21 +166,40 @@ def test_diff():
     check("MCU_FaultCode位长度旧值=8", len_change.old_value == 8)
     check("MCU_FaultCode位长度新值=12", len_change.new_value == 12)
 
+    # BA_ 属性变更：v2中 BMS_BattInfo(768) 新增 GenMsgSendType=1（Event）
+    mc768 = next((mc for mc in result.modified_messages if mc.msg_id == 768), None)
+    check("报文768有修改（BA_属性变更）", mc768 is not None)
+    if mc768:
+        send_type_change = next((fc for fc in mc768.attr_changes
+                                 if fc.field_name == "GenMsgSendType"), None)
+        check("BMS_BattInfo GenMsgSendType属性变更存在", send_type_change is not None)
+        check("BMS_BattInfo GenMsgSendType旧值=<不存在>", send_type_change.old_value == "<不存在>")
+        check("BMS_BattInfo GenMsgSendType新值=1", send_type_change.new_value == 1)
+
+    # BA_ 属性变更：v2中 VCU_Status(256) 新增 GenMsgStartDelayTime=5
+    mc256_attr = next((mc for mc in result.modified_messages if mc.msg_id == 256), None)
+    if mc256_attr:
+        delay_change = next((fc for fc in mc256_attr.attr_changes
+                             if fc.field_name == "GenMsgStartDelayTime"), None)
+        check("VCU_Status GenMsgStartDelayTime属性变更存在", delay_change is not None)
+        check("VCU_Status GenMsgStartDelayTime新值=5", delay_change.new_value == 5)
+
     # 统计
     stats = result.stats()
     check("统计-节点新增=1", stats["nodes_added"] == 1)
     check("统计-节点删除=0", stats["nodes_removed"] == 0)
+    check("统计-报文ID变更=1", stats["msg_id_changes"] == 1)
     check("统计-报文新增=1", stats["msgs_added"] == 1)
-    check("统计-报文删除=1", stats["msgs_removed"] == 1)
+    check("统计-报文删除=0（GW_TimeSync是ID变更）", stats["msgs_removed"] == 0)
     check("统计-信号新增>=1", stats["sigs_added"] >= 1)
     check("统计-信号修改>=1", stats["sigs_modified"] >= 1)
 
     print(f"\n  差异统计: {stats}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 测试3：报告生成功能
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def test_reporters():
     section("测试3: 报告生成 (dbc_report.py)")
@@ -236,9 +264,9 @@ def test_reporters():
     print(f"\n  所有报告已生成到: {OUT_DIR}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 测试4：相同文件对比（无差异）
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def test_no_diff():
     section("测试4: 相同文件对比（应无差异）")
@@ -255,9 +283,9 @@ def test_no_diff():
     check("文本报告包含无变更提示", "完全一致" in text)
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 测试5：字符串解析
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def test_parse_string():
     section("测试5: 字符串解析")
@@ -298,9 +326,9 @@ VAL_ 100 Signal1 0 "Off" 1 "On" ;
     check("Signal2偏移=-100", sig2.offset == -100.0)
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 主函数
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def main():
     print("=" * 60)
@@ -323,10 +351,10 @@ def main():
             func()
             passed += 1
         except AssertionError as e:
-            print(f"\n  ❌ 测试失败: {e}")
+            print(f"\n  [FAIL] 测试失败: {e}")
             failed += 1
         except Exception as e:
-            print(f"\n  ❌ 测试异常: {type(e).__name__}: {e}")
+            print(f"\n  [FAIL] 测试异常: {type(e).__name__}: {e}")
             import traceback
             traceback.print_exc()
             failed += 1
@@ -336,9 +364,9 @@ def main():
     print(f"{'='*60}")
 
     if failed == 0:
-        print("\n  🎉 所有测试通过！DBC Skill 功能正常。")
+        print("\n   所有测试通过！DBC Skill 功能正常。")
     else:
-        print(f"\n  ⚠️  有 {failed} 个测试失败，请检查相关模块。")
+        print(f"\n  [WARN]  有 {failed} 个测试失败，请检查相关模块。")
         sys.exit(1)
 
 

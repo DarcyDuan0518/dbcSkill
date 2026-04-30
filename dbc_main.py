@@ -29,9 +29,9 @@ from dbc_report import (
 )
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 子命令：diff
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def cmd_diff(args):
     """对比两个DBC文件"""
@@ -109,15 +109,15 @@ def cmd_diff(args):
 
     # 打印统计
     stats = result.stats()
-    print(f"\n✅ 差异分析完成:")
+    print(f"\n[PASS] 差异分析完成:")
     print(f"   节点变更: +{stats['nodes_added']} / -{stats['nodes_removed']}")
     print(f"   报文变更: +{stats['msgs_added']} / -{stats['msgs_removed']} / ~{stats['msgs_modified']}")
     print(f"   信号变更: +{stats['sigs_added']} / -{stats['sigs_removed']} / ~{stats['sigs_modified']}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 子命令：info
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def cmd_info(args):
     """显示单个DBC文件摘要"""
@@ -155,9 +155,9 @@ def cmd_info(args):
                             print(f"      {k} = {v!r}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 子命令：export
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def cmd_export(args):
     """导出DBC内容为结构化格式"""
@@ -258,9 +258,9 @@ def _dbc_to_dict(dbc) -> dict:
     }
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 参数解析
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -294,7 +294,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     subparsers = parser.add_subparsers(dest="command", help="子命令")
 
-    # ── diff 子命令 ──
+    # -- diff 子命令 --
     diff_parser = subparsers.add_parser("diff", help="对比两个DBC文件的差异")
     diff_parser.add_argument("old_dbc", help="旧版本DBC文件路径")
     diff_parser.add_argument("new_dbc", help="新版本DBC文件路径")
@@ -308,13 +308,13 @@ def build_parser() -> argparse.ArgumentParser:
     diff_parser.add_argument("--output-dir", "-d", help="输出目录（all格式时有效）")
     diff_parser.add_argument("--brief", "-b", action="store_true", help="简洁模式（不显示详细信号信息）")
 
-    # ── info 子命令 ──
+    # -- info 子命令 --
     info_parser = subparsers.add_parser("info", help="显示DBC文件内容摘要")
     info_parser.add_argument("dbc_file", help="DBC文件路径")
     info_parser.add_argument("--output", "-o", help="保存摘要到文件")
     info_parser.add_argument("--signals", "-s", action="store_true", help="显示详细信号列表")
 
-    # ── export 子命令 ──
+    # -- export 子命令 --
     export_parser = subparsers.add_parser("export", help="导出DBC内容为结构化格式")
     export_parser.add_argument("dbc_file", help="DBC文件路径")
     export_parser.add_argument(

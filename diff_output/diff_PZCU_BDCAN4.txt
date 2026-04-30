@@ -1,12 +1,13 @@
 ======================================================================
   DBC 变更差异报告
-  生成时间: 2026-04-29 13:48:42
+  生成时间: 2026-04-30 08:55:10
   旧版本: EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_BDCAN4.dbc
   新版本: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN4.dbc
 ======================================================================
 
 【变更摘要】
   节点: 新增 0  删除 0
+  报文ID变更: 0
   报文: 新增 3  删除 0  修改 10
   信号: 新增 8  删除 0  修改 7
 
@@ -51,7 +52,7 @@
           因子=0.01  偏移=-1.0  范围=[-1.0, 1.0]  单位=''
           接收节点=['Vector_XXX']
   ✎ RRSCU_Sts1_100ms (0x3AC)
-      属性变更 - 属性.GenMsgStartDelayTime: 0.0 → 30.0
+      属性变更 - GenMsgStartDelayTime: 0.0 → 30.0
       ✎ [修改信号] RRSCU_SecRSeatPosChng
           值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} → {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
   ✎ EMS_STS2_100ms_GW1 (0x3E1)
@@ -63,7 +64,7 @@
       ✎ [修改信号] PsngSeatPosChng
           值表: {0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'} → {0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}
   ✎ RRSCU_Sts11_100ms (0x522)
-      属性变更 - 属性.GenMsgStartDelayTime: 0.0 → 65.0
+      属性变更 - GenMsgStartDelayTime: 0.0 → 65.0
       ✚ [新增信号] PsngSeatMovReq
           起始位=63  长度=4bit  Motorola(大端)  无符号
           因子=1.0  偏移=0.0  范围=[0.0, 15.0]  单位=''

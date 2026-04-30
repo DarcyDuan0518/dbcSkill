@@ -2,7 +2,7 @@
 报文-新增,0x1FFC0007,PZCU_Monitor4_1000ms,,DLC,,8
 报文-新增,0x1FFC0007,PZCU_Monitor4_1000ms,,发送节点,,PZCU
 信号-新增,0x1FFC0007,PZCU_Monitor4_1000ms,VehMaxCrntIn1Sec,定义,,"起始位=7,长度=14,字节序=Motorola(大端),因子=0.1,偏移=0.0,单位=A"
-报文-修改,0x2F6,PZCU_Monitor2_20ms,,DLC,8,16
+报文-修改(字段),0x2F6,PZCU_Monitor2_20ms,,DLC,8,16
 信号-新增,0x2F6,PZCU_Monitor2_20ms,RRWndRippleAnti_PnchSts,定义,,"起始位=24,长度=1,字节序=Motorola(大端),因子=1.0,偏移=0.0"
 信号-新增,0x2F6,PZCU_Monitor2_20ms,RRWndRippleCurrent,定义,,"起始位=47,长度=8,字节序=Motorola(大端),因子=1.0,偏移=0.0"
 信号-新增,0x2F6,PZCU_Monitor2_20ms,RRWndRipplePeriod,定义,,"起始位=59,长度=10,字节序=Motorola(大端),因子=1.0,偏移=0.0"

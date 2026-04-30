@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-04-29 13:48:42",
-  "old_file": "PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_MCUFCAN.dbc",
-  "new_file": "PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_MCUFCAN.dbc",
+  "generated_at": "2026-04-30 08:55:10",
+  "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_MCUFCAN.dbc",
+  "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_MCUFCAN.dbc",
   "stats": {
     "nodes_added": 0,
     "nodes_removed": 0,
+    "msg_id_changes": 0,
     "msgs_added": 0,
     "msgs_removed": 0,
     "msgs_modified": 3,
@@ -13,6 +14,7 @@
     "sigs_modified": 0
   },
   "node_changes": [],
+  "message_id_changes": [],
   "message_changes": [
     {
       "type": "MODIFIED",
@@ -20,6 +22,7 @@
       "can_id_hex": "0x123",
       "msg_name": "EMS_SysSts1_10ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -48,6 +51,7 @@
       "can_id_hex": "0x3AA",
       "msg_name": "PZCU_ACHtMgm_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -76,6 +80,7 @@
       "can_id_hex": "0x5A0",
       "msg_name": "CCU_VehSts_1000ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",

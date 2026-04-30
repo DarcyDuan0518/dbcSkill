@@ -11,13 +11,13 @@ from typing import List, Optional
 from dbc_parser import DBCFile, Message, Signal
 from dbc_diff import (
     DBCDiffResult, MessageChange, SignalChange, NodeChange,
-    ChangeType, FieldChange
+    ChangeType, FieldChange, MessageIdChange
 )
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 工具函数
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def _byte_order_str(bo: str) -> str:
     return "Intel(小端)" if bo == "1" else "Motorola(大端)"
@@ -26,15 +26,15 @@ def _value_type_str(vt: str) -> str:
     return "无符号" if vt == "+" else "有符号"
 
 def _change_icon(ct: str) -> str:
-    return {"ADDED": "✚", "REMOVED": "✖", "MODIFIED": "✎"}.get(ct, "?")
+    return {"ADDED": "[+]", "REMOVED": "[x]", "MODIFIED": "[~]"}.get(ct, "?")
 
 def _change_label(ct: str) -> str:
     return {"ADDED": "新增", "REMOVED": "删除", "MODIFIED": "修改"}.get(ct, ct)
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 控制台文本报告
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class TextReporter:
     """生成控制台友好的文本差异报告"""
@@ -51,13 +51,14 @@ class TextReporter:
         lines.append("=" * 70)
 
         if not result.has_changes():
-            lines.append("\n✔ 两个DBC文件内容完全一致，无任何变更。")
+            lines.append("\n[PASS] 两个DBC文件内容完全一致，无任何变更。")
             return "\n".join(lines)
 
         # 统计摘要
         stats = result.stats()
         lines.append("\n【变更摘要】")
         lines.append(f"  节点: 新增 {stats['nodes_added']}  删除 {stats['nodes_removed']}")
+        lines.append(f"  报文ID变更: {stats['msg_id_changes']}")
         lines.append(f"  报文: 新增 {stats['msgs_added']}  删除 {stats['msgs_removed']}  修改 {stats['msgs_modified']}")
         lines.append(f"  信号: 新增 {stats['sigs_added']}  删除 {stats['sigs_removed']}  修改 {stats['sigs_modified']}")
 
@@ -68,14 +69,22 @@ class TextReporter:
                 lines.append(f"  {_change_icon(nc.change_type)} {nc.summary()}")
                 if verbose and nc.field_changes:
                     for fc in nc.field_changes:
-                        lines.append(f"      {fc.field_name}: {fc.old_value!r} → {fc.new_value!r}")
+                        lines.append(f"      {fc.field_name}: {fc.old_value!r} -> {fc.new_value!r}")
+
+        # 报文ID变更
+        if result.message_id_changes:
+            lines.append("\n【报文ID变更】")
+            for ic in result.message_id_changes:
+                lines.append(f"  ⇄ {ic.summary()}")
+                if verbose:
+                    lines.append(f"      旧ID: {ic.old_id_hex}  新ID: {ic.new_id_hex}")
 
         # 新增报文
         if result.added_messages:
             lines.append("\n【新增报文】")
             for mc in result.added_messages:
                 msg = mc.new_message
-                lines.append(f"  ✚ {mc.msg_name} ({mc.can_id_hex})  DLC={msg.dlc}  发送节点={msg.sender}")
+                lines.append(f"  [+] {mc.msg_name} ({mc.can_id_hex})  DLC={msg.dlc}  发送节点={msg.sender}")
                 if verbose and msg.signals:
                     for sig_name, sig in sorted(msg.signals.items()):
                         lines.append(f"      + 信号: {sig_name}  起始位={sig.start_bit}  长度={sig.length}bit"
@@ -87,7 +96,7 @@ class TextReporter:
             lines.append("\n【删除报文】")
             for mc in result.removed_messages:
                 msg = mc.old_message
-                lines.append(f"  ✖ {mc.msg_name} ({mc.can_id_hex})  DLC={msg.dlc}  发送节点={msg.sender}")
+                lines.append(f"  [x] {mc.msg_name} ({mc.can_id_hex})  DLC={msg.dlc}  发送节点={msg.sender}")
                 if verbose and msg.signals:
                     for sig_name in sorted(msg.signals.keys()):
                         lines.append(f"      - 信号: {sig_name}")
@@ -96,11 +105,14 @@ class TextReporter:
         if result.modified_messages:
             lines.append("\n【修改报文】")
             for mc in result.modified_messages:
-                lines.append(f"  ✎ {mc.msg_name} ({mc.can_id_hex})")
+                lines.append(f"  [~] {mc.msg_name} ({mc.can_id_hex})")
                 if verbose:
-                    # 报文属性变更
+                    # 报文结构字段变更
                     for fc in mc.field_changes:
-                        lines.append(f"      属性变更 - {fc.field_name}: {fc.old_value!r} → {fc.new_value!r}")
+                        lines.append(f"      字段变更 - {fc.field_name}: {fc.old_value!r} -> {fc.new_value!r}")
+                    # BA_ 属性变更
+                    for fc in mc.attr_changes:
+                        lines.append(f"      属性变更 - {fc.field_name}: {fc.old_value!r} -> {fc.new_value!r}")
                     # 信号变更
                     for sc in mc.signal_changes:
                         icon = _change_icon(sc.change_type)
@@ -118,7 +130,7 @@ class TextReporter:
                             lines.append(f"          起始位={sig.start_bit}  长度={sig.length}bit")
                         elif sc.change_type == ChangeType.MODIFIED:
                             for fc in sc.field_changes:
-                                lines.append(f"          {fc.field_name}: {fc.old_value!r} → {fc.new_value!r}")
+                                lines.append(f"          {fc.field_name}: {fc.old_value!r} -> {fc.new_value!r}")
 
         lines.append("\n" + "=" * 70)
         return "\n".join(lines)
@@ -132,9 +144,9 @@ class TextReporter:
         print(f"[TextReporter] 报告已保存: {filepath}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # Markdown 报告
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class MarkdownReporter:
     """生成Markdown格式差异报告"""
@@ -149,7 +161,7 @@ class MarkdownReporter:
         lines.append(f"- **新版本**: `{os.path.basename(result.new_file)}`\n")
 
         if not result.has_changes():
-            lines.append("> ✅ 两个DBC文件内容完全一致，无任何变更。")
+            lines.append("> [PASS] 两个DBC文件内容完全一致，无任何变更。")
             return "\n".join(lines)
 
         # 统计摘要
@@ -158,6 +170,7 @@ class MarkdownReporter:
         lines.append("| 类别 | 新增 | 删除 | 修改 |")
         lines.append("|------|------|------|------|")
         lines.append(f"| 节点 | {stats['nodes_added']} | {stats['nodes_removed']} | - |")
+        lines.append(f"| 报文ID变更 | - | - | {stats['msg_id_changes']} |")
         lines.append(f"| 报文 | {stats['msgs_added']} | {stats['msgs_removed']} | {stats['msgs_modified']} |")
         lines.append(f"| 信号 | {stats['sigs_added']} | {stats['sigs_removed']} | {stats['sigs_modified']} |")
         lines.append("")
@@ -168,9 +181,18 @@ class MarkdownReporter:
             lines.append("| 变更类型 | 节点名称 | 详情 |")
             lines.append("|----------|----------|------|")
             for nc in result.node_changes:
-                detail = "; ".join(f"{fc.field_name}: `{fc.old_value}` → `{fc.new_value}`"
+                detail = "; ".join(f"{fc.field_name}: `{fc.old_value}` -> `{fc.new_value}`"
                                    for fc in nc.field_changes) or "-"
                 lines.append(f"| {_change_label(nc.change_type)} | `{nc.node_name}` | {detail} |")
+            lines.append("")
+
+        # 报文ID变更
+        if result.message_id_changes:
+            lines.append("## 报文ID变更\n")
+            lines.append("| 报文名称 | 旧ID | 新ID |")
+            lines.append("|----------|------|------|")
+            for ic in result.message_id_changes:
+                lines.append(f"| `{ic.msg_name}` | `{ic.old_id_hex}` | `{ic.new_id_hex}` |")
             lines.append("")
 
         # 新增报文
@@ -178,7 +200,7 @@ class MarkdownReporter:
             lines.append("## 新增报文\n")
             for mc in result.added_messages:
                 msg = mc.new_message
-                lines.append(f"### ✚ {mc.msg_name} `{mc.can_id_hex}`\n")
+                lines.append(f"### [+] {mc.msg_name} `{mc.can_id_hex}`\n")
                 lines.append(f"- **DLC**: {msg.dlc} bytes")
                 lines.append(f"- **发送节点**: {msg.sender}")
                 if msg.comment:
@@ -201,7 +223,7 @@ class MarkdownReporter:
             lines.append("## 删除报文\n")
             for mc in result.removed_messages:
                 msg = mc.old_message
-                lines.append(f"### ✖ {mc.msg_name} `{mc.can_id_hex}`\n")
+                lines.append(f"### [x] {mc.msg_name} `{mc.can_id_hex}`\n")
                 lines.append(f"- **DLC**: {msg.dlc} bytes")
                 lines.append(f"- **发送节点**: {msg.sender}")
                 lines.append(f"- **信号数量**: {len(msg.signals)}")
@@ -213,14 +235,23 @@ class MarkdownReporter:
         if result.modified_messages:
             lines.append("## 修改报文\n")
             for mc in result.modified_messages:
-                lines.append(f"### ✎ {mc.msg_name} `{mc.can_id_hex}`\n")
+                lines.append(f"### [~] {mc.msg_name} `{mc.can_id_hex}`\n")
 
-                # 报文属性变更
+                # 报文结构字段变更
                 if mc.field_changes:
-                    lines.append("**报文属性变更**:\n")
+                    lines.append("**报文字段变更**:\n")
                     lines.append("| 字段 | 旧值 | 新值 |")
                     lines.append("|------|------|------|")
                     for fc in mc.field_changes:
+                        lines.append(f"| {fc.field_name} | `{fc.old_value}` | `{fc.new_value}` |")
+                    lines.append("")
+
+                # BA_ 属性变更
+                if mc.attr_changes:
+                    lines.append("**BA_属性变更**:\n")
+                    lines.append("| 属性名 | 旧值 | 新值 |")
+                    lines.append("|--------|------|------|")
+                    for fc in mc.attr_changes:
                         lines.append(f"| {fc.field_name} | `{fc.old_value}` | `{fc.new_value}` |")
                     lines.append("")
 
@@ -268,9 +299,9 @@ class MarkdownReporter:
         print(f"[MarkdownReporter] 报告已保存: {filepath}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # HTML 报告
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class HTMLReporter:
     """生成HTML格式差异报告（带样式）"""
@@ -317,7 +348,7 @@ class HTMLReporter:
 <style>{self._CSS}</style>
 </head>
 <body>
-<h1>🔍 DBC 变更差异报告</h1>
+<h1> DBC 变更差异报告</h1>
 <div class="meta">
   <strong>生成时间:</strong> {now}<br>
   <strong>旧版本:</strong> <code>{os.path.basename(result.old_file)}</code><br>
@@ -326,12 +357,12 @@ class HTMLReporter:
 """]
 
         if not result.has_changes():
-            html.append('<p class="no-change">✅ 两个DBC文件内容完全一致，无任何变更。</p>')
+            html.append('<p class="no-change">[PASS] 两个DBC文件内容完全一致，无任何变更。</p>')
             html.append("</body></html>")
             return "".join(html)
 
         # 统计摘要
-        html.append("<h2>📊 变更摘要</h2>")
+        html.append("<h2> 变更摘要</h2>")
         html.append('<div class="summary">')
         for label, key_add, key_rem, key_mod in [
             ("节点", "nodes_added", "nodes_removed", None),
@@ -346,23 +377,36 @@ class HTMLReporter:
 
         # 节点变更
         if result.node_changes:
-            html.append("<h2>🖧 节点变更</h2>")
+            html.append("<h2> 节点变更</h2>")
             html.append("<table><tr><th>变更类型</th><th>节点名称</th><th>详情</th></tr>")
             for nc in result.node_changes:
                 tag_cls = nc.change_type.lower()
-                detail = "; ".join(f"{fc.field_name}: <code>{fc.old_value}</code> → <code>{fc.new_value}</code>"
+                detail = "; ".join(f"{fc.field_name}: <code>{fc.old_value}</code> -> <code>{fc.new_value}</code>"
                                    for fc in nc.field_changes) or "-"
                 html.append(f"<tr><td><span class='tag-{tag_cls}'>{_change_label(nc.change_type)}</span></td>"
                              f"<td><code>{nc.node_name}</code></td><td>{detail}</td></tr>")
             html.append("</table>")
 
+        # 报文ID变更
+        if result.message_id_changes:
+            html.append("<h2>⇄ 报文ID变更</h2>")
+            html.append(f'<div class="stat-box modified" style="display:inline-block;margin-bottom:10px">'
+                        f'<div class="num">{stats["msg_id_changes"]}</div>'
+                        f'<div class="label">报文ID变更</div></div>')
+            html.append("<table><tr><th>报文名称</th><th>旧ID</th><th>新ID</th></tr>")
+            for ic in result.message_id_changes:
+                html.append(f"<tr><td><strong>{ic.msg_name}</strong></td>"
+                             f"<td><code>{ic.old_id_hex}</code></td>"
+                             f"<td><code>{ic.new_id_hex}</code></td></tr>")
+            html.append("</table>")
+
         # 新增报文
         if result.added_messages:
-            html.append("<h2>✚ 新增报文</h2>")
+            html.append("<h2>[+] 新增报文</h2>")
             for mc in result.added_messages:
                 msg = mc.new_message
                 html.append(f'<div class="msg-block added">')
-                html.append(f"<h3>✚ {mc.msg_name} <code>{mc.can_id_hex}</code></h3>")
+                html.append(f"<h3>[+] {mc.msg_name} <code>{mc.can_id_hex}</code></h3>")
                 html.append(f"<p>DLC: <strong>{msg.dlc}</strong> bytes &nbsp;|&nbsp; 发送节点: <strong>{msg.sender}</strong></p>")
                 if msg.comment:
                     html.append(f"<p>注释: {msg.comment}</p>")
@@ -372,11 +416,11 @@ class HTMLReporter:
 
         # 删除报文
         if result.removed_messages:
-            html.append("<h2>✖ 删除报文</h2>")
+            html.append("<h2>[x] 删除报文</h2>")
             for mc in result.removed_messages:
                 msg = mc.old_message
                 html.append(f'<div class="msg-block removed">')
-                html.append(f"<h3>✖ {mc.msg_name} <code>{mc.can_id_hex}</code></h3>")
+                html.append(f"<h3>[x] {mc.msg_name} <code>{mc.can_id_hex}</code></h3>")
                 html.append(f"<p>DLC: <strong>{msg.dlc}</strong> bytes &nbsp;|&nbsp; 发送节点: <strong>{msg.sender}</strong></p>")
                 if msg.signals:
                     sig_names = ", ".join(f"<code>{s}</code>" for s in sorted(msg.signals.keys()))
@@ -385,15 +429,23 @@ class HTMLReporter:
 
         # 修改报文
         if result.modified_messages:
-            html.append("<h2>✎ 修改报文</h2>")
+            html.append("<h2>[~] 修改报文</h2>")
             for mc in result.modified_messages:
                 html.append(f'<div class="msg-block modified">')
-                html.append(f"<h3>✎ {mc.msg_name} <code>{mc.can_id_hex}</code></h3>")
+                html.append(f"<h3>[~] {mc.msg_name} <code>{mc.can_id_hex}</code></h3>")
 
                 if mc.field_changes:
-                    html.append("<h4>报文属性变更</h4>")
+                    html.append("<h4>报文字段变更</h4>")
                     html.append("<table><tr><th>字段</th><th>旧值</th><th>新值</th></tr>")
                     for fc in mc.field_changes:
+                        html.append(f"<tr><td>{fc.field_name}</td><td><code>{fc.old_value}</code></td>"
+                                    f"<td><code>{fc.new_value}</code></td></tr>")
+                    html.append("</table>")
+
+                if mc.attr_changes:
+                    html.append("<h4>BA_属性变更</h4>")
+                    html.append("<table><tr><th>属性名</th><th>旧值</th><th>新值</th></tr>")
+                    for fc in mc.attr_changes:
                         html.append(f"<tr><td>{fc.field_name}</td><td><code>{fc.old_value}</code></td>"
                                     f"<td><code>{fc.new_value}</code></td></tr>")
                     html.append("</table>")
@@ -455,9 +507,9 @@ class HTMLReporter:
         print(f"[HTMLReporter] 报告已保存: {filepath}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # CSV 报告
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class CSVReporter:
     """生成CSV格式差异报告（适合Excel查看）"""
@@ -491,10 +543,16 @@ class CSVReporter:
             for sig_name in sorted(msg.signals.keys()):
                 rows.append([f"信号-删除", mc.can_id_hex, mc.msg_name, sig_name, "", "", ""])
 
+        # 报文ID变更
+        for ic in result.message_id_changes:
+            rows.append(["报文ID变更", ic.old_id_hex, ic.msg_name, "", "新ID", ic.old_id_hex, ic.new_id_hex])
+
         # 修改报文
         for mc in result.modified_messages:
             for fc in mc.field_changes:
-                rows.append([f"报文-修改", mc.can_id_hex, mc.msg_name, "", fc.field_name, fc.old_value, fc.new_value])
+                rows.append(["报文-修改(字段)", mc.can_id_hex, mc.msg_name, "", fc.field_name, fc.old_value, fc.new_value])
+            for fc in mc.attr_changes:
+                rows.append(["报文-修改(属性)", mc.can_id_hex, mc.msg_name, "", fc.field_name, fc.old_value, fc.new_value])
             for sc in mc.signal_changes:
                 if sc.change_type == ChangeType.ADDED:
                     sig = sc.new_signal
@@ -514,9 +572,9 @@ class CSVReporter:
         print(f"[CSVReporter] 报告已保存: {filepath}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # JSON 报告
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class JSONReporter:
     """生成JSON格式差异报告（适合程序化处理）"""
@@ -529,6 +587,7 @@ class JSONReporter:
             "new_file": result.new_file,
             "stats": result.stats(),
             "node_changes": [],
+            "message_id_changes": [],
             "message_changes": []
         }
 
@@ -540,6 +599,13 @@ class JSONReporter:
                                    for fc in nc.field_changes]
             })
 
+        for ic in result.message_id_changes:
+            data["message_id_changes"].append({
+                "msg_name": ic.msg_name,
+                "old_id": ic.old_id_hex,
+                "new_id": ic.new_id_hex,
+            })
+
         for mc in result.message_changes:
             mc_data = {
                 "type": mc.change_type,
@@ -548,6 +614,8 @@ class JSONReporter:
                 "msg_name": mc.msg_name,
                 "field_changes": [{"field": fc.field_name, "old": str(fc.old_value), "new": str(fc.new_value)}
                                    for fc in mc.field_changes],
+                "attr_changes": [{"field": fc.field_name, "old": str(fc.old_value), "new": str(fc.new_value)}
+                                  for fc in mc.attr_changes],
                 "signal_changes": []
             }
             for sc in mc.signal_changes:
@@ -579,9 +647,9 @@ class JSONReporter:
         print(f"[JSONReporter] 报告已保存: {filepath}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # DBC文件内容摘要报告（单文件分析）
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class DBCSummaryReporter:
     """生成单个DBC文件的内容摘要报告"""

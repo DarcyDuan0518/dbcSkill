@@ -8,9 +8,9 @@ from typing import Dict, List, Optional, Any, Tuple
 from dbc_parser import DBCFile, Message, Signal, Node
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 变更类型枚举
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class ChangeType:
     ADDED   = "ADDED"    # 新增
@@ -18,9 +18,9 @@ class ChangeType:
     MODIFIED = "MODIFIED"  # 修改
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 变更记录数据类
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 @dataclass
 class FieldChange:
@@ -30,7 +30,7 @@ class FieldChange:
     new_value: Any
 
     def __str__(self):
-        return f"  {self.field_name}: {self.old_value!r} → {self.new_value!r}"
+        return f"  {self.field_name}: {self.old_value!r} -> {self.new_value!r}"
 
 
 @dataclass
@@ -55,10 +55,31 @@ class SignalChange:
             return f"[删除信号] {self.msg_name}({self.can_id_hex}).{self.signal_name}"
         else:
             changes_str = "; ".join(
-                f"{c.field_name}: {c.old_value!r}→{c.new_value!r}"
+                f"{c.field_name}: {c.old_value!r}->{c.new_value!r}"
                 for c in self.field_changes
             )
             return f"[修改信号] {self.msg_name}({self.can_id_hex}).{self.signal_name} [{changes_str}]"
+
+
+@dataclass
+class MessageIdChange:
+    """报文ID变更（同名报文但ID不同）"""
+    msg_name: str
+    old_id: int
+    new_id: int
+    old_message: Optional[Message] = None
+    new_message: Optional[Message] = None
+
+    @property
+    def old_id_hex(self) -> str:
+        return f"0x{self.old_id & 0x1FFFFFFF:X}"
+
+    @property
+    def new_id_hex(self) -> str:
+        return f"0x{self.new_id & 0x1FFFFFFF:X}"
+
+    def summary(self) -> str:
+        return f"[报文ID变更] {self.msg_name}: {self.old_id_hex} -> {self.new_id_hex}"
 
 
 @dataclass
@@ -70,6 +91,7 @@ class MessageChange:
     old_message: Optional[Message] = None
     new_message: Optional[Message] = None
     field_changes: List[FieldChange] = field(default_factory=list)
+    attr_changes: List[FieldChange] = field(default_factory=list)   # BA_ attribute 变更
     signal_changes: List[SignalChange] = field(default_factory=list)
 
     @property
@@ -122,9 +144,10 @@ class DBCDiffResult:
     old_file: str
     new_file: str
     node_changes: List[NodeChange] = field(default_factory=list)
+    message_id_changes: List[MessageIdChange] = field(default_factory=list)
     message_changes: List[MessageChange] = field(default_factory=list)
 
-    # ── 统计快捷属性 ──
+    # -- 统计快捷属性 --
     @property
     def added_messages(self) -> List[MessageChange]:
         return [c for c in self.message_changes if c.change_type == ChangeType.ADDED]
@@ -154,13 +177,14 @@ class DBCDiffResult:
         return result
 
     def has_changes(self) -> bool:
-        return bool(self.node_changes or self.message_changes)
+        return bool(self.node_changes or self.message_id_changes or self.message_changes)
 
     def stats(self) -> Dict[str, int]:
         sig_changes = self.all_signal_changes
         return {
             "nodes_added":    len(self.added_nodes),
             "nodes_removed":  len(self.removed_nodes),
+            "msg_id_changes": len(self.message_id_changes),
             "msgs_added":     len(self.added_messages),
             "msgs_removed":   len(self.removed_messages),
             "msgs_modified":  len(self.modified_messages),
@@ -170,9 +194,9 @@ class DBCDiffResult:
         }
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 差异分析器
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class DBCDiff:
     """
@@ -220,12 +244,15 @@ class DBCDiff:
         # 1. 比较节点
         result.node_changes = self._compare_nodes(old_dbc, new_dbc)
 
-        # 2. 比较报文（按msg_id匹配）
+        # 2. 检测同名报文 ID 变更（在按ID比较之前先找出来）
+        result.message_id_changes = self._detect_id_changes(old_dbc, new_dbc)
+
+        # 3. 比较报文（按msg_id匹配）
         result.message_changes = self._compare_messages(old_dbc, new_dbc)
 
         return result
 
-    # ── 节点比较 ──────────────────────────────
+    # -- 节点比较 ------------------------------
 
     def _compare_nodes(self, old_dbc: DBCFile, new_dbc: DBCFile) -> List[NodeChange]:
         changes = []
@@ -263,7 +290,7 @@ class DBCDiff:
 
         return changes
 
-    # ── 报文比较 ──────────────────────────────
+    # -- 报文比较 ------------------------------
 
     def _compare_messages(self, old_dbc: DBCFile, new_dbc: DBCFile) -> List[MessageChange]:
         changes = []
@@ -271,8 +298,22 @@ class DBCDiff:
         old_ids = set(old_dbc.messages.keys())
         new_ids = set(new_dbc.messages.keys())
 
-        # 新增报文
+        # 找出已被识别为 ID 变更的报文，排除在新增/删除之外
+        old_name_to_id = {msg.name: msg_id for msg_id, msg in old_dbc.messages.items()}
+        new_name_to_id = {msg.name: msg_id for msg_id, msg in new_dbc.messages.items()}
+        id_changed_old_ids = set()
+        id_changed_new_ids = set()
+        for name in set(old_name_to_id) & set(new_name_to_id):
+            old_id = old_name_to_id[name]
+            new_id = new_name_to_id[name]
+            if old_id != new_id:
+                id_changed_old_ids.add(old_id)
+                id_changed_new_ids.add(new_id)
+
+        # 新增报文（排除 ID 变更的新 ID）
         for msg_id in sorted(new_ids - old_ids):
+            if msg_id in id_changed_new_ids:
+                continue
             msg = new_dbc.messages[msg_id]
             changes.append(MessageChange(
                 change_type=ChangeType.ADDED,
@@ -281,8 +322,10 @@ class DBCDiff:
                 new_message=msg
             ))
 
-        # 删除报文
+        # 删除报文（排除 ID 变更的旧 ID）
         for msg_id in sorted(old_ids - new_ids):
+            if msg_id in id_changed_old_ids:
+                continue
             msg = old_dbc.messages[msg_id]
             changes.append(MessageChange(
                 change_type=ChangeType.REMOVED,
@@ -311,16 +354,13 @@ class DBCDiff:
             if old_val != new_val:
                 field_changes.append(FieldChange(label, old_val, new_val))
 
-        # 比较属性字典
-        attr_changes = self._compare_dicts(
-            old_msg.attributes, new_msg.attributes, prefix="属性"
-        )
-        field_changes.extend(attr_changes)
+        # 比较 BA_ 属性字典（单独存入 attr_changes，不混入 field_changes）
+        attr_changes = self._compare_dicts(old_msg.attributes, new_msg.attributes)
 
         # 比较信号
         signal_changes = self._compare_signals(old_msg, new_msg)
 
-        if not field_changes and not signal_changes:
+        if not field_changes and not attr_changes and not signal_changes:
             return None
 
         return MessageChange(
@@ -330,10 +370,11 @@ class DBCDiff:
             old_message=old_msg,
             new_message=new_msg,
             field_changes=field_changes,
+            attr_changes=attr_changes,
             signal_changes=signal_changes
         )
 
-    # ── 信号比较 ──────────────────────────────
+    # -- 信号比较 ------------------------------
 
     def _compare_signals(self, old_msg: Message, new_msg: Message) -> List[SignalChange]:
         changes = []
@@ -394,7 +435,30 @@ class DBCDiff:
                 changes.append(FieldChange(label, old_val, new_val))
         return changes
 
-    # ── 工具方法 ──────────────────────────────
+    # -- 报文ID变更检测 ------------------------
+
+    def _detect_id_changes(self, old_dbc: DBCFile, new_dbc: DBCFile) -> List[MessageIdChange]:
+        """检测同名报文但ID不同的情况（报文ID变更）"""
+        changes = []
+        # 构建 name -> id 映射
+        old_name_to_id = {msg.name: msg_id for msg_id, msg in old_dbc.messages.items()}
+        new_name_to_id = {msg.name: msg_id for msg_id, msg in new_dbc.messages.items()}
+
+        common_names = set(old_name_to_id) & set(new_name_to_id)
+        for name in sorted(common_names):
+            old_id = old_name_to_id[name]
+            new_id = new_name_to_id[name]
+            if old_id != new_id:
+                changes.append(MessageIdChange(
+                    msg_name=name,
+                    old_id=old_id,
+                    new_id=new_id,
+                    old_message=old_dbc.messages[old_id],
+                    new_message=new_dbc.messages[new_id],
+                ))
+        return changes
+
+    # -- 工具方法 ------------------------------
 
     def _compare_dicts(self, old_d: Dict, new_d: Dict, prefix: str = "") -> List[FieldChange]:
         changes = []
@@ -408,9 +472,9 @@ class DBCDiff:
         return changes
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 便捷函数
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def compare_dbc_files(old_path: str, new_path: str) -> DBCDiffResult:
     """

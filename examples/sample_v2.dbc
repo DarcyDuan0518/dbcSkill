@@ -58,6 +58,14 @@ BO_ 768 BMS_BattInfo : 8 BMS
  SG_ BMS_MaxCellTemp : 40|8@1+ (1,-40) [-40|215] "degC" VCU,GW
  SG_ BMS_MinCellTemp : 48|8@1+ (1,-40) [-40|215] "degC" VCU,GW
 
+BO_ 1040 GW_TimeSync : 4 GW
+ SG_ GW_Year : 0|7@1+ (1,2000) [2000|2127] "" VCU,MCU,BMS
+ SG_ GW_Month : 7|4@1+ (1,0) [1|12] "" VCU,MCU,BMS
+ SG_ GW_Day : 11|5@1+ (1,0) [1|31] "" VCU,MCU,BMS
+ SG_ GW_Hour : 16|5@1+ (1,0) [0|23] "" VCU,MCU,BMS
+ SG_ GW_Minute : 21|6@1+ (1,0) [0|59] "" VCU,MCU,BMS
+ SG_ GW_Second : 27|6@1+ (1,0) [0|59] "" VCU,MCU,BMS
+
 BO_ 1280 ADAS_CtrlCmd : 8 ADAS
  SG_ ADAS_LongCtrlReq : 0|2@1+ (1,0) [0|3] "" VCU
  SG_ ADAS_TargetAccel : 2|12@1- (0.05,-102.4) [-10|10] "m/s2" VCU
@@ -87,11 +95,13 @@ CM_ SG_ 768 BMS_SOC "电池荷电状态";
 
 BA_DEF_ BO_ "GenMsgCycleTime" INT 0 10000;
 BA_DEF_ BO_ "GenMsgSendType" ENUM "Cyclic","Event","NoMsgSendType";
+BA_DEF_ BO_ "GenMsgStartDelayTime" INT 0 1000;
 BA_DEF_ SG_ "SystemSignalLongSymbol" STRING;
 BA_DEF_ SG_ "GenSigSendType" ENUM "Cyclic","Event","NoSigSendType";
 
 BA_DEF_DEF_ "GenMsgCycleTime" 0;
 BA_DEF_DEF_ "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_ "GenMsgStartDelayTime" 0;
 BA_DEF_DEF_ "SystemSignalLongSymbol" "";
 BA_DEF_DEF_ "GenSigSendType" "Cyclic";
 
@@ -99,6 +109,8 @@ BA_ "GenMsgCycleTime" BO_ 256 10;
 BA_ "GenMsgCycleTime" BO_ 512 10;
 BA_ "GenMsgCycleTime" BO_ 768 100;
 BA_ "GenMsgCycleTime" BO_ 1280 20;
+BA_ "GenMsgSendType" BO_ 768 1;
+BA_ "GenMsgStartDelayTime" BO_ 256 5;
 
 VAL_ 256 VCU_GearPos 0 "P" 1 "R" 2 "N" 3 "D" ;
 VAL_ 256 VCU_BrakePedalSts 0 "Released" 1 "Pressed" 2 "Error" 3 "Invalid" ;

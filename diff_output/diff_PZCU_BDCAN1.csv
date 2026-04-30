@@ -16,6 +16,6 @@
 信号-修改,0x3EC,BZCU_SecSeatSts_100ms,SecLSeatPosChng,值表,"{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}","{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
 信号-修改,0x3EC,BZCU_SecSeatSts_100ms,SecRSeatPosChng,值表,"{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}","{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
 信号-修改,0x505,PZCU_BodySts5_100ms,PZCU_PsngSeatPosChng,值表,"{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}","{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
-报文-修改,0x522,RRSCU_Sts11_100ms_GW,,属性.GenMsgStartDelayTime,0.0,65.0
+报文-修改(属性),0x522,RRSCU_Sts11_100ms_GW,,GenMsgStartDelayTime,0.0,65.0
 信号-新增,0x522,RRSCU_Sts11_100ms_GW,PsngSeatMovReq,定义,,"起始位=63,长度=4,字节序=Motorola(大端),因子=1.0,偏移=0.0"
 信号-新增,0x52C,DZCU_BodySts4_100ms,BLEHoodCtrlReq,定义,,"起始位=300,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"

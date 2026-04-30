@@ -63,7 +63,7 @@
 信号-新增,0x39D,HU_RemoteCtrl_100ms,AtuoChrgVehParkNum,定义,,"起始位=202,长度=5,字节序=Motorola(大端),因子=1.0,偏移=0.0"
 信号-新增,0x39D,HU_RemoteCtrl_100ms,HuRLWdwshdPosiCtrl,定义,,"起始位=19,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"
 信号-新增,0x3AA,PZCU_ACHtMgm_100ms,AtuoChrgSts,定义,,"起始位=205,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"
-报文-修改,0x3AC,RRSCU_Sts1_100ms_GW,,属性.GenMsgStartDelayTime,0.0,30.0
+报文-修改(属性),0x3AC,RRSCU_Sts1_100ms_GW,,GenMsgStartDelayTime,0.0,30.0
 信号-修改,0x3AC,RRSCU_Sts1_100ms_GW,RRSCU_SecRSeatPosChng,值表,"{0: 'No Command', 1: 'No change', 2: 'Changed', 3: 'Invalid'}","{0: 'No change', 1: 'Changed', 2: 'Reserved', 3: 'Reserved'}"
 信号-修改,0x3D0,ODU_STS1_100ms,ChrgInltLEDSts,值表,"{0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Reserved'}","{0: 'Off', 1: 'White', 2: 'Green', 3: 'Red', 4: 'Blue', 5: 'Breathing Green��Reserved��', 6: 'Breathing Blue��Reserved��', 7: 'Invalid'}"
 信号-新增,0x3D1,ODU_Temp_100ms,OBCOverTemp,定义,,"起始位=74,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"
@@ -75,10 +75,10 @@
 信号-修改,0x51A,BZCU_BodySts_100ms,DrEasyEntCfg,值表,"{0: 'Active', 1: 'Inactive'}","{0: 'Inactive', 1: 'Active'}"
 信号-修改,0x51A,BZCU_BodySts_100ms,SecLEasyEntCfg,值表,"{0: 'Active', 1: 'Inactive'}","{0: 'Inactive', 1: 'Active'}"
 信号-修改,0x51A,BZCU_BodySts_100ms,SecREasyEntCfg,值表,"{0: 'Active', 1: 'Inactive'}","{0: 'Inactive', 1: 'Active'}"
-报文-修改,0x522,RRSCU_Sts11_100ms_GW,,属性.GenMsgStartDelayTime,0.0,65.0
+报文-修改(属性),0x522,RRSCU_Sts11_100ms_GW,,GenMsgStartDelayTime,0.0,65.0
 信号-新增,0x522,RRSCU_Sts11_100ms_GW,PsngSeatMovReq,定义,,"起始位=63,长度=4,字节序=Motorola(大端),因子=1.0,偏移=0.0"
-报文-修改,0x531,TM_SysSts_100ms_GW,,属性.GenMsgStartDelayTime,0.0,80.0
+报文-修改(属性),0x531,TM_SysSts_100ms_GW,,GenMsgStartDelayTime,0.0,80.0
 信号-修改,0x53C,PZCU_LIN_100ms,PsngSeatTableSwSts,值表,"{0: 'Normal', 1: 'Open', 2: 'Retract', 3: 'valid'}","{0: 'Normal', 1: 'short press', 2: 'long press', 3: 'Invalid'}"
-报文-修改,0x557,RRSCU_Sts6_100ms_GW,,属性.GenMsgStartDelayTime,0.0,75.0
-报文-修改,0x565,RLSCU_Sts6_100ms_GW,,属性.GenMsgStartDelayTime,0.0,75.0
+报文-修改(属性),0x557,RRSCU_Sts6_100ms_GW,,GenMsgStartDelayTime,0.0,75.0
+报文-修改(属性),0x565,RLSCU_Sts6_100ms_GW,,GenMsgStartDelayTime,0.0,75.0
 信号-新增,0x5A0,CCU_VehSts_1000ms,OBDDiagDeviceActivated,定义,,"起始位=13,长度=2,字节序=Motorola(大端),因子=1.0,偏移=0.0"

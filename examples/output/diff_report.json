@@ -1,13 +1,14 @@
 {
-  "generated_at": "2026-04-22 09:38:09",
+  "generated_at": "2026-04-30 13:48:19",
   "old_file": "E:\\gerrit\\00_Tools\\claude-dbcskill\\examples\\sample_v1.dbc",
   "new_file": "E:\\gerrit\\00_Tools\\claude-dbcskill\\examples\\sample_v2.dbc",
   "stats": {
     "nodes_added": 1,
     "nodes_removed": 0,
+    "msg_id_changes": 1,
     "msgs_added": 1,
-    "msgs_removed": 1,
-    "msgs_modified": 2,
+    "msgs_removed": 0,
+    "msgs_modified": 3,
     "sigs_added": 1,
     "sigs_removed": 0,
     "sigs_modified": 3
@@ -19,6 +20,13 @@
       "field_changes": []
     }
   ],
+  "message_id_changes": [
+    {
+      "msg_name": "GW_TimeSync",
+      "old_id": "0x400",
+      "new_id": "0x410"
+    }
+  ],
   "message_changes": [
     {
       "type": "ADDED",
@@ -26,14 +34,7 @@
       "can_id_hex": "0x500",
       "msg_name": "ADAS_CtrlCmd",
       "field_changes": [],
-      "signal_changes": []
-    },
-    {
-      "type": "REMOVED",
-      "msg_id": 1024,
-      "can_id_hex": "0x400",
-      "msg_name": "GW_TimeSync",
-      "field_changes": [],
+      "attr_changes": [],
       "signal_changes": []
     },
     {
@@ -42,6 +43,13 @@
       "can_id_hex": "0x100",
       "msg_name": "VCU_Status",
       "field_changes": [],
+      "attr_changes": [
+        {
+          "field": "GenMsgStartDelayTime",
+          "old": "<不存在>",
+          "new": "5"
+        }
+      ],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -139,6 +147,7 @@
       "can_id_hex": "0x200",
       "msg_name": "MCU_TorqueInfo",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -177,6 +186,21 @@
           }
         }
       ]
+    },
+    {
+      "type": "MODIFIED",
+      "msg_id": 768,
+      "can_id_hex": "0x300",
+      "msg_name": "BMS_BattInfo",
+      "field_changes": [],
+      "attr_changes": [
+        {
+          "field": "GenMsgSendType",
+          "old": "<不存在>",
+          "new": "1"
+        }
+      ],
+      "signal_changes": []
     }
   ]
 }

@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-04-29 13:48:42",
-  "old_file": "PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_ZCAN.dbc",
-  "new_file": "PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_ZCAN.dbc",
+  "generated_at": "2026-04-30 08:55:10",
+  "old_file": "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409\\CAN\\EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_ZCAN.dbc",
+  "new_file": "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421\\CAN\\EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_ZCAN.dbc",
   "stats": {
     "nodes_added": 0,
     "nodes_removed": 0,
+    "msg_id_changes": 0,
     "msgs_added": 3,
     "msgs_removed": 0,
     "msgs_modified": 22,
@@ -13,6 +14,7 @@
     "sigs_modified": 15
   },
   "node_changes": [],
+  "message_id_changes": [],
   "message_changes": [
     {
       "type": "ADDED",
@@ -20,6 +22,7 @@
       "can_id_hex": "0x20B",
       "msg_name": "DZCU_BodySts7_20ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": []
     },
     {
@@ -28,6 +31,7 @@
       "can_id_hex": "0x67B",
       "msg_name": "PZCU_LIN_VerNum6",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": []
     },
     {
@@ -36,6 +40,7 @@
       "can_id_hex": "0x6CA",
       "msg_name": "BZCU_LIN_VerNum",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": []
     },
     {
@@ -44,6 +49,7 @@
       "can_id_hex": "0x123",
       "msg_name": "EMS_SysSts1_10ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -72,6 +78,7 @@
       "can_id_hex": "0x216",
       "msg_name": "ESP_SysSts3_20ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -100,6 +107,7 @@
       "can_id_hex": "0x21B",
       "msg_name": "DZCU_PSDCmd_20ms_GW",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -159,6 +167,7 @@
       "can_id_hex": "0x259",
       "msg_name": "PZCU_BodySts_20ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -225,6 +234,7 @@
       "can_id_hex": "0x28A",
       "msg_name": "PZCU_OTASts_Event",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -272,6 +282,7 @@
       "can_id_hex": "0x39A",
       "msg_name": "BZCU_SeatCtrl_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -356,6 +367,7 @@
       "can_id_hex": "0x39D",
       "msg_name": "HU_RemoteCtrl_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -422,6 +434,7 @@
       "can_id_hex": "0x3AA",
       "msg_name": "PZCU_ACHtMgm_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -449,9 +462,10 @@
       "msg_id": 940,
       "can_id_hex": "0x3AC",
       "msg_name": "RRSCU_Sts1_100ms_GW",
-      "field_changes": [
+      "field_changes": [],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgStartDelayTime",
+          "field": "GenMsgStartDelayTime",
           "old": "0.0",
           "new": "30.0"
         }
@@ -490,6 +504,7 @@
       "can_id_hex": "0x3D0",
       "msg_name": "ODU_STS1_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -524,6 +539,7 @@
       "can_id_hex": "0x3D1",
       "msg_name": "ODU_Temp_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -552,6 +568,7 @@
       "can_id_hex": "0x3E0",
       "msg_name": "BMS_ChrgInfo2_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",
@@ -580,6 +597,7 @@
       "can_id_hex": "0x3EC",
       "msg_name": "BZCU_SecSeatSts_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -639,6 +657,7 @@
       "can_id_hex": "0x3FA",
       "msg_name": "PSCU_Sts2_100ms_GW",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -673,6 +692,7 @@
       "can_id_hex": "0x505",
       "msg_name": "PZCU_BodySts5_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -707,6 +727,7 @@
       "can_id_hex": "0x51A",
       "msg_name": "BZCU_BodySts_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -790,9 +811,10 @@
       "msg_id": 1314,
       "can_id_hex": "0x522",
       "msg_name": "RRSCU_Sts11_100ms_GW",
-      "field_changes": [
+      "field_changes": [],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgStartDelayTime",
+          "field": "GenMsgStartDelayTime",
           "old": "0.0",
           "new": "65.0"
         }
@@ -824,9 +846,10 @@
       "msg_id": 1329,
       "can_id_hex": "0x531",
       "msg_name": "TM_SysSts_100ms_GW",
-      "field_changes": [
+      "field_changes": [],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgStartDelayTime",
+          "field": "GenMsgStartDelayTime",
           "old": "0.0",
           "new": "80.0"
         }
@@ -839,6 +862,7 @@
       "can_id_hex": "0x53C",
       "msg_name": "PZCU_LIN_100ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "MODIFIED",
@@ -872,9 +896,10 @@
       "msg_id": 1367,
       "can_id_hex": "0x557",
       "msg_name": "RRSCU_Sts6_100ms_GW",
-      "field_changes": [
+      "field_changes": [],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgStartDelayTime",
+          "field": "GenMsgStartDelayTime",
           "old": "0.0",
           "new": "75.0"
         }
@@ -886,9 +911,10 @@
       "msg_id": 1381,
       "can_id_hex": "0x565",
       "msg_name": "RLSCU_Sts6_100ms_GW",
-      "field_changes": [
+      "field_changes": [],
+      "attr_changes": [
         {
-          "field": "属性.GenMsgStartDelayTime",
+          "field": "GenMsgStartDelayTime",
           "old": "0.0",
           "new": "75.0"
         }
@@ -901,6 +927,7 @@
       "can_id_hex": "0x5A0",
       "msg_name": "CCU_VehSts_1000ms",
       "field_changes": [],
+      "attr_changes": [],
       "signal_changes": [
         {
           "type": "ADDED",

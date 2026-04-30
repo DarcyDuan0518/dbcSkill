@@ -1,0 +1,198 @@
+LIN_description_file;
+LIN_protocol_version = "2.1";
+LIN_language_version = "2.1";
+LIN_speed = 19.2 kbps;
+Channel_name = "LIN11";
+
+Nodes {
+  Master: LIN_Master, 5 ms, 0.2 ms;
+  Slaves: SlaveA, SlaveB, SlaveC, SlaveD;
+}
+
+Signals {
+  EngineSpeed       : 16, 0x0000, SlaveA, LIN_Master;
+  EngineTemp        : 8,  0x00,   SlaveA, LIN_Master;
+  FuelLevel         : 8,  0xFF,   SlaveB, LIN_Master;
+  DoorStatus        : 4,  0x0,    SlaveB, LIN_Master;
+  LightSwitch       : 2,  0x0,    LIN_Master, SlaveC;
+  FanSpeed          : 8,  0x00,   LIN_Master, SlaveA, SlaveB;
+  BatteryVoltage    : 8,  0x00,   SlaveC, LIN_Master;
+  ErrorFlag         : 1,  0x0,    SlaveA, LIN_Master;
+  AmbientTemp       : 8,  0x00,   SlaveD, LIN_Master;
+  WiperSpeed        : 4,  0x0,    LIN_Master, SlaveD;
+}
+
+Diagnostic_signals {
+  MasterReqB0 : 8, 0;
+  MasterReqB1 : 8, 0;
+  MasterReqB2 : 8, 0;
+  MasterReqB3 : 8, 0;
+  MasterReqB4 : 8, 0;
+  MasterReqB5 : 8, 0;
+  MasterReqB6 : 8, 0;
+  MasterReqB7 : 8, 0;
+  SlaveRespB0 : 8, 0;
+  SlaveRespB1 : 8, 0;
+  SlaveRespB2 : 8, 0;
+  SlaveRespB3 : 8, 0;
+  SlaveRespB4 : 8, 0;
+  SlaveRespB5 : 8, 0;
+  SlaveRespB6 : 8, 0;
+  SlaveRespB7 : 8, 0;
+}
+
+Frames {
+  EngineFrame : 0x01, SlaveA, 4 {
+    EngineSpeed,    0;
+    EngineTemp,     16;
+    ErrorFlag,      24;
+  }
+  FuelFrame : 0x02, SlaveB, 3 {
+    FuelLevel,      0;
+    DoorStatus,     8;
+  }
+  ControlFrame : 0x10, LIN_Master, 2 {
+    LightSwitch,    0;
+    FanSpeed,       8;
+  }
+  BatteryFrame : 0x20, SlaveC, 1 {
+    BatteryVoltage, 0;
+  }
+  ClimateFrame : 0x30, SlaveD, 2 {
+    AmbientTemp,    0;
+    WiperSpeed,     8;
+  }
+}
+
+Diagnostic_frames {
+  MasterReq : 0x3C, 8 {
+    MasterReqB0, 0;
+    MasterReqB1, 8;
+    MasterReqB2, 16;
+    MasterReqB3, 24;
+    MasterReqB4, 32;
+    MasterReqB5, 40;
+    MasterReqB6, 48;
+    MasterReqB7, 56;
+  }
+  SlaveResp : 0x3D, 8 {
+    SlaveRespB0, 0;
+    SlaveRespB1, 8;
+    SlaveRespB2, 16;
+    SlaveRespB3, 24;
+    SlaveRespB4, 32;
+    SlaveRespB5, 40;
+    SlaveRespB6, 48;
+    SlaveRespB7, 56;
+  }
+}
+
+Node_attributes {
+  SlaveA {
+    LIN_protocol = "2.1";
+    configured_NAD = 0x01;
+    initial_NAD = 0x01;
+    product_id = 0x0001, 0x0001, 0x02;
+    response_error = ErrorFlag;
+    P2_min = 50 ms;
+    ST_min = 0 ms;
+    configurable_frames {
+      EngineFrame = 0x0001;
+      ControlFrame = 0x0010;
+    }
+  }
+  SlaveB {
+    LIN_protocol = "2.1";
+    configured_NAD = 0x02;
+    initial_NAD = 0x02;
+    product_id = 0x0002, 0x0001, 0x01;
+    P2_min = 50 ms;
+    ST_min = 0 ms;
+    configurable_frames {
+      FuelFrame = 0x0002;
+    }
+  }
+  SlaveC {
+    LIN_protocol = "2.1";
+    configured_NAD = 0x03;
+    initial_NAD = 0x03;
+    product_id = 0x0003, 0x0001, 0x01;
+    P2_min = 50 ms;
+    ST_min = 0 ms;
+    configurable_frames {
+      BatteryFrame = 0x0020;
+    }
+  }
+  SlaveD {
+    LIN_protocol = "2.1";
+    configured_NAD = 0x04;
+    initial_NAD = 0x04;
+    product_id = 0x0004, 0x0001, 0x01;
+    P2_min = 50 ms;
+    ST_min = 0 ms;
+    configurable_frames {
+      ClimateFrame = 0x0030;
+    }
+  }
+}
+
+Schedule_tables {
+  NormalSchedule {
+    EngineFrame  delay 10 ms;
+    FuelFrame    delay 20 ms;
+    ControlFrame delay 10 ms;
+    BatteryFrame delay 50 ms;
+    ClimateFrame delay 30 ms;
+  }
+  DiagSchedule {
+    MasterReq    delay 10 ms;
+    SlaveResp    delay 10 ms;
+  }
+}
+
+Signal_encoding_types {
+  EngineSpeedEncoding {
+    physical_value, 0, 65535, 0.1, 0, "rpm";
+  }
+  EngineTempEncoding {
+    physical_value, 0, 215, 1, -40, "degC";
+  }
+  FuelLevelEncoding {
+    physical_value, 0, 100, 0.5, 0, "%";
+    logical_value, 255, "Error";
+  }
+  DoorStatusEncoding {
+    logical_value, 0, "Closed";
+    logical_value, 1, "Open";
+    logical_value, 2, "Ajar";
+    logical_value, 3, "Locked";
+    logical_value, 15, "Error";
+  }
+  FanSpeedEncoding {
+    physical_value, 0, 100, 1, 0, "%";
+    logical_value, 255, "Off";
+  }
+  BatteryVoltageEncoding {
+    physical_value, 0, 25.5, 0.1, 0, "V";
+  }
+  AmbientTempEncoding {
+    physical_value, 0, 80, 1, -40, "degC";
+  }
+  WiperSpeedEncoding {
+    logical_value, 0, "Off";
+    logical_value, 1, "Low";
+    logical_value, 2, "High";
+    logical_value, 3, "Auto";
+  }
+}
+
+Signal_representation {
+  EngineSpeedEncoding:  EngineSpeed;
+  EngineTempEncoding:   EngineTemp;
+  FuelLevelEncoding:    FuelLevel;
+  DoorStatusEncoding:   DoorStatus;
+  FanSpeedEncoding:     FanSpeed;
+  BatteryVoltageEncoding: BatteryVoltage;
+  AmbientTempEncoding:  AmbientTemp;
+  WiperSpeedEncoding:   WiperSpeed;
+}

@@ -1,0 +1,157 @@
+{
+  "meta": {
+    "generated_at": "2026-04-30 13:48:19",
+    "old_file": "E:\\gerrit\\00_Tools\\claude-dbcskill\\examples\\sample_v1.ldf",
+    "new_file": "E:\\gerrit\\00_Tools\\claude-dbcskill\\examples\\sample_v2.ldf",
+    "has_changes": true
+  },
+  "stats": {
+    "nodes_added": 1,
+    "nodes_removed": 0,
+    "nodes_modified": 1,
+    "node_attrs_added": 1,
+    "node_attrs_removed": 0,
+    "node_attrs_modified": 1,
+    "frames_added": 1,
+    "frames_removed": 0,
+    "frames_modified": 1,
+    "signals_added": 2,
+    "signals_removed": 0,
+    "signals_modified": 0,
+    "schedules_added": 0,
+    "schedules_removed": 0,
+    "schedules_modified": 1,
+    "encodings_added": 2,
+    "encodings_removed": 0,
+    "encodings_modified": 1
+  },
+  "node_changes": [
+    {
+      "change_type": "MODIFIED",
+      "node_name": "LIN_Master",
+      "is_master": true,
+      "field_changes": [
+        {
+          "field": "抖动(ms)",
+          "old": "0.1",
+          "new": "0.2"
+        }
+      ]
+    },
+    {
+      "change_type": "ADDED",
+      "node_name": "SlaveD",
+      "is_master": false,
+      "field_changes": []
+    }
+  ],
+  "node_attr_changes": [
+    {
+      "change_type": "ADDED",
+      "node_name": "SlaveD",
+      "field_changes": [],
+      "frames_added": [],
+      "frames_removed": [],
+      "frames_id_changed": []
+    },
+    {
+      "change_type": "MODIFIED",
+      "node_name": "SlaveA",
+      "field_changes": [
+        {
+          "field": "product_id",
+          "old": "0x0001, 0x0001, 0x01",
+          "new": "0x0001, 0x0001, 0x02"
+        }
+      ],
+      "frames_added": [],
+      "frames_removed": [],
+      "frames_id_changed": []
+    }
+  ],
+  "frame_changes": [
+    {
+      "change_type": "ADDED",
+      "frame_name": "ClimateFrame",
+      "field_changes": [],
+      "signals_added": [],
+      "signals_removed": [],
+      "signal_pos_changes": [],
+      "frame_id": 48,
+      "publisher": "SlaveD",
+      "length": 2
+    },
+    {
+      "change_type": "MODIFIED",
+      "frame_name": "FuelFrame",
+      "field_changes": [
+        {
+          "field": "帧长度",
+          "old": "2",
+          "new": "3"
+        }
+      ],
+      "signals_added": [],
+      "signals_removed": [],
+      "signal_pos_changes": [],
+      "frame_id": 2,
+      "publisher": "SlaveB",
+      "length": 3
+    }
+  ],
+  "signal_changes": [
+    {
+      "change_type": "ADDED",
+      "frame_name": "ClimateFrame",
+      "signal_name": "AmbientTemp",
+      "field_changes": [],
+      "length": 8,
+      "publisher": "SlaveD",
+      "init_value": "0"
+    },
+    {
+      "change_type": "ADDED",
+      "frame_name": "ClimateFrame",
+      "signal_name": "WiperSpeed",
+      "field_changes": [],
+      "length": 4,
+      "publisher": "LIN_Master",
+      "init_value": "0"
+    }
+  ],
+  "schedule_changes": [
+    {
+      "change_type": "MODIFIED",
+      "table_name": "NormalSchedule",
+      "entries_added": [
+        "ClimateFrame"
+      ],
+      "entries_removed": [],
+      "entries_modified": [],
+      "entries_reordered": []
+    }
+  ],
+  "encoding_changes": [
+    {
+      "change_type": "ADDED",
+      "encoding_name": "AmbientTempEncoding",
+      "field_changes": []
+    },
+    {
+      "change_type": "ADDED",
+      "encoding_name": "WiperSpeedEncoding",
+      "field_changes": []
+    },
+    {
+      "change_type": "MODIFIED",
+      "encoding_name": "DoorStatusEncoding",
+      "field_changes": [
+        {
+          "field": "编码值",
+          "old": "logical(0,Closed)|logical(1,Open)|logical(2,Ajar)|logical(15,Error)",
+          "new": "logical(0,Closed)|logical(1,Open)|logical(2,Ajar)|logical(3,Locked)|logical(15,Error)"
+        }
+      ]
+    }
+  ]
+}

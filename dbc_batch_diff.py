@@ -40,9 +40,9 @@ from dbc_report import (
 )
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # DBC文件信息
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 @dataclass
 class DBCFileInfo:
@@ -153,9 +153,9 @@ def scan_dbc_files(directory: str, subdir: str = "CAN") -> Dict[str, DBCFileInfo
     return channel_map
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 批量对比结果
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 @dataclass
 class ChannelDiffResult:
@@ -214,9 +214,9 @@ class BatchDiffResult:
         return [r for r in self.compared if not r.has_changes]
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 批量对比器
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class DBCBatchDiff:
     """批量DBC差异对比器"""
@@ -307,11 +307,11 @@ class DBCBatchDiff:
                 if diff.has_changes():
                     stats = diff.stats()
                     print(f"  [有变更] {key}  "
-                          f"V{old_info.version}→V{new_info.version}  "
+                          f"V{old_info.version}->V{new_info.version}  "
                           f"报文+{stats['msgs_added']}/-{stats['msgs_removed']}/~{stats['msgs_modified']}  "
                           f"信号+{stats['sigs_added']}/-{stats['sigs_removed']}/~{stats['sigs_modified']}")
                 else:
-                    print(f"  [无变更] {key}  V{old_info.version}→V{new_info.version}")
+                    print(f"  [无变更] {key}  V{old_info.version}->V{new_info.version}")
 
             except Exception as e:
                 results.append(ChannelDiffResult(
@@ -334,9 +334,9 @@ class DBCBatchDiff:
         )
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # 批量报告生成器
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 class BatchReportGenerator:
     """批量报告生成器"""
@@ -396,7 +396,7 @@ class BatchReportGenerator:
         self._generate_summary_text(batch, summary_txt)
         generated.append(summary_txt)
 
-        print(f"\n✅ 批量报告生成完成，共 {len(generated)} 个文件")
+        print(f"\n[PASS] 批量报告生成完成，共 {len(generated)} 个文件")
         print(f"   输出目录: {output_dir}")
         print(f"   汇总报告: {summary_html}")
         return generated
@@ -426,19 +426,19 @@ class BatchReportGenerator:
         if batch.only_in_old:
             lines.append(f"\n【仅旧版本存在的通道】")
             for key in batch.only_in_old:
-                lines.append(f"  ✖ {key}")
+                lines.append(f"  [x] {key}")
 
         if batch.only_in_new:
             lines.append(f"\n【仅新版本存在的通道】")
             for key in batch.only_in_new:
-                lines.append(f"  ✚ {key}")
+                lines.append(f"  [+] {key}")
 
         if batch.changed:
             lines.append(f"\n【有变更的通道】")
             for cr in sorted(batch.changed, key=lambda x: x.channel_key):
                 stats = cr.stats
-                lines.append(f"\n  ✎ {cr.channel_key}  "
-                              f"V{cr.old_version} → V{cr.new_version}")
+                lines.append(f"\n  [~] {cr.channel_key}  "
+                              f"V{cr.old_version} -> V{cr.new_version}")
                 lines.append(f"     旧文件: {os.path.basename(cr.old_file)}")
                 lines.append(f"     新文件: {os.path.basename(cr.new_file)}")
                 lines.append(f"     节点: +{stats.get('nodes_added',0)}/-{stats.get('nodes_removed',0)}")
@@ -448,22 +448,22 @@ class BatchReportGenerator:
                 # 打印具体变更摘要
                 diff = cr.diff_result
                 for mc in diff.added_messages:
-                    lines.append(f"       ✚ 新增报文: {mc.msg_name} ({mc.can_id_hex})")
+                    lines.append(f"       [+] 新增报文: {mc.msg_name} ({mc.can_id_hex})")
                 for mc in diff.removed_messages:
-                    lines.append(f"       ✖ 删除报文: {mc.msg_name} ({mc.can_id_hex})")
+                    lines.append(f"       [x] 删除报文: {mc.msg_name} ({mc.can_id_hex})")
                 for mc in diff.modified_messages:
-                    lines.append(f"       ✎ 修改报文: {mc.msg_name} ({mc.can_id_hex})")
+                    lines.append(f"       [~] 修改报文: {mc.msg_name} ({mc.can_id_hex})")
                     for sc in mc.signal_changes:
-                        icon = {"ADDED": "✚", "REMOVED": "✖", "MODIFIED": "✎"}.get(sc.change_type, "?")
+                        icon = {"ADDED": "[+]", "REMOVED": "[x]", "MODIFIED": "[~]"}.get(sc.change_type, "?")
                         label = {"ADDED": "新增", "REMOVED": "删除", "MODIFIED": "修改"}.get(sc.change_type, sc.change_type)
                         lines.append(f"           {icon} [{label}信号] {sc.signal_name}")
                         for fc in sc.field_changes:
-                            lines.append(f"               {fc.field_name}: {fc.old_value!r} → {fc.new_value!r}")
+                            lines.append(f"               {fc.field_name}: {fc.old_value!r} -> {fc.new_value!r}")
 
         if batch.unchanged:
             lines.append(f"\n【无变更的通道】")
             for cr in sorted(batch.unchanged, key=lambda x: x.channel_key):
-                lines.append(f"  ✔ {cr.channel_key}  V{cr.old_version} → V{cr.new_version}")
+                lines.append(f"  [PASS] {cr.channel_key}  V{cr.old_version} -> V{cr.new_version}")
 
         lines.append("\n" + "=" * 72)
 
@@ -506,7 +506,7 @@ class BatchReportGenerator:
 <head><meta charset="UTF-8"><title>DBC批量差异对比汇总</title>
 <style>{css}</style></head>
 <body>
-<h1>📊 DBC 批量差异对比 - 汇总报告</h1>
+<h1> DBC 批量差异对比 - 汇总报告</h1>
 <div class="meta">
   <strong>生成时间:</strong> {now}<br>
   <strong>旧版本目录:</strong> <code>{old_name}</code><br>
@@ -524,7 +524,7 @@ class BatchReportGenerator:
 
         # 仅旧版本存在
         if batch.only_in_old:
-            html.append('<h2>✖ 仅旧版本存在的通道（新版本已删除）</h2>')
+            html.append('<h2>[x] 仅旧版本存在的通道（新版本已删除）</h2>')
             html.append('<table><tr><th>通道</th><th>旧版本文件</th></tr>')
             for cr in [r for r in batch.channel_results if r.error == "only_in_old"]:
                 html.append(f'<tr><td><span class="tag-del">已删除</span> <strong>{cr.channel_key}</strong></td>'
@@ -533,7 +533,7 @@ class BatchReportGenerator:
 
         # 仅新版本存在
         if batch.only_in_new:
-            html.append('<h2>✚ 仅新版本存在的通道（新增通道）</h2>')
+            html.append('<h2>[+] 仅新版本存在的通道（新增通道）</h2>')
             html.append('<table><tr><th>通道</th><th>新版本文件</th></tr>')
             for cr in [r for r in batch.channel_results if r.error == "only_in_new"]:
                 html.append(f'<tr><td><span class="tag-add">新增</span> <strong>{cr.channel_key}</strong></td>'
@@ -542,7 +542,7 @@ class BatchReportGenerator:
 
         # 有变更通道
         if batch.changed:
-            html.append('<h2>✎ 有变更的通道</h2>')
+            html.append('<h2>[~] 有变更的通道</h2>')
             html.append('<table><tr><th>通道</th><th>旧版本</th><th>新版本</th>'
                         '<th>报文变更</th><th>信号变更</th><th>详细报告</th></tr>')
             for cr in sorted(batch.changed, key=lambda x: x.channel_key):
@@ -581,9 +581,9 @@ class BatchReportGenerator:
             html.append('<h2>📋 变更详情</h2>')
             for cr in sorted(batch.changed, key=lambda x: x.channel_key):
                 diff = cr.diff_result
-                html.append(f'<h3 style="color:#e67e22">✎ {cr.channel_key} '
+                html.append(f'<h3 style="color:#e67e22">[~] {cr.channel_key} '
                              f'<small style="color:#888;font-weight:normal">'
-                             f'V{cr.old_version} → V{cr.new_version}</small></h3>')
+                             f'V{cr.old_version} -> V{cr.new_version}</small></h3>')
 
                 # 新增报文
                 for mc in diff.added_messages:
@@ -607,7 +607,7 @@ class BatchReportGenerator:
                         html.append('<ul>')
                         for fc in mc.field_changes:
                             html.append(f'<li>报文属性 <em>{fc.field_name}</em>: '
-                                        f'<code>{fc.old_value}</code> → <code>{fc.new_value}</code></li>')
+                                        f'<code>{fc.old_value}</code> -> <code>{fc.new_value}</code></li>')
                         html.append('</ul>')
                     if mc.signal_changes:
                         html.append('<table style="margin-left:20px;width:calc(100% - 20px)">'
@@ -616,7 +616,7 @@ class BatchReportGenerator:
                             tag = {"ADDED": "tag-add", "REMOVED": "tag-del", "MODIFIED": "tag-mod"}.get(sc.change_type, "")
                             label = {"ADDED": "新增", "REMOVED": "删除", "MODIFIED": "修改"}.get(sc.change_type, sc.change_type)
                             field_str = "; ".join(
-                                f"{fc.field_name}: <code>{fc.old_value}</code>→<code>{fc.new_value}</code>"
+                                f"{fc.field_name}: <code>{fc.old_value}</code>-><code>{fc.new_value}</code>"
                                 for fc in sc.field_changes
                             ) or "-"
                             html.append(f'<tr><td><span class="{tag}">{label}</span></td>'
@@ -626,7 +626,7 @@ class BatchReportGenerator:
 
         # 无变更通道
         if batch.unchanged:
-            html.append('<h2>✔ 无变更的通道</h2>')
+            html.append('<h2>[PASS] 无变更的通道</h2>')
             html.append('<table><tr><th>通道</th><th>旧版本文件</th><th>新版本文件</th></tr>')
             for cr in sorted(batch.unchanged, key=lambda x: x.channel_key):
                 html.append(f'<tr><td><span class="tag-ok">无变更</span> {cr.channel_key}</td>'
@@ -641,9 +641,9 @@ class BatchReportGenerator:
         print(f"[BatchReport] HTML汇总已保存: {filepath}")
 
 
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 # CLI 入口
-# ─────────────────────────────────────────────
+# ---------------------------------------------
 
 def main():
     parser = argparse.ArgumentParser(
@@ -694,11 +694,11 @@ def main():
     differ = DBCBatchDiff(subdir=args.can_subdir)
     batch_result = differ.compare_dirs(old_dir, new_dir)
 
-    print(f"\n{'─'*60}")
+    print(f"\n{'-'*60}")
     print(f"  对比完成: {len(batch_result.compared)} 个通道")
     print(f"  有变更: {len(batch_result.changed)}  无变更: {len(batch_result.unchanged)}")
     print(f"  仅旧版本: {len(batch_result.only_in_old)}  仅新版本: {len(batch_result.only_in_new)}")
-    print(f"{'─'*60}\n")
+    print(f"{'-'*60}\n")
 
     reporter = BatchReportGenerator()
     reporter.generate(batch_result, args.output_dir, args.format)

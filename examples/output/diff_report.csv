@@ -8,13 +8,8 @@
 信号-新增,0x500,ADAS_CtrlCmd,ADAS_SystemStatus,定义,,"起始位=32,长度=4,字节序=Intel(小端),因子=1.0,偏移=0.0,单位="
 信号-新增,0x500,ADAS_CtrlCmd,ADAS_TargetAccel,定义,,"起始位=2,长度=12,字节序=Intel(小端),因子=0.05,偏移=-102.4,单位=m/s2"
 信号-新增,0x500,ADAS_CtrlCmd,ADAS_TargetSteerAngle,定义,,"起始位=16,长度=16,字节序=Intel(小端),因子=0.1,偏移=-3276.8,单位=deg"
-报文-删除,0x400,GW_TimeSync,,DLC,4,
-信号-删除,0x400,GW_TimeSync,GW_Day,,,
-信号-删除,0x400,GW_TimeSync,GW_Hour,,,
-信号-删除,0x400,GW_TimeSync,GW_Minute,,,
-信号-删除,0x400,GW_TimeSync,GW_Month,,,
-信号-删除,0x400,GW_TimeSync,GW_Second,,,
-信号-删除,0x400,GW_TimeSync,GW_Year,,,
+报文ID变更,0x400,GW_TimeSync,,新ID,0x400,0x410
+报文-修改(属性),0x100,VCU_Status,,GenMsgStartDelayTime,<不存在>,5
 信号-新增,0x100,VCU_Status,VCU_SteerAngle,定义,,"起始位=32,长度=16,字节序=Intel(小端),因子=0.1,偏移=-3276.8"
 信号-修改,0x100,VCU_Status,VCU_DrivingMode,值表,"{0: 'Normal', 1: 'Sport', 2: 'Eco', 3: 'Snow', 4: 'Custom'}","{0: 'Normal', 1: 'Sport', 2: 'Eco', 3: 'Snow', 4: 'Custom', 5: 'Auto'}"
 信号-修改,0x100,VCU_Status,VCU_VehicleSpeed,因子,0.1,0.05
@@ -24,3 +19,4 @@
 信号-修改,0x200,MCU_TorqueInfo,MCU_FaultCode,位长度,8,12
 信号-修改,0x200,MCU_TorqueInfo,MCU_FaultCode,最大值,255.0,4095.0
 信号-修改,0x200,MCU_TorqueInfo,MCU_FaultCode,注释,,故障码，位长度从8扩展到12
+报文-修改(属性),0x300,BMS_BattInfo,,GenMsgSendType,<不存在>,1
