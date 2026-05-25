@@ -1,0 +1,14 @@
+  
+@echo off
+chcp 65001 >nul
+echo.
+echo ============================================================
+echo   通信矩阵综合差异分析（CAN + LIN）
+echo ============================================================
+echo.
+python OneDiffAll_dbc_ldf.py ^
+    "data/PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409" ^
+    "data/PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421" ^
+    --output-dir one_diff_output
+echo.
+pause

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DBC变更差异报告</title>
+<style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; color: #333; }
+    h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+    h2 { color: #2980b9; margin-top: 30px; }
+    h3 { color: #16a085; }
+    h4 { color: #8e44ad; }
+    .meta { background: #ecf0f1; padding: 10px 15px; border-radius: 5px; margin-bottom: 20px; }
+    .summary { display: flex; gap: 20px; flex-wrap: wrap; margin: 15px 0; }
+    .stat-box { background: white; border-radius: 8px; padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); min-width: 120px; text-align: center; }
+    .stat-box .num { font-size: 2em; font-weight: bold; }
+    .stat-box .label { color: #666; font-size: 0.85em; }
+    .added .num { color: #27ae60; }
+    .removed .num { color: #e74c3c; }
+    .modified .num { color: #f39c12; }
+    table { border-collapse: collapse; width: 100%; margin: 10px 0; background: white; border-radius: 5px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    th { background: #3498db; color: white; padding: 10px 12px; text-align: left; font-size: 0.9em; }
+    td { padding: 8px 12px; border-bottom: 1px solid #ecf0f1; font-size: 0.9em; }
+    tr:hover td { background: #f8f9fa; }
+    .tag-added { background: #d5f5e3; color: #1e8449; padding: 2px 8px; border-radius: 3px; font-weight: bold; }
+    .tag-removed { background: #fadbd8; color: #922b21; padding: 2px 8px; border-radius: 3px; font-weight: bold; }
+    .tag-modified { background: #fef9e7; color: #9a7d0a; padding: 2px 8px; border-radius: 3px; font-weight: bold; }
+    .msg-block { background: white; border-radius: 8px; padding: 15px 20px; margin: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
+    .msg-block.added { border-left: 5px solid #27ae60; }
+    .msg-block.removed { border-left: 5px solid #e74c3c; }
+    .msg-block.modified { border-left: 5px solid #f39c12; }
+    code { background: #ecf0f1; padding: 1px 5px; border-radius: 3px; font-family: monospace; }
+    .no-change { color: #27ae60; font-size: 1.1em; padding: 20px; }
+    </style>
+</head>
+<body>
+<h1> DBC 变更差异报告</h1>
+<div class="meta">
+  <strong>生成时间:</strong> 2026-05-25 16:53:55<br>
+  <strong>旧版本:</strong> <code>EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_BDCAN1.dbc</code><br>
+  <strong>新版本:</strong> <code>EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN1.dbc</code>
+</div>
+<h2> 变更摘要</h2><div class="summary"><div class="stat-box added"><div class="num">0</div><div class="label">节点新增</div></div><div class="stat-box removed"><div class="num">0</div><div class="label">节点删除</div></div><div class="stat-box added"><div class="num">0</div><div class="label">报文新增</div></div><div class="stat-box removed"><div class="num">0</div><div class="label">报文删除</div></div><div class="stat-box modified"><div class="num">8</div><div class="label">报文修改</div></div><div class="stat-box added"><div class="num">13</div><div class="label">信号新增</div></div><div class="stat-box removed"><div class="num">0</div><div class="label">信号删除</div></div><div class="stat-box modified"><div class="num">0</div><div class="label">信号修改</div></div></div><h2>[~] 修改报文</h2><div class="msg-block modified"><h3>[~] EMS_SysSts1_10ms <code>0x123</code></h3><h4>信号变更</h4><table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>EnPrignTotCnt</code></strong></td><td>起始位=<code>71</code>&nbsp;&nbsp;位长度=<code>8</code></td></tr></table></div><div class="msg-block modified"><h3>[~] CCU_ChassisInfo1_10ms <code>0x196</code></h3><h4>信号变更</h4><table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>VMM_SusBrkCtrlReq</code></strong></td><td>起始位=<code>248</code>&nbsp;&nbsp;位长度=<code>1</code></td></tr></table></div><div class="msg-block modified"><h3>[~] DZCU_DrLockCtrl_20ms <code>0x219</code></h3><h4>信号变更</h4><table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>DZCU_RChildProtnLckSts</code></strong></td><td>起始位=<code>252</code>&nbsp;&nbsp;位长度=<code>1</code></td></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>DZCU_RRDoorLckSts</code></strong></td><td>起始位=<code>249</code>&nbsp;&nbsp;位长度=<code>2</code></td></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>DZCU_RRDoorSts</code></strong></td><td>起始位=<code>251</code>&nbsp;&nbsp;位长度=<code>2</code></td></tr></table></div><div class="msg-block modified"><h3>[~] PZCU_BodySts_20ms <code>0x259</code></h3><h4>信号变更</h4><table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>PZCU_LChildProtnLckSts</code></strong></td><td>起始位=<code>72</code>&nbsp;&nbsp;位长度=<code>1</code></td></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>PZCU_RLDoorLckSts</code></strong></td><td>起始位=<code>87</code>&nbsp;&nbsp;位长度=<code>2</code></td></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>PZCU_RLDoorSts</code></strong></td><td>起始位=<code>74</code>&nbsp;&nbsp;位长度=<code>2</code></td></tr></table></div><div class="msg-block modified"><h3>[~] CCU_Info3_50ms <code>0x342</code></h3><h4>信号变更</h4><table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>AtuoChrgRobarmMoveSts</code></strong></td><td>起始位=<code>102</code>&nbsp;&nbsp;位长度=<code>3</code></td></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>RoadClass</code></strong></td><td>起始位=<code>99</code>&nbsp;&nbsp;位长度=<code>4</code></td></tr></table></div><div class="msg-block modified"><h3>[~] DZCU_BodyCtrl_100ms <code>0x399</code></h3><h4>信号变更</h4><table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>RLWndPcntMvCmd</code></strong></td><td>起始位=<code>44</code>&nbsp;&nbsp;位长度=<code>7</code></td></tr></table></div><div class="msg-block modified"><h3>[~] RRSCU_Sts11_100ms_GW <code>0x522</code></h3><h4>BA_属性变更</h4><table><tr><th>属性名</th><th>旧值</th><th>新值</th></tr><tr><td>GenMsgStartDelayTime</td><td><code>0.0</code></td><td><code>65.0</code></td></tr></table><h4>信号变更</h4><table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>PsngSeatMovReq</code></strong></td><td>起始位=<code>63</code>&nbsp;&nbsp;位长度=<code>4</code></td></tr></table></div><div class="msg-block modified"><h3>[~] DZCU_BodySts4_100ms <code>0x52C</code></h3><h4>信号变更</h4><table><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr><tr><td><span class='tag-added'>新增</span></td><td><strong><code>BLEHoodCtrlReq</code></strong></td><td>起始位=<code>300</code>&nbsp;&nbsp;位长度=<code>2</code></td></tr></table></div></body></html>
