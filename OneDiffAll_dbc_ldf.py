@@ -4163,15 +4163,15 @@ class CombinedReportGenerator:
     ):
         """
         生成综合报告：
-        - combined_report.html  综合 HTML 报告（含 CAN + LIN 两大板块）
-        - combined_report.txt   综合文本报告
+        - matrix_diff_report.html  综合 HTML 报告（含 CAN + LIN 两大板块）
+        - matrix_diff_report.txt   综合文本报告
         """
         os.makedirs(output_dir, exist_ok=True)
         ldf_only_old = ldf_only_old or []
         ldf_only_new = ldf_only_new or []
 
-        html_path = os.path.join(output_dir, "combined_report.html")
-        txt_path = os.path.join(output_dir, "combined_report.txt")
+        html_path = os.path.join(output_dir, "matrix_diff_report.html")
+        txt_path = os.path.join(output_dir, "matrix_diff_report.txt")
 
         self._generate_html(dbc_batch, ldf_results, html_path, fmt, old_dir, new_dir, ldf_only_old, ldf_only_new)
         self._generate_text(dbc_batch, ldf_results, txt_path, old_dir, new_dir, ldf_only_old, ldf_only_new)
