@@ -479,13 +479,35 @@ class LDFDiff:
             ))
 
         # 新增的信号
+        # 建立 新LDF 信号->起始位 映射（用于展示）
+        sig_to_startbit_new = self._build_sig_startbit_map(new_ldf)
         for name in sorted(set(new_sigs) - set(old_sigs)):
             frame_name = sig_to_frame_new.get(name, "")
+            new_s = new_sigs[name]
+            # 构建属性 field_changes（old_value="" 表示新增）
+            added_fields = []
+            added_fields.append(FieldChange("位长度", "", new_s.length))
+            start_bit = sig_to_startbit_new.get(name, "")
+            added_fields.append(FieldChange("起始位", "", start_bit))
+            added_fields.append(FieldChange("初始值", "", new_s.init_value))
+            # encoding physical 字段
+            enc_name = new_s.encoding_type
+            enc = new_ldf.encoding_types.get(enc_name) if enc_name else None
+            if enc:
+                phys = [v for v in enc.values if v.encode_type == 'physical']
+                if phys:
+                    p = phys[0]
+                    added_fields.append(FieldChange("比例因子", "", p.scale))
+                    added_fields.append(FieldChange("偏移", "", p.offset))
+                    added_fields.append(FieldChange("单位", "", p.unit))
+            if new_s.comment:
+                added_fields.append(FieldChange("注释", "", new_s.comment))
             result.signal_changes.append(LDFSignalChange(
                 change_type=ChangeType.ADDED,
                 frame_name=frame_name,
                 signal_name=name,
-                new_signal=new_sigs[name],
+                new_signal=new_s,
+                field_changes=added_fields,
             ))
 
         # 修改的信号
@@ -502,6 +524,25 @@ class LDFDiff:
                         field_changes.append(FieldChange(label, ov, nv))
                 elif ov != nv:
                     field_changes.append(FieldChange(label, ov, nv))
+
+            # 额外比较关联 encoding_type 的 physical_value 字段（比例因子/偏移/单位）
+            enc_name_old = old_s.encoding_type
+            enc_name_new = new_s.encoding_type
+            old_enc = old_ldf.encoding_types.get(enc_name_old) if enc_name_old else None
+            new_enc = new_ldf.encoding_types.get(enc_name_new) if enc_name_new else None
+            if old_enc and new_enc:
+                old_phys = [v for v in old_enc.values if v.encode_type == 'physical']
+                new_phys = [v for v in new_enc.values if v.encode_type == 'physical']
+                if old_phys and new_phys:
+                    op, np_ = old_phys[0], new_phys[0]
+                    for attr, label in [("scale", "比例因子"), ("offset", "偏移"), ("unit", "单位")]:
+                        ov, nv = getattr(op, attr), getattr(np_, attr)
+                        if ov != nv:
+                            field_changes.append(FieldChange(label, ov, nv))
+            elif enc_name_old != enc_name_new:
+                # encoding_type 名称本身发生了变化
+                field_changes.append(FieldChange("编码类型", enc_name_old or "", enc_name_new or ""))
+
             if field_changes:
                 frame_name = sig_to_frame_new.get(name, sig_to_frame_old.get(name, ""))
                 result.signal_changes.append(LDFSignalChange(
@@ -519,6 +560,14 @@ class LDFDiff:
         for frame in ldf.frames.values():
             for fs in frame.signals:
                 mapping[fs.signal_name] = frame.name
+        return mapping
+
+    def _build_sig_startbit_map(self, ldf: LDFFile) -> Dict[str, int]:
+        """构建 信号名 -> 起始位 的映射"""
+        mapping = {}
+        for frame in ldf.frames.values():
+            for fs in frame.signals:
+                mapping[fs.signal_name] = fs.start_bit
         return mapping
 
     # -- 帧比较 --------------------------------

@@ -1,0 +1,1571 @@
+========================================================================
+  通信矩阵综合差异分析报告
+  生成时间: 2026-06-04 16:58:20
+  旧版本目录: PZBP3.1.8通信矩阵_CAN_V10.1.7_SOA_V10.1.10_0409
+  新版本目录: PZBP3.4.0通信矩阵_CAN_V11.1.0_SOA_V11.1.1_0421
+========================================================================
+
+【CAN 通道差异（DBC）】
+------------------------------------------------------------------------
+  对比通道数: 11
+  有变更通道: 10
+  无变更通道: 1
+  仅旧版本有: 0
+  仅新版本有: 0
+
+  [有变更的通道]
+
+  [~] PZCU_BDCAN1  V10.1.6 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_BDCAN1.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN1.dbc
+      报文: +0/-0/~8
+      信号: +13/-0/~0
+        [~] 修改报文: EMS_SysSts1_10ms (0x123)
+            [+] 新增信号: EnPrignTotCnt
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 71
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Engine Preignition Total Count \n��ȼ�ܼ���'
+        [~] 修改报文: CCU_ChassisInfo1_10ms (0x196)
+            [+] 新增信号: VMM_SusBrkCtrlReq
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 248
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'VMM Suspension control request\nVMM���������ܿ�������'
+        [~] 修改报文: DZCU_DrLockCtrl_20ms (0x219)
+            [+] 新增信号: DZCU_RChildProtnLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 252
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Right Child Protection Lock Status\n �Ҳ��ͯ��״̬'
+            [+] 新增信号: DZCU_RRDoorLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 249
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Right Door Lock Status\n �Һ�����״̬�ź�'
+            [+] 新增信号: DZCU_RRDoorSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 251
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Right Door Status\n �Һ���״̬�ź�'
+        [~] 修改报文: PZCU_BodySts_20ms (0x259)
+            [+] 新增信号: PZCU_LChildProtnLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 72
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Left Child Protection Lock Status\n ����ͯ��״̬'
+            [+] 新增信号: PZCU_RLDoorLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 87
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Left Door Lock Status\n �������״̬�ź�'
+            [+] 新增信号: PZCU_RLDoorSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 74
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Left Door Status\n �����״̬�ź�'
+        [~] 修改报文: CCU_Info3_50ms (0x342)
+            [+] 新增信号: AtuoChrgRobarmMoveSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 102
+                位长度: '' -> 3
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 7.0
+                注释: '' -> '�Զ�����е�۶���״̬'
+            [+] 新增信号: RoadClass
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 99
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> '��·�ȼ�'
+        [~] 修改报文: DZCU_BodyCtrl_100ms (0x399)
+            [+] 新增信号: RLWndPcntMvCmd
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 44
+                位长度: '' -> 7
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 102.0
+                注释: '' -> 'Rear left Window Percentage Move Command\n��\U000f3d74��˶��ٷֱ�'
+        [~] 修改报文: RRSCU_Sts11_100ms_GW (0x522)
+            [+] 新增信号: PsngSeatMovReq
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 63
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> '����������������'
+        [~] 修改报文: DZCU_BodySts4_100ms (0x52C)
+            [+] 新增信号: BLEHoodCtrlReq
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 300
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Ble Hood Contrl Request\n����ǰ�������'
+
+  [~] PZCU_BDCAN4  V10.1.4 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_BDCAN4.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN4.dbc
+      报文: +3/-0/~8
+      信号: +8/-0/~3
+        [+] 新增报文: ETC_Info3_Event (0x19F)
+        [+] 新增报文: EMS_STS2_100ms_GW2 (0x3E2)
+        [+] 新增报文: ETC_OBUCardID_1000ms (0x62D)
+        [~] 修改报文: EMS_SysSts1_10ms_GW2 (0x134)
+            [+] 新增信号: EnPrignTotCnt
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 7
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Engine Preignition Total Count \n��ȼ�ܼ���'
+        [~] 修改报文: ETC_Info2_Event (0x1B9)
+            [~] 修改信号: ETC_TradeAmou
+                起始位: 3 -> 15
+            [~] 修改信号: ETC_TradeSts
+                起始位: 7 -> 3
+                位长度: 2 -> 3
+                最大值: 3.0 -> 7.0
+        [~] 修改报文: PZCU_Sig3RTBD4_20ms (0x2B8)
+            [+] 新增信号: LatGrd
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 31
+                位长度: '' -> 8
+                比例因子: '' -> 0.01
+                偏移: '' -> -1.0
+                最小值: '' -> -1.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Lateral Gradient\n�����¶�'
+            [+] 新增信号: LongtGrd
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 39
+                位长度: '' -> 8
+                比例因子: '' -> 0.01
+                偏移: '' -> -1.0
+                最小值: '' -> -1.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Longitudinal Gradient\n�����¶�'
+        [~] 修改报文: RRSCU_Sts1_100ms (0x3AC)
+        [~] 修改报文: EMS_STS2_100ms_GW1 (0x3E1)
+            [+] 新增信号: EnBstPre
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 55
+                位长度: '' -> 9
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 300.0
+                单位: '' -> 'kPa'
+                注释: '' -> 'Engine Boost Pressure\n ��������ѹѹ��'
+        [~] 修改报文: RRSCU_Sts11_100ms (0x522)
+            [+] 新增信号: PsngSeatMovReq
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 63
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> '����������������'
+        [~] 修改报文: CCU_VehSts_1000ms_GW (0x5A0)
+            [+] 新增信号: OBDDiagDeviceActivated
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 13
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'OBD diagnostic device activate OBD\n������豸����'
+        [~] 修改报文: ETC_Info1_1000ms (0x5FB)
+            [+] 新增信号: ETC_EmsnIntnst
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 63
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'ETC emission intensity\nETC ����ǿ��'
+            [+] 新增信号: ETC_WkupSnstvt
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 55
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'ETC Wakeup sensitivity\nETC����������'
+            [~] 修改信号: ETC_DisasSts
+                起始位: 3 -> 13
+                位长度: 2 -> 3
+                最大值: 3.0 -> 7.0
+
+  [~] PZCU_BDCAN6  V10.1.6 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_BDCAN6.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_BDCAN6.dbc
+      报文: +0/-0/~6
+      信号: +16/-0/~4
+        [~] 修改报文: DZCU_DrLockCtrl_20ms (0x219)
+            [+] 新增信号: DZCU_RChildProtnLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 252
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Right Child Protection Lock Status\n �Ҳ��ͯ��״̬'
+            [+] 新增信号: DZCU_RRDoorLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 249
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Right Door Lock Status\n �Һ�����״̬�ź�'
+            [+] 新增信号: DZCU_RRDoorSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 251
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Right Door Status\n �Һ���״̬�ź�'
+        [~] 修改报文: PZCU_ECGMCmd_20ms (0x247)
+            [+] 新增信号: ECPrivacySts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 41
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'ȫ����˽������˽״̬'
+            [+] 新增信号: RLECProtnSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 24
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'RLEC Protection Status\n�����EC����״̬'
+            [+] 新增信号: RLTempECCtrlCmd
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 37
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> '����¶ȵ���EC����'
+            [+] 新增信号: RRECProtnSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 54
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'RREC Protection Status\n�Һ���EC����״̬'
+            [+] 新增信号: RRTempECCtrlCmd
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 33
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> '�Һ��¶ȵ���EC����'
+            [+] 新增信号: TailDoorECProtnSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 52
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'TailDoorEC Protection Status\n����EC����״̬'
+            [+] 新增信号: TaildoorTempECCtrlCmd
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 45
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> '�����¶ȵ���EC����'
+            [+] 新增信号: ThirdLECProtnSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 55
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'ThirdLEC Protection Status\n�������EC����״̬'
+            [+] 新增信号: ThirdRECProtnSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 53
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'ThirdREC Protection Status\n�����Ҳ�EC����״̬'
+        [~] 修改报文: PZCU_BodySts_20ms (0x259)
+            [+] 新增信号: PZCU_LChildProtnLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 72
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Left Child Protection Lock Status\n ����ͯ��״̬'
+            [+] 新增信号: PZCU_RLDoorLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 87
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Left Door Lock Status\n �������״̬�ź�'
+            [+] 新增信号: PZCU_RLDoorSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 74
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Left Door Status\n �����״̬�ź�'
+        [~] 修改报文: LECGM_Sts1_100msMixed (0x3A1)
+            [~] 修改信号: SecLECCtrlReq
+                GenSigSendType: 'Cyclic' -> 'OnWrite'
+            [~] 修改信号: SecLECCtrlSW
+                GenSigSendType: 'Cyclic' -> 'OnWrite'
+        [~] 修改报文: RECGM_Sts1_100msMixed (0x3A2)
+            [~] 修改信号: SecRECCtrlReq
+                GenSigSendType: 'Cyclic' -> 'OnWrite'
+            [~] 修改信号: SecRECCtrlSW
+                GenSigSendType: 'Cyclic' -> 'OnWrite'
+        [~] 修改报文: CCU_VehSts_1000ms (0x5A0)
+            [+] 新增信号: OBDDiagDeviceActivated
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 13
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'OBD diagnostic device activate OBD\n������豸����'
+
+  [~] PZCU_CHCAN1  V10.1.4 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_CHCAN1.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_CHCAN1.dbc
+      报文: +2/-0/~4
+      信号: +3/-0/~1
+        [+] 新增报文: PZCU_ChassisCtrl2_Event (0xF4)
+        [+] 新增报文: HWA_Info4_Event (0x2CE)
+        [~] 修改报文: ESP_SysSts3_10ms (0x76)
+            [~] 修改信号: TDiscMaxEstimd_Mod
+                单位: 'K' -> '��'
+        [~] 修改报文: CCU_ChassisInfo1_10ms (0x196)
+            [+] 新增信号: VMM_SusBrkCtrlReq
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 248
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'VMM Suspension control request\nVMM���������ܿ�������'
+        [~] 修改报文: ESP_SysSts3_20ms (0x216)
+            [+] 新增信号: ESP_WssCoreMonRob
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 127
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'ESP��DPB������У�����'
+        [~] 修改报文: PZCU_ACHtMgm_100ms (0x3AA)
+            [+] 新增信号: AtuoChrgSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 205
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> '�Զ����ģʽ״̬'
+
+  [~] PZCU_CHCAN2  V10.1.4 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_CHCAN2.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_CHCAN2.dbc
+      报文: +0/-0/~4
+      信号: +6/-0/~0
+        [~] 修改报文: EMS_SysSts1_10ms (0x123)
+            [+] 新增信号: EnPrignTotCnt
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 71
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Engine Preignition Total Count \n��ȼ�ܼ���'
+        [~] 修改报文: CCU_Info3_50ms (0x342)
+            [+] 新增信号: AtuoChrgRobarmMoveSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 102
+                位长度: '' -> 3
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 7.0
+                注释: '' -> '�Զ�����е�۶���״̬'
+            [+] 新增信号: RoadClass
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 99
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> '��·�ȼ�'
+        [~] 修改报文: PZCU_ACHtMgm_100ms (0x3AA)
+            [+] 新增信号: AtuoChrgSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 205
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> '�Զ����ģʽ״̬'
+        [~] 修改报文: EMS_STS2_100ms (0x3D3)
+            [+] 新增信号: EnBstPre
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 55
+                位长度: '' -> 9
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 300.0
+                单位: '' -> 'kPa'
+                注释: '' -> 'Engine Boost Pressure\n ��������ѹѹ��'
+            [+] 新增信号: EnMsfrTotCtr
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 111
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Engine Misfire Total Counter\n \n ������ʧ���ܼ�����'
+
+  [~] PZCU_MCUFCAN  V10.1.4 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.4_20260317_PZCU_MCUFCAN.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_MCUFCAN.dbc
+      报文: +0/-0/~3
+      信号: +3/-0/~0
+        [~] 修改报文: EMS_SysSts1_10ms (0x123)
+            [+] 新增信号: EnPrignTotCnt
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 71
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Engine Preignition Total Count \n��ȼ�ܼ���'
+        [~] 修改报文: PZCU_ACHtMgm_100ms (0x3AA)
+            [+] 新增信号: AtuoChrgSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 205
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> '�Զ����ģʽ״̬'
+        [~] 修改报文: CCU_VehSts_1000ms (0x5A0)
+            [+] 新增信号: OBDDiagDeviceActivated
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 13
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'OBD diagnostic device activate OBD\n������豸����'
+
+  [~] PZCU_MCURCAN  V10.1.6 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_MCURCAN.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_MCURCAN.dbc
+      报文: +0/-0/~6
+      信号: +5/-0/~1
+        [~] 修改报文: ESP_SysSts3_10ms (0x76)
+            [~] 修改信号: TDiscMaxEstimd_Mod
+                单位: 'K' -> '��'
+        [~] 修改报文: EMS_SysSts1_10ms (0x123)
+            [+] 新增信号: EnPrignTotCnt
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 71
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Engine Preignition Total Count \n��ȼ�ܼ���'
+        [~] 修改报文: BMS_SysSts1_10ms (0x140)
+            [+] 新增信号: DCChrgPrtVByOGC
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 246
+                位长度: '' -> 15
+                比例因子: '' -> 0.1
+                偏移: '' -> -1500.0
+                最小值: '' -> -1500.0
+                最大值: '' -> 1500.0
+                单位: '' -> 'V'
+                注释: '' -> 'DC charging port voltage By OGC\n  \n���\u05ee��ֱ�����˿ڵ�ѹ'
+        [~] 修改报文: PZCU_ACHtMgm_100ms (0x3AA)
+            [+] 新增信号: AtuoChrgSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 205
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> '�Զ����ģʽ״̬'
+        [~] 修改报文: BMS_ChrgInfo2_100ms (0x3E0)
+            [+] 新增信号: BMS_ChgEndPwrLowWarning
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 149
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> '���ĩ�˵\u0379�������'
+        [~] 修改报文: CCU_VehSts_1000ms (0x5A0)
+            [+] 新增信号: OBDDiagDeviceActivated
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 13
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'OBD diagnostic device activate OBD\n������豸����'
+
+  [~] PZCU_PTCAN  V10.1.6 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_PTCAN.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_PTCAN.dbc
+      报文: +0/-0/~8
+      信号: +12/-0/~1
+        [~] 修改报文: ESP_SysSts3_10ms (0x76)
+            [~] 修改信号: TDiscMaxEstimd_Mod
+                单位: 'K' -> '��'
+        [~] 修改报文: EMS_SysSts1_10ms (0x123)
+            [+] 新增信号: EnPrignTotCnt
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 71
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Engine Preignition Total Count \n��ȼ�ܼ���'
+        [~] 修改报文: BMS_SysSts1_10ms (0x140)
+            [+] 新增信号: DCChrgPrtVByOGC
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 246
+                位长度: '' -> 15
+                比例因子: '' -> 0.1
+                偏移: '' -> -1500.0
+                最小值: '' -> -1500.0
+                最大值: '' -> 1500.0
+                单位: '' -> 'V'
+                注释: '' -> 'DC charging port voltage By OGC\n  \n���\u05ee��ֱ�����˿ڵ�ѹ'
+        [~] 修改报文: PZCU_ACHtMgm_100ms (0x3AA)
+            [+] 新增信号: AtuoChrgSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 205
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> '�Զ����ģʽ״̬'
+        [~] 修改报文: ODU_Temp_100ms (0x3D1)
+            [+] 新增信号: OBCOverTemp
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 74
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'OBC Over Temperature\nOBC���±���'
+        [~] 修改报文: BMS_ChrgInfo2_100ms (0x3E0)
+            [+] 新增信号: BMS_ChgEndPwrLowWarning
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 149
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> '���ĩ�˵\u0379�������'
+        [~] 修改报文: CCU_VehSts_1000ms (0x5A0)
+            [+] 新增信号: OBDDiagDeviceActivated
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 13
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'OBD diagnostic device activate OBD\n������豸����'
+        [~] 修改报文: BMS_Fault_1000ms (0x633)
+            [+] 新增信号: COMM_PTCAN_H120_FLT
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 483
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'PTCAN_H120���Ĵ���'
+            [+] 新增信号: COMM_PTCAN_H121_FLT
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 482
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'PTCAN_H121���Ĵ���'
+            [+] 新增信号: COMM_PTCAN_H3A0_FLT
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 484
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'PTCAN_H3A0���Ĵ���'
+            [+] 新增信号: ERR_MCUFRollingCounterFlt_ID0X120
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 486
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'MCUF����RollingCounter����(0x120)'
+            [+] 新增信号: ERR_MCURRollingCounterFlt_ID0X121
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 485
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'MCUR����RollingCounter����(0x121)'
+            [+] 新增信号: ERR_PZCURollingCounterFlt_ID0X3A0
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 381
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'PZCURollingCounter����(ID 0X3A0)'
+
+  [~] PZCU_VirtCAN4  V10.1.0 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.0_20260212_PZCU_VirtCAN4.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_VirtCAN4.dbc
+      报文: +1/-0/~3
+      信号: +50/-4/~2
+        [+] 新增报文: PZCU_Monitor4_1000ms (0x1FFC0007)
+        [~] 修改报文: PZCU_Monitor2_20ms (0x2F6)
+            [+] 新增信号: RRWndRippleAnti_PnchSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 24
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Rear Right window Ripple Anti_Pinch Status\n �Һ\U000f3d74��Ʋ����д���'
+            [+] 新增信号: RRWndRippleCurrent
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 47
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 25.0
+                注释: '' -> 'Rear Right Window Ripple Motor Current\n �Һ\U000f3d74�����'
+            [+] 新增信号: RRWndRipplePeriod
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 59
+                位长度: '' -> 10
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1024.0
+                注释: '' -> 'Rear Right Window Ripple Period\n �Һ\U000f3d74��Ʋ�����'
+            [+] 新增信号: RRWndRipplePosCounter
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 55
+                位长度: '' -> 12
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 4096.0
+                注释: '' -> 'Rear Right Window Ripple Position Counter\n �Һ\U000f3d74��Ʋ�λ�ü���'
+        [~] 修改报文: PZCU_Monitor1_100ms (0x393)
+            [+] 新增信号: FACDrvFaceOtltTempTrg
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 316
+                位长度: '' -> 11
+                比例因子: '' -> 0.1
+                偏移: '' -> -40.0
+                最小值: '' -> -40.0
+                最大值: '' -> 100.0
+                单位: '' -> '��'
+                注释: '' -> '���ݴ���Ŀ������¶�'
+            [+] 新增信号: FACDrvFootOtltTempTrg
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 321
+                位长度: '' -> 11
+                比例因子: '' -> 0.1
+                偏移: '' -> -40.0
+                最小值: '' -> -40.0
+                最大值: '' -> 100.0
+                单位: '' -> '��'
+                注释: '' -> '���ݴ���Ŀ������¶�'
+            [+] 新增信号: FACPsngFaceOtltTempTrg
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 342
+                位长度: '' -> 11
+                比例因子: '' -> 0.1
+                偏移: '' -> -40.0
+                最小值: '' -> -40.0
+                最大值: '' -> 100.0
+                单位: '' -> '��'
+                注释: '' -> '���ݴ���Ŀ������¶�'
+            [+] 新增信号: FACPsngFootOtltTempTrg
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 347
+                位长度: '' -> 11
+                比例因子: '' -> 0.1
+                偏移: '' -> -40.0
+                最小值: '' -> -40.0
+                最大值: '' -> 100.0
+                单位: '' -> '��'
+                注释: '' -> '���ݴ���Ŀ������¶�'
+            [+] 新增信号: HeatcoreTarTemp
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 167
+                位长度: '' -> 16
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 65535.0
+                注释: '' -> 'ůоĿ���¶�'
+            [+] 新增信号: MotLoopTMModeDcsn
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 153
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'motor loop thermal state\n����ϵͳ�ȹ���״̬'
+            [-] 删除信号: FLACFaceOtltTempTrg
+            [-] 删除信号: FLACFootOtltTempTrg
+            [-] 删除信号: FRACFaceOtltTempTrg
+            [-] 删除信号: FRACFootOtltTempTrg
+            [~] 修改信号: MotCoolRsn
+                起始位: 175 -> 471
+                位长度: 8 -> 16
+                最大值: 255.0 -> 1023.0
+            [~] 修改信号: MotWarmRsn
+                起始位: 153 -> 455
+                位长度: 10 -> 16
+        [~] 修改报文: PZCU_Monitor3_100ms (0x1FFC0001)
+            [+] 新增信号: ACAutoDryActv
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 216
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> '�Ը��Ｄ��״̬'
+            [+] 新增信号: ACAutoDryOffCode
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 239
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�Ը��﹦��OffCode'
+            [+] 新增信号: AUTODryingSWSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 210
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'AUTO Drying Switch Status\n�Ը��￪��״̬'
+            [+] 新增信号: AutoDfgFuncSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 211
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Auto Defog Function Status\n�Զ���������״̬'
+            [+] 新增信号: CbnHexTarT
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 303
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Ŀ��ůо�¶�'
+            [+] 新增信号: Delta2BEXV
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 358
+                位长度: '' -> 11
+                比例因子: '' -> 0.1
+                偏移: '' -> -40.0
+                最小值: '' -> -40.0
+                最大值: '' -> 85.0
+                注释: '' -> 'Delta2BEXV'
+            [+] 新增信号: Delta2EDC
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 327
+                位长度: '' -> 11
+                比例因子: '' -> 0.1
+                偏移: '' -> -40.0
+                最小值: '' -> -40.0
+                最大值: '' -> 85.0
+                注释: '' -> 'Delta2EDC'
+            [+] 新增信号: Delta2EFEXV
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 332
+                位长度: '' -> 11
+                比例因子: '' -> 0.1
+                偏移: '' -> -40.0
+                最小值: '' -> -40.0
+                最大值: '' -> 85.0
+                注释: '' -> 'Delta2EFEXV'
+            [+] 新增信号: Delta2OERV
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 337
+                位长度: '' -> 11
+                比例因子: '' -> 0.1
+                偏移: '' -> -40.0
+                最小值: '' -> -40.0
+                最大值: '' -> 85.0
+                注释: '' -> 'Delta2OERV'
+            [+] 新增信号: DrvFaceAirOtltRunModSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 287
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '���ݵ綯���������״̬'
+            [+] 新增信号: DrvFaceAndFootTempDiff
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 219
+                位长度: '' -> 3
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 7.0
+                注释: '' -> '��������²�״̬'
+            [+] 新增信号: ECOACSwSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 213
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'ECOACSwSts\nECO�յ�����״̬'
+            [+] 新增信号: FanCtrlTar
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 263
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '��ȴ���ȿ���Ŀ��'
+            [+] 新增信号: FrtACDrvBlwrGearAutoSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 223
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> 'Front AC Blower Gear Auto Status \nǰ�յ������λ�Զ�״̬'
+            [+] 新增信号: HiMotWstHeatOffCode
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 255
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '���µ�����Ȼ���OffCode'
+            [+] 新增信号: LoMotWstHeatOffCode
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 247
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '���µ�����Ȼ���OffCode'
+            [+] 新增信号: PM25PurifyFunSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 212
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'PM25 Purify Function Status\nPM2_5��������״̬'
+            [+] 新增信号: PsngFaceAirOtltRunModSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 295
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '���ݵ綯���������״̬'
+            [+] 新增信号: PsngFaceAndFootTempDiff
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 231
+                位长度: '' -> 3
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 7.0
+                注释: '' -> '��������²�״̬'
+            [+] 新增信号: RRWndHallCount
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 431
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�Һ\U000f3d74�hall���м�ʱ'
+            [+] 新增信号: RRWndHallCurDelta
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 447
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�Һ\U000f3d74�hall�����仯��'
+            [+] 新增信号: RRWndHallDeltaSum
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 407
+                位长度: '' -> 16
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 65535.0
+                注释: '' -> '�Һ\U000f3d74�hall���ٺ�'
+            [+] 新增信号: RRWndHallHold
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 423
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�Һ\U000f3d74�hall����ά�ִ���'
+            [+] 新增信号: RRWndHallSpeed
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 391
+                位长度: '' -> 16
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 65535.0
+                注释: '' -> '�Һ\U000f3d74�hall�ٶ�'
+            [+] 新增信号: RRWndHallSpeedDelta
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 439
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�Һ\U000f3d74�hall�ٶȱ仯��'
+            [+] 新增信号: RRWndRippleCount
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 495
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�Һ\U000f3d74��Ʋ����м�ʱ'
+            [+] 新增信号: RRWndRippleDeltaSum
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 471
+                位长度: '' -> 16
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 65535.0
+                注释: '' -> '�Һ\U000f3d74��Ʋ����ٺ�'
+            [+] 新增信号: RRWndRippleHold
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 487
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�Һ\U000f3d77��Ʋ���ά�ִ���'
+            [+] 新增信号: RRWndRippleInitnSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 383
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Rear Right Window Ripple Initialization Status\n �Һ\U000f3d74��Ʋ���ʼ��״̬'
+            [+] 新增信号: RRWndRippleLearnPos
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 363
+                位长度: '' -> 12
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 4096.0
+                注释: '' -> 'Rear Right Window Ripple Learn Position\n �Һ\U000f3d74��Ʋ�ѧϰλ��'
+            [+] 新增信号: RRWndRipplePcntPos
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 382
+                位长度: '' -> 7
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 100.0
+                注释: '' -> 'Rear Right Window Ripple Percentage Position\n �Һ\U000f3d74��Ʋ�����0%(ȫ��)100%(ȫ��)'
+            [+] 新增信号: RRWndRippleSpeed
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 455
+                位长度: '' -> 16
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 65535.0
+                注释: '' -> '�Һ\U000f3d74��Ʋ��ٶ�'
+            [+] 新增信号: RRWndRippleSpeedDelta
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 503
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�Һ\U000f3d74��Ʋ��ٶȱ仯��'
+            [+] 新增信号: SmallCoolRdy
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 228
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> '����С��������Ready״̬'
+            [+] 新增信号: TMSDisCode
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 319
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'TMSʧЧCode'
+            [+] 新增信号: UnlckdVentnSwSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 208
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> '����ͨ�翪��״̬'
+            [+] 新增信号: VTMDisCode
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 311
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'VTMʧЧCode'
+            [+] 新增信号: VTMHVControlCommand
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 271
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�ȹ�����ѹ�õ�����'
+            [+] 新增信号: VTMLvPwrUseReq
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 279
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> '�ȹ�����ѹ�õ�����'
+            [+] 新增信号: VentSWSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 209
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> '�복ͨ�翪��״̬'
+
+  [~] PZCU_ZCAN  V10.1.6 -> V11.1.0
+      旧文件: EEA3.0_CAN_Matrix_V10.1.6_20260403_PZCU_ZCAN.dbc
+      新文件: EEA3.0_CAN_Matrix_V11.1.0_20260415_PZCU_ZCAN.dbc
+      报文: +3/-0/~14
+      信号: +15/-0/~0
+        [+] 新增报文: DZCU_BodySts7_20ms (0x20B)
+        [+] 新增报文: PZCU_LIN_VerNum6 (0x67B)
+        [+] 新增报文: BZCU_LIN_VerNum (0x6CA)
+        [~] 修改报文: EMS_SysSts1_10ms (0x123)
+            [+] 新增信号: EnPrignTotCnt
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 71
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'Engine Preignition Total Count \n��ȼ�ܼ���'
+        [~] 修改报文: ESP_SysSts3_20ms (0x216)
+            [+] 新增信号: ESP_WssCoreMonRob
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 127
+                位长度: '' -> 8
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 255.0
+                注释: '' -> 'ESP��DPB������У�����'
+        [~] 修改报文: PZCU_BodySts_20ms (0x259)
+            [+] 新增信号: PZCU_LChildProtnLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 72
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'Left Child Protection Lock Status\n ����ͯ��״̬'
+            [+] 新增信号: PZCU_RLDoorLckSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 87
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Left Door Lock Status\n �������״̬�ź�'
+            [+] 新增信号: PZCU_RLDoorSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 74
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'Rear Left Door Status\n �����״̬�ź�'
+        [~] 修改报文: PZCU_OTASts_Event (0x28A)
+            [+] 新增信号: OBDKeepWakeupReq
+                GenSigSendType: '' -> 'OnWrite'
+                起始位: '' -> 1
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> 'OBD�ŷ���ϱ��ֻ�������\nOBD keep wake up request'
+            [+] 新增信号: QuitOBDKeepWakeupReq
+                GenSigSendType: '' -> 'OnWrite'
+                起始位: '' -> 0
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> '�˳�OBD�ŷ���ϱ��ֻ�������\nQuit OBD keep wake up request'
+        [~] 修改报文: HU_RemoteCtrl_100ms (0x39D)
+            [+] 新增信号: AtuoChrgReq
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 204
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> '�Զ����ģʽ����'
+            [+] 新增信号: AtuoChrgVehParkNum
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 202
+                位长度: '' -> 5
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 31.0
+                注释: '' -> '�Զ���糵�����ڳ�λ���'
+            [+] 新增信号: HuRLWdwshdPosiCtrl
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 19
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'HuRLWdwshdPosiCtrl\n��\U000f3d74�����������'
+        [~] 修改报文: PZCU_ACHtMgm_100ms (0x3AA)
+            [+] 新增信号: AtuoChrgSts
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 205
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> '�Զ����ģʽ״̬'
+        [~] 修改报文: RRSCU_Sts1_100ms_GW (0x3AC)
+        [~] 修改报文: ODU_Temp_100ms (0x3D1)
+            [+] 新增信号: OBCOverTemp
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 74
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'OBC Over Temperature\nOBC���±���'
+        [~] 修改报文: BMS_ChrgInfo2_100ms (0x3E0)
+            [+] 新增信号: BMS_ChgEndPwrLowWarning
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 149
+                位长度: '' -> 1
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 1.0
+                注释: '' -> '���ĩ�˵\u0379�������'
+        [~] 修改报文: RRSCU_Sts11_100ms_GW (0x522)
+            [+] 新增信号: PsngSeatMovReq
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 63
+                位长度: '' -> 4
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 15.0
+                注释: '' -> '����������������'
+        [~] 修改报文: TM_SysSts_100ms_GW (0x531)
+        [~] 修改报文: RRSCU_Sts6_100ms_GW (0x557)
+        [~] 修改报文: RLSCU_Sts6_100ms_GW (0x565)
+        [~] 修改报文: CCU_VehSts_1000ms (0x5A0)
+            [+] 新增信号: OBDDiagDeviceActivated
+                GenSigSendType: '' -> 'Cyclic'
+                起始位: '' -> 13
+                位长度: '' -> 2
+                比例因子: '' -> 1.0
+                偏移: '' -> 0.0
+                最小值: '' -> 0.0
+                最大值: '' -> 3.0
+                注释: '' -> 'OBD diagnostic device activate OBD\n������豸����'
+
+  [无变更的通道]
+    [OK] PZCU_EMSCAN  V9.0.0 -> V9.0.0
+
+
+【LIN 通道差异（LDF）】
+------------------------------------------------------------------------
+  对比通道数: 5
+  有变更通道: 3
+  无变更通道: 2
+  仅旧版本有: 0
+  仅新版本有: 1
+
+  [新增通道]
+    [+] LIN10
+
+  [有变更的通道]
+
+  [~] LIN11
+      帧: +0/-0/~2
+      信号: +4/-1/~0
+      节点: +0/-0/~0
+      调度表: +0/-0/~0
+        [~] 修改帧: PSTM_StatusInfo
+            [+] 新增信号: PsngSeatTableAutoLvlSts
+                位长度: 1
+                起始位: 60
+                初始值: 0
+            [+] 新增信号: PsngSeatTableSwEnbSts
+                位长度: 1
+                起始位: 61
+                初始值: 0
+            [+] 新增信号: PsngSeatTableSwPressSts
+                位长度: 1
+                起始位: 31
+                初始值: 0
+            [-] 删除信号: PsngSeatTableAutoLevelSwSts
+        [~] 修改帧: PZCU_LIN11CtrlCmd2
+            [+] 新增信号: PsngSeatTableSwEnbReq
+                位长度: 1
+                起始位: 47
+                初始值: 0
+
+  [~] LIN12
+      帧: +0/-0/~17
+      信号: +17/-0/~0
+      节点: +0/-0/~0
+      调度表: +0/-0/~0
+        [~] 修改帧: IPALM1_Status
+            [+] 新增信号: IPALM1_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: IPALM2_Status
+            [+] 新增信号: IPALM2_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: IPALM3_Status
+            [+] 新增信号: IPALM3_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: IPALM4_Status
+            [+] 新增信号: IPALM4_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PDALM1_Status
+            [+] 新增信号: PDALM1_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PDALM2_Status
+            [+] 新增信号: PDALM2_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PDALM3_Status
+            [+] 新增信号: PDALM3_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PDALM4_Status
+            [+] 新增信号: PDALM4_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PDALM5_Status
+            [+] 新增信号: PDALM5_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PDALM6_Status
+            [+] 新增信号: PDALM6_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PRDALM1_Status
+            [+] 新增信号: PRDALM1_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PRDALM2_Status
+            [+] 新增信号: PRDALM2_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PRDALM3_Status
+            [+] 新增信号: PRDALM3_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PRDALM4_Status
+            [+] 新增信号: PRDALM4_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PRDALM5_Status
+            [+] 新增信号: PRDALM5_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PRDALM6_Status
+            [+] 新增信号: PRDALM6_WorkMode
+                位长度: 4
+                起始位: 1
+                初始值: 15
+        [~] 修改帧: PZCU_ALMCtrl2
+            [+] 新增信号: PWorkMode
+                位长度: 4
+                起始位: 12
+                初始值: 15
+
+  [~] LIN7
+      帧: +1/-0/~1
+      信号: +24/-0/~0
+      节点: +0/-0/~0
+      调度表: +0/-0/~1
+        [+] 新增帧: VFRIDGE_Info3
+        [~] 修改帧: PZCU_IAQSCtrl
+            [+] 新增信号: FridgeFastCld_vfridge
+                位长度: 2
+                起始位: 8
+                初始值: 0
+            [+] 新增信号: FridgeFaultThermalmanagementsystem_vfridge
+                位长度: 3
+                起始位: 5
+                初始值: 0
+            [+] 新增信号: FrzFan1SpdReq_vfridge
+                位长度: 7
+                起始位: 32
+                初始值: 0
+                比例因子: 1.0
+                偏移: 0.0
+                单位: '%'
+            [+] 新增信号: FrzFan2SpdReq_vfridge
+                位长度: 7
+                起始位: 40
+                初始值: 0
+                比例因子: 1.0
+                偏移: 0.0
+                单位: '%'
+            [+] 新增信号: TECVoltageReq_vfridge
+                位长度: 7
+                起始位: 16
+                初始值: 0
+                比例因子: 0.1
+                偏移: 0.0
+                单位: 'V'
+            [+] 新增信号: vfridgeTM_FridgeClTempSts
+                位长度: 7
+                起始位: 48
+                初始值: 127
+            [+] 新增信号: vfridgeTM_FridgeHtTempSts
+                位长度: 7
+                起始位: 56
+                初始值: 127
+            [+] 新增信号: vfridgeTM_FridgeSlncLvlSts
+                位长度: 3
+                起始位: 24
+                初始值: 7
+            [+] 新增信号: vfridgeTM_FridgeWorkMdSts
+                位长度: 2
+                起始位: 14
+                初始值: 3
+            [+] 新增信号: vfridgeTM_FridgeWorkSt
+                位长度: 2
+                起始位: 12
+                初始值: 3
+            [+] 新增信号: vfridge_FridgeFastCldSts
+                位长度: 2
+                起始位: 10
+                初始值: 3
+
+  [无变更的通道]
+    [OK] LIN8
+    [OK] LIN9
+
+========================================================================

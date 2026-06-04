@@ -322,9 +322,25 @@ class CombinedReportGenerator:
                                  f'<strong>{mc.msg_name}</strong> <code>{mc.can_id_hex}</code> '
                                  f'DLC={msg.dlc} 发送节点={msg.sender}</div>')
                     if msg.signals:
-                        parts.append('<table class="inner-table"><tr><th>信号名</th><th>起始位</th><th>位长度</th></tr>')
+                        _SIG_ATTRS = [
+                            ("start_bit", "起始位"), ("length", "位长度"),
+                            ("factor", "比例因子"),
+                            ("offset", "偏移"), ("min_val", "最小值"),
+                            ("max_val", "最大值"), ("unit", "单位"),
+                            ("comment", "注释"),
+                        ]
+                        parts.append('<table class="inner-table"><tr><th>信号名</th><th>属性</th></tr>')
                         for sig_name, sig in sorted(msg.signals.items()):
-                            parts.append(f'<tr><td>{sig_name}</td><td>{sig.start_bit}</td><td>{sig.length}</td></tr>')
+                            fields = " &nbsp;|&nbsp; ".join(
+                                f"<em>{label}</em>: <code class='new-val'>{getattr(sig, attr)}</code>"
+                                for attr, label in _SIG_ATTRS
+                                if (isinstance(getattr(sig, attr), list) and getattr(sig, attr))
+                                or (not isinstance(getattr(sig, attr), list) and getattr(sig, attr) is not None and getattr(sig, attr) != "")
+                            )
+                            _sst = sig.attributes.get('SigSendType') or sig.attributes.get('GenSigSendType') or ''
+                            if _sst:
+                                fields = f'<em>SigSendType</em>: <code class="new-val">{_sst}</code>' + (' &nbsp;|&nbsp; ' + fields if fields else '')
+                            parts.append(f'<tr style="font-size:1.0em"><td><strong>{sig_name}</strong></td><td>{fields or "-"}</td></tr>')
                         parts.append('</table>')
 
                 # 删除报文
@@ -352,18 +368,28 @@ class CombinedReportGenerator:
                         for sc in mc.signal_changes:
                             tag = {"ADDED": "tag-add", "REMOVED": "tag-del", "MODIFIED": "tag-mod"}.get(sc.change_type, "")
                             label = {"ADDED": "新增", "REMOVED": "删除", "MODIFIED": "修改"}.get(sc.change_type, sc.change_type)
-                            if sc.change_type == "ADDED" and sc.new_signal is not None:
-                                field_str = (f'起始位=<code>{sc.new_signal.start_bit}</code> '
-                                            f'位长度=<code>{sc.new_signal.length}</code>')
+                            if sc.change_type == "ADDED":
+                                if sc.field_changes:
+                                    field_str = " &nbsp;|&nbsp; ".join(
+                                        f"<em>{fc.field_name}</em>: <code class='new-val'>{fc.new_value}</code>"
+                                        for fc in sc.field_changes
+                                    )
+                                elif sc.new_signal is not None:
+                                    field_str = (f'起始位=<code>{sc.new_signal.start_bit}</code> '
+                                                f'位长度=<code>{sc.new_signal.length}</code>')
+                                else:
+                                    field_str = "-"
                             elif sc.change_type == "REMOVED" and sc.old_signal is not None:
                                 field_str = (f'起始位=<code>{sc.old_signal.start_bit}</code> '
                                             f'位长度=<code>{sc.old_signal.length}</code>')
                             else:
-                                field_str = "; ".join(
-                                    f"{fc.field_name}: <code class='old-val'>{fc.old_value}</code>→"
-                                    f"<code class='new-val'>{fc.new_value}</code>"
-                                    for fc in sc.field_changes
-                                ) or "-"
+                                if sc.field_changes:
+                                    field_str = " &nbsp;|&nbsp; ".join(
+                                        f"<em>{fc.field_name}</em>: <code class='old-val'>{fc.old_value}</code> → <code class='new-val'>{fc.new_value}</code>"
+                                        for fc in sc.field_changes
+                                    )
+                                else:
+                                    field_str = "-"
                             parts.append(f'<tr><td><span class="{tag}">{label}</span></td>'
                                         f'<td><strong>{sc.signal_name}</strong></td>'
                                         f'<td>{field_str}</td></tr>')
@@ -506,6 +532,8 @@ class CombinedReportGenerator:
                         parts.append('</ul>')
 
         # 帧变更（LDFFrameChange: signal_added/signal_removed/signal_pos_changes）
+        # 建立 信号名 -> LDFSignalChange 映射，用于在修改帧中展示信号属性/变更字段
+        sig_change_map = {sc.signal_name: sc for sc in r.signal_changes}
         if r.frame_changes:
             fc_added   = [c for c in r.frame_changes if c.change_type == "ADDED"]
             fc_removed = [c for c in r.frame_changes if c.change_type == "REMOVED"]
@@ -514,6 +542,20 @@ class CombinedReportGenerator:
                 parts.append('<div class="diff-category"><strong>帧变更</strong></div>')
                 for c in fc_added:
                     parts.append(f'<div class="item-row add-row"><span class="tag-add">新增帧</span> <strong>{c.frame_name}</strong></div>')
+                    # 展示帧内所有信号属性
+                    if c.new_frame and c.new_frame.signals:
+                        parts.append('<table class="inner-table"><tr><th>信号名</th><th>属性</th></tr>')
+                        for fs in c.new_frame.signals:
+                            sc = sig_change_map.get(fs.signal_name)
+                            if sc and sc.field_changes:
+                                attr_str = " &nbsp;|&nbsp; ".join(
+                                    f"<em>{fc.field_name}</em>: <code class='new-val'>{fc.new_value}</code>"
+                                    for fc in sc.field_changes
+                                )
+                            else:
+                                attr_str = f"起始位: <code>{fs.start_bit}</code>"
+                            parts.append(f'<tr style="font-size:1.0em"><td><strong>{fs.signal_name}</strong></td><td>{attr_str}</td></tr>')
+                        parts.append('</table>')
                 for c in fc_removed:
                     parts.append(f'<div class="item-row del-row"><span class="tag-del">删除帧</span> <strong>{c.frame_name}</strong></div>')
                 for c in fc_modified:
@@ -525,19 +567,53 @@ class CombinedReportGenerator:
                                         f'<code class="old-val">{fld.old_value}</code> → '
                                         f'<code class="new-val">{fld.new_value}</code></li>')
                         parts.append('</ul>')
-                    # 信号新增/删除
+                    # 帧内信号新增/删除/位置变更/属性变更
                     sig_rows = []
                     for sn in c.signal_added:
-                        sig_rows.append(f'<tr><td><span class="tag-add">新增</span></td><td><strong>{sn}</strong></td><td>-</td></tr>')
+                        sc = sig_change_map.get(sn)
+                        if sc and sc.field_changes:
+                            attr_str = " &nbsp;|&nbsp; ".join(
+                                f"<em>{fc.field_name}</em>: <code class='new-val'>{fc.new_value}</code>"
+                                for fc in sc.field_changes
+                            )
+                        else:
+                            attr_str = "-"
+                        sig_rows.append(f'<tr style="font-size:1.0em"><td><span class="tag-add">新增</span></td><td><strong>{sn}</strong></td><td>{attr_str}</td></tr>')
                     for sn in c.signal_removed:
                         sig_rows.append(f'<tr><td><span class="tag-del">删除</span></td><td><strong>{sn}</strong></td><td>-</td></tr>')
                     for pc in c.signal_pos_changes:
+                        sc = sig_change_map.get(pc.signal_name)
+                        extra = ""
+                        if sc and sc.change_type == "MODIFIED" and sc.field_changes:
+                            extra = " &nbsp;|&nbsp; " + " &nbsp;|&nbsp; ".join(
+                                f"<em>{fc.field_name}</em>: <code class='old-val'>{fc.old_value}</code>→<code class='new-val'>{fc.new_value}</code>"
+                                for fc in sc.field_changes
+                            )
                         sig_rows.append(
-                            f'<tr><td><span class="tag-mod">位置变更</span></td>'
+                            f'<tr style="font-size:1.0em"><td><span class="tag-mod">位置变更</span></td>'
                             f'<td><strong>{pc.signal_name}</strong></td>'
                             f'<td>起始位: <code class="old-val">{pc.old_start_bit}</code>→'
-                            f'<code class="new-val">{pc.new_start_bit}</code></td></tr>'
+                            f'<code class="new-val">{pc.new_start_bit}</code>{extra}</td></tr>'
                         )
+                    # 属性变更的信号（MODIFIED，且属于本帧，但不在 signal_pos_changes 中）
+                    pos_changed_names = {pc.signal_name for pc in c.signal_pos_changes}
+                    for sn_mod, sc in sig_change_map.items():
+                        if (sc.change_type == "MODIFIED" and sc.frame_name == c.frame_name
+                                and sn_mod not in pos_changed_names
+                                and sn_mod not in c.signal_added
+                                and sn_mod not in c.signal_removed):
+                            if sc.field_changes:
+                                field_str = " &nbsp;|&nbsp; ".join(
+                                    f"<em>{fc.field_name}</em>: <code class='old-val'>{fc.old_value}</code>→<code class='new-val'>{fc.new_value}</code>"
+                                    for fc in sc.field_changes
+                                )
+                            else:
+                                field_str = "-"
+                            sig_rows.append(
+                                f'<tr style="font-size:1.0em"><td><span class="tag-mod">属性变更</span></td>'
+                                f'<td><strong>{sn_mod}</strong></td>'
+                                f'<td>{field_str}</td></tr>'
+                            )
                     if sig_rows:
                         parts.append('<table class="inner-table"><tr><th>变更类型</th><th>信号名</th><th>变更字段</th></tr>')
                         parts.extend(sig_rows)
@@ -556,13 +632,17 @@ class CombinedReportGenerator:
                     parts.append(f'<div class="item-row del-row"><span class="tag-del">删除调度表</span> <strong>{c.table_name}</strong></div>')
                 for c in sc_modified:
                     parts.append(f'<div class="item-row mod-row"><span class="tag-mod">修改调度表</span> <strong>{c.table_name}</strong></div>')
-                    detail_parts = []
-                    if c.entries_added:
-                        detail_parts.append(f'新增条目: {", ".join(c.entries_added)}')
-                    if c.entries_removed:
-                        detail_parts.append(f'删除条目: {", ".join(c.entries_removed)}')
-                    if detail_parts:
-                        parts.append(f'<ul class="change-list"><li>{"；".join(detail_parts)}</li></ul>')
+                    if c.entries_added or c.entries_removed:
+                        entry_parts = []
+                        if c.entries_added:
+                            entry_parts.append('新增帧: ' + ' '.join(
+                                f'<span class="tag-add">{e}</span>' for e in c.entries_added
+                            ))
+                        if c.entries_removed:
+                            entry_parts.append('删除帧: ' + ' '.join(
+                                f'<span class="tag-del">{e}</span>' for e in c.entries_removed
+                            ))
+                        parts.append(f'<ul class="change-list"><li>{"；".join(entry_parts)}</li></ul>')
 
         if not parts:
             parts.append('<p class="no-data">无变更详情</p>')
@@ -691,9 +771,10 @@ class CombinedReportGenerator:
                 w(f"      节点: +{stats.get('nodes_added',0)}/-{stats.get('nodes_removed',0)}/~{stats.get('nodes_modified',0)}")
                 w(f"      调度表: +{stats.get('schedules_added',0)}/-{stats.get('schedules_removed',0)}/~{stats.get('schedules_modified',0)}")
 
-                # 帧变更详情（change_type 是字符串；LDFFrameChange 用 signal_added/removed/pos_changes）
+                # 帧变更详情（信号变更合并到各帧展示）
+                sig_change_map_txt = {sc.signal_name: sc for sc in r.signal_changes}
                 for fc in r.frame_changes:
-                    ctype = fc.change_type   # 直接是字符串
+                    ctype = fc.change_type
                     icon  = {"ADDED": "[+]", "REMOVED": "[-]", "MODIFIED": "[~]"}.get(ctype, "?")
                     label = {"ADDED": "新增帧", "REMOVED": "删除帧", "MODIFIED": "修改帧"}.get(ctype, ctype)
                     w(f"        {icon} {label}: {fc.frame_name}")
@@ -702,10 +783,28 @@ class CombinedReportGenerator:
                             w(f"            {fld.field_name}: {fld.old_value!r} -> {fld.new_value!r}")
                         for sn in fc.signal_added:
                             w(f"            [+] 新增信号: {sn}")
+                            sc = sig_change_map_txt.get(sn)
+                            if sc and sc.field_changes:
+                                for fld in sc.field_changes:
+                                    w(f"                {fld.field_name}: {fld.new_value!r}")
                         for sn in fc.signal_removed:
                             w(f"            [-] 删除信号: {sn}")
+                        pos_changed_names_txt = {pc.signal_name for pc in fc.signal_pos_changes}
                         for pc in fc.signal_pos_changes:
                             w(f"            [~] 信号位置变更: {pc.signal_name}  起始位 {pc.old_start_bit} -> {pc.new_start_bit}")
+                            sc = sig_change_map_txt.get(pc.signal_name)
+                            if sc and sc.change_type == "MODIFIED" and sc.field_changes:
+                                for fld in sc.field_changes:
+                                    w(f"                {fld.field_name}: {fld.old_value!r} -> {fld.new_value!r}")
+                        # 属性变更的信号（MODIFIED，属于本帧，未在 pos_changes 中）
+                        for sn_mod, sc in sig_change_map_txt.items():
+                            if (sc.change_type == "MODIFIED" and sc.frame_name == fc.frame_name
+                                    and sn_mod not in pos_changed_names_txt
+                                    and sn_mod not in fc.signal_added
+                                    and sn_mod not in fc.signal_removed):
+                                w(f"            [~] 修改信号: {sn_mod}")
+                                for fld in sc.field_changes:
+                                    w(f"                {fld.field_name}: {fld.old_value!r} -> {fld.new_value!r}")
 
         if ldf_unchanged:
             w("")
@@ -731,7 +830,7 @@ body {
     font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
     margin: 0; padding: 0;
     background: #f0f2f5; color: #333;
-    font-size: 14px;
+    font-size: 15px;
 }
 .page-header {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
@@ -848,8 +947,8 @@ tr:hover td { background: #fafafa; }
 
 .diff-category {
     margin: 12px 0 6px 0; padding: 4px 10px;
-    background: #eceff1; border-radius: 4px;
-    font-size: 0.88em; color: #546e7a;
+    background: #e1bee7; border-radius: 4px;
+    font-size: 0.9em; color: #000; font-weight: bold;
 }
 .change-list { margin: 4px 0 4px 16px; padding: 0; font-size: 0.88em; }
 .change-list li { padding: 2px 0; }

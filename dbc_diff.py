@@ -207,14 +207,19 @@ class DBCDiff:
     """
 
     # 信号需要比较的字段列表
-    # 以下字段不影响协议栈代码生成，忽略：
-    #   byte_order(字节序)、value_type(数值类型)、factor(因子)、offset(偏移)、
-    #   min_val(最小值)、max_val(最大值)、unit(单位)、receivers(接收节点)、
-    #   comment(注释)、value_table(值表)
     _SIGNAL_FIELDS = [
         ("start_bit",     "起始位"),
         ("length",        "位长度"),
         ("mux_indicator", "多路复用"),
+        ("byte_order",    "字节序"),
+        ("value_type",    "值类型"),
+        ("factor",        "比例因子"),
+        ("offset",        "偏移"),
+        ("min_val",       "最小值"),
+        ("max_val",       "最大值"),
+        ("unit",          "单位"),
+        ("receivers",     "接收节点"),
+        ("comment",       "注释"),
     ]
 
     # 报文需要比较的字段列表
@@ -378,14 +383,25 @@ class DBCDiff:
         old_names = set(old_sigs.keys())
         new_names = set(new_sigs.keys())
 
-        # 新增信号
+        # 新增信号（填充属性字段，old_value="" 表示新增）
         for name in sorted(new_names - old_names):
+            sig = new_sigs[name]
+            added_fields = []
+            for attr, label in self._SIGNAL_FIELDS:
+                val = getattr(sig, attr)
+                # 跳过空值/默认值
+                if isinstance(val, list):
+                    if val:
+                        added_fields.append(FieldChange(label, "", val))
+                elif val is not None and val != "":
+                    added_fields.append(FieldChange(label, "", val))
             changes.append(SignalChange(
                 change_type=ChangeType.ADDED,
                 msg_id=new_msg.msg_id,
                 msg_name=new_msg.name,
                 signal_name=name,
-                new_signal=new_sigs[name]
+                new_signal=sig,
+                field_changes=added_fields,
             ))
 
         # 删除信号
