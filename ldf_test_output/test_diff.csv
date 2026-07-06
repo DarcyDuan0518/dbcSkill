@@ -1,0 +1,17 @@
+﻿变更类别,变更类型,名称1,名称2,字段,旧值,新值
+节点,修改,主节点,LIN_Master,抖动(ms),0.1,0.2
+节点,新增,从节点,SlaveD,,,
+帧,新增,ClimateFrame,,,,
+帧,修改,FuelFrame,,帧长度,2,3
+信号,新增,ClimateFrame,AmbientTemp,位长度,,8
+信号,新增,ClimateFrame,AmbientTemp,起始位,,0
+信号,新增,ClimateFrame,AmbientTemp,初始值,,0
+信号,新增,ClimateFrame,AmbientTemp,比例因子,,1.0
+信号,新增,ClimateFrame,AmbientTemp,偏移,,-40.0
+信号,新增,ClimateFrame,AmbientTemp,单位,,degC
+信号,新增,ClimateFrame,WiperSpeed,位长度,,4
+信号,新增,ClimateFrame,WiperSpeed,起始位,,8
+信号,新增,ClimateFrame,WiperSpeed,初始值,,0
+节点属性,新增,SlaveD,,,,
+节点属性,修改,SlaveA,,product_id,"0x0001, 0x0001, 0x01","0x0001, 0x0001, 0x02"
+调度表,修改,NormalSchedule,ClimateFrame,新增条目,,

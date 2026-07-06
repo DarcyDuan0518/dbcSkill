@@ -307,21 +307,19 @@ class LDFDiff:
         result = diff.compare(old_ldf, new_ldf)
     """
 
-    # 信号需要比较的字段（编码类型不影响协议栈代码生成，不纳入比较）
+    # 信号需要比较的字段（不含 comment，注释仅变更不算修改；编码类型不影响协议栈代码生成，不纳入比较）
     _SIGNAL_FIELDS = [
         ("length",      "位长度"),
         ("init_value",  "初始值"),
         ("publisher",   "发布节点"),
         ("subscribers", "订阅节点"),
-        ("comment",     "注释"),
     ]
 
-    # 帧需要比较的字段
+    # 帧需要比较的字段（不含 comment，注释仅变更不算修改）
     _FRAME_FIELDS = [
         ("frame_id",  "帧ID"),
         ("publisher", "发布节点"),
         ("length",    "帧长度"),
-        ("comment",   "注释"),
     ]
 
     # 主节点需要比较的字段

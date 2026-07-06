@@ -2,21 +2,18 @@
 节点-新增,,ADAS,,,,
 报文-新增,0x500,ADAS_CtrlCmd,,DLC,,8
 报文-新增,0x500,ADAS_CtrlCmd,,发送节点,,ADAS
-信号-新增,0x500,ADAS_CtrlCmd,ADAS_FaultLevel,定义,,"起始位=36,长度=3,字节序=Intel(小端),因子=1.0,偏移=0.0,单位="
-信号-新增,0x500,ADAS_CtrlCmd,ADAS_LatCtrlReq,定义,,"起始位=14,长度=2,字节序=Intel(小端),因子=1.0,偏移=0.0,单位="
-信号-新增,0x500,ADAS_CtrlCmd,ADAS_LongCtrlReq,定义,,"起始位=0,长度=2,字节序=Intel(小端),因子=1.0,偏移=0.0,单位="
-信号-新增,0x500,ADAS_CtrlCmd,ADAS_SystemStatus,定义,,"起始位=32,长度=4,字节序=Intel(小端),因子=1.0,偏移=0.0,单位="
-信号-新增,0x500,ADAS_CtrlCmd,ADAS_TargetAccel,定义,,"起始位=2,长度=12,字节序=Intel(小端),因子=0.05,偏移=-102.4,单位=m/s2"
-信号-新增,0x500,ADAS_CtrlCmd,ADAS_TargetSteerAngle,定义,,"起始位=16,长度=16,字节序=Intel(小端),因子=0.1,偏移=-3276.8,单位=deg"
+信号-新增,0x500,ADAS_CtrlCmd,ADAS_FaultLevel,定义,,"起始位=36,长度=3"
+信号-新增,0x500,ADAS_CtrlCmd,ADAS_LatCtrlReq,定义,,"起始位=14,长度=2"
+信号-新增,0x500,ADAS_CtrlCmd,ADAS_LongCtrlReq,定义,,"起始位=0,长度=2"
+信号-新增,0x500,ADAS_CtrlCmd,ADAS_SystemStatus,定义,,"起始位=32,长度=4"
+信号-新增,0x500,ADAS_CtrlCmd,ADAS_TargetAccel,定义,,"起始位=2,长度=12"
+信号-新增,0x500,ADAS_CtrlCmd,ADAS_TargetSteerAngle,定义,,"起始位=16,长度=16"
 报文ID变更,0x400,GW_TimeSync,,新ID,0x400,0x410
 报文-修改(属性),0x100,VCU_Status,,GenMsgStartDelayTime,<不存在>,5
-信号-新增,0x100,VCU_Status,VCU_SteerAngle,定义,,"起始位=32,长度=16,字节序=Intel(小端),因子=0.1,偏移=-3276.8"
-信号-修改,0x100,VCU_Status,VCU_DrivingMode,值表,"{0: 'Normal', 1: 'Sport', 2: 'Eco', 3: 'Snow', 4: 'Custom'}","{0: 'Normal', 1: 'Sport', 2: 'Eco', 3: 'Snow', 4: 'Custom', 5: 'Auto'}"
-信号-修改,0x100,VCU_Status,VCU_VehicleSpeed,因子,0.1,0.05
+信号-新增,0x100,VCU_Status,VCU_SteerAngle,定义,,"起始位=32,长度=16"
+信号-修改,0x100,VCU_Status,VCU_VehicleSpeed,比例因子,0.1,0.05
 信号-修改,0x100,VCU_Status,VCU_VehicleSpeed,最大值,409.5,204.75
 信号-修改,0x100,VCU_Status,VCU_VehicleSpeed,接收节点,"['MCU', 'GW']","['MCU', 'GW', 'ADAS']"
-信号-修改,0x100,VCU_Status,VCU_VehicleSpeed,注释,车速，精度0.1km/h,车速，精度0.05km/h（精度提升）
 信号-修改,0x200,MCU_TorqueInfo,MCU_FaultCode,位长度,8,12
 信号-修改,0x200,MCU_TorqueInfo,MCU_FaultCode,最大值,255.0,4095.0
-信号-修改,0x200,MCU_TorqueInfo,MCU_FaultCode,注释,,故障码，位长度从8扩展到12
 报文-修改(属性),0x300,BMS_BattInfo,,GenMsgSendType,<不存在>,1

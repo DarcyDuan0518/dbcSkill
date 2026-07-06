@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>LDF差异分析报告</title>
+<style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+    h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+    h2 { color: #34495e; border-left: 4px solid #3498db; padding-left: 10px; margin-top: 30px; }
+    h3 { color: #555; margin-top: 15px; }
+    .meta { background: #ecf0f1; padding: 12px; border-radius: 6px; margin-bottom: 20px; }
+    .meta table { border-collapse: collapse; }
+    .meta td { padding: 4px 12px; }
+    .stats { display: flex; gap: 12px; flex-wrap: wrap; margin: 15px 0; }
+    .stat-card { background: white; border-radius: 8px; padding: 12px 20px;
+                 box-shadow: 0 2px 6px rgba(0,0,0,0.1); min-width: 120px; text-align: center; }
+    .stat-card .label { font-size: 12px; color: #888; }
+    .stat-card .value { font-size: 22px; font-weight: bold; color: #2c3e50; }
+    table.diff { width: 100%; border-collapse: collapse; margin: 10px 0; background: white;
+                 box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 6px; overflow: hidden; }
+    table.diff th { background: #3498db; color: white; padding: 8px 12px; text-align: left; }
+    table.diff td { padding: 7px 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+    table.diff tr:last-child td { border-bottom: none; }
+    .added    { background: #e8f8e8; color: #27ae60; }
+    .removed  { background: #fde8e8; color: #e74c3c; }
+    .modified { background: #fef9e7; color: #f39c12; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px;
+             font-size: 12px; font-weight: bold; }
+    .badge-add  { background: #27ae60; color: white; }
+    .badge-del  { background: #e74c3c; color: white; }
+    .badge-mod  { background: #f39c12; color: white; }
+    .no-change  { color: #27ae60; font-size: 16px; padding: 20px; }
+    code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+    .section { background: white; border-radius: 8px; padding: 16px 20px;
+               box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<h1>📋 LDF 差异分析报告</h1>
+<div class="meta">
+  <table>
+    <tr><td><b>生成时间</b></td><td>2026-07-03 14:18:22</td></tr>
+    <tr><td><b>旧文件</b></td><td><code>E:\gerrit\00_Tools\claude-dbcskill\examples\sample_v1.ldf</code></td></tr>
+    <tr><td><b>新文件</b></td><td><code>E:\gerrit\00_Tools\claude-dbcskill\examples\sample_v2.ldf</code></td></tr>
+  </table>
+</div>
+<h2>变更统计</h2><div class="stats">
+<div class="stat-card"><div class="label">节点新增</div><div class="value" style="color:#27ae60">1</div></div>
+<div class="stat-card"><div class="label">节点删除</div><div class="value" style="color:#e74c3c">0</div></div>
+<div class="stat-card"><div class="label">帧新增</div><div class="value" style="color:#27ae60">1</div></div>
+<div class="stat-card"><div class="label">帧删除</div><div class="value" style="color:#e74c3c">0</div></div>
+<div class="stat-card"><div class="label">帧修改</div><div class="value" style="color:#f39c12">1</div></div>
+<div class="stat-card"><div class="label">信号新增</div><div class="value" style="color:#27ae60">2</div></div>
+<div class="stat-card"><div class="label">信号删除</div><div class="value" style="color:#e74c3c">0</div></div>
+<div class="stat-card"><div class="label">信号修改</div><div class="value" style="color:#f39c12">0</div></div>
+</div>
+<h2>节点变更</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>节点名</th><th>角色</th><th>变更详情</th></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>LIN_Master</b></td><td>主节点</td><td><code>抖动(ms)</code>: 0.1 -> 0.2</td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td><b>SlaveD</b></td><td>从节点</td><td></td></tr>
+</table></div>
+<h2>节点属性变更（Node_attributes）</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>节点名</th><th>变更详情</th></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td><b>SlaveD</b></td><td></td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>SlaveA</b></td><td><code>product_id</code>: '0x0001, 0x0001, 0x01'->'0x0001, 0x0001, 0x02'</td></tr>
+</table></div>
+<h2>帧变更</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>帧名</th><th>帧ID</th><th>变更详情</th></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td><b>ClimateFrame</b></td><td><code>0x30</code></td><td>发布:SlaveD, 长度:2B<br>信号: AmbientTemp, WiperSpeed</td></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>FuelFrame</b></td><td><code>0x02</code></td><td><code>帧长度</code>: 2->3</td></tr>
+</table></div>
+<h2>信号变更</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>所属帧</th><th>信号名</th><th>位长度</th><th>发布节点</th><th>变更详情</th></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>ClimateFrame</td><td><b>AmbientTemp</b></td><td>8</td><td>SlaveD</td><td></td></tr>
+<tr class="added"><td><span class="badge badge-add">新增</span></td><td>ClimateFrame</td><td><b>WiperSpeed</b></td><td>4</td><td>LIN_Master</td><td></td></tr>
+</table></div>
+<h2>调度表变更</h2><div class="section">
+<table class="diff"><tr><th>类型</th><th>调度表名</th><th>变更详情</th></tr>
+<tr class="modified"><td><span class="badge badge-mod">修改</span></td><td><b>NormalSchedule</b></td><td><span style="color:#27ae60">+ClimateFrame</span></td></tr>
+</table></div>
+</body></html>

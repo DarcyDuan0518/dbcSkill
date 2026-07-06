@@ -1,6 +1,6 @@
 ======================================================================
   DBC 变更差异报告
-  生成时间: 2026-04-30 13:48:19
+  生成时间: 2026-07-03 14:18:48
   旧版本: sample_v1.dbc
   新版本: sample_v2.dbc
 ======================================================================
@@ -9,7 +9,7 @@
   节点: 新增 1  删除 0
   报文ID变更: 1
   报文: 新增 1  删除 0  修改 3
-  信号: 新增 1  删除 0  修改 3
+  信号: 新增 1  删除 0  修改 2
 
 【节点变更】
   [+] [新增节点] ADAS
@@ -20,32 +20,26 @@
 
 【新增报文】
   [+] ADAS_CtrlCmd (0x500)  DLC=8  发送节点=ADAS
-      + 信号: ADAS_FaultLevel  起始位=36  长度=3bit  Intel(小端)  因子=1.0  偏移=0.0  单位=''
-      + 信号: ADAS_LatCtrlReq  起始位=14  长度=2bit  Intel(小端)  因子=1.0  偏移=0.0  单位=''
-      + 信号: ADAS_LongCtrlReq  起始位=0  长度=2bit  Intel(小端)  因子=1.0  偏移=0.0  单位=''
-      + 信号: ADAS_SystemStatus  起始位=32  长度=4bit  Intel(小端)  因子=1.0  偏移=0.0  单位=''
-      + 信号: ADAS_TargetAccel  起始位=2  长度=12bit  Intel(小端)  因子=0.05  偏移=-102.4  单位='m/s2'
-      + 信号: ADAS_TargetSteerAngle  起始位=16  长度=16bit  Intel(小端)  因子=0.1  偏移=-3276.8  单位='deg'
+      + 信号: ADAS_FaultLevel  起始位=36  长度=3bit
+      + 信号: ADAS_LatCtrlReq  起始位=14  长度=2bit
+      + 信号: ADAS_LongCtrlReq  起始位=0  长度=2bit
+      + 信号: ADAS_SystemStatus  起始位=32  长度=4bit
+      + 信号: ADAS_TargetAccel  起始位=2  长度=12bit
+      + 信号: ADAS_TargetSteerAngle  起始位=16  长度=16bit
 
 【修改报文】
   [~] VCU_Status (0x100)
       属性变更 - GenMsgStartDelayTime: '<不存在>' -> 5
       [+] [新增信号] VCU_SteerAngle
-          起始位=32  长度=16bit  Intel(小端)  有符号
-          因子=0.1  偏移=-3276.8  范围=[-3276.8, 3276.7]  单位='deg'
-          接收节点=['ADAS', 'GW']
-      [~] [修改信号] VCU_DrivingMode
-          值表: {0: 'Normal', 1: 'Sport', 2: 'Eco', 3: 'Snow', 4: 'Custom'} -> {0: 'Normal', 1: 'Sport', 2: 'Eco', 3: 'Snow', 4: 'Custom', 5: 'Auto'}
+          起始位=32  长度=16bit
       [~] [修改信号] VCU_VehicleSpeed
-          因子: 0.1 -> 0.05
+          比例因子: 0.1 -> 0.05
           最大值: 409.5 -> 204.75
           接收节点: ['MCU', 'GW'] -> ['MCU', 'GW', 'ADAS']
-          注释: '车速，精度0.1km/h' -> '车速，精度0.05km/h（精度提升）'
   [~] MCU_TorqueInfo (0x200)
       [~] [修改信号] MCU_FaultCode
           位长度: 8 -> 12
           最大值: 255.0 -> 4095.0
-          注释: '' -> '故障码，位长度从8扩展到12'
   [~] BMS_BattInfo (0x300)
       属性变更 - GenMsgSendType: '<不存在>' -> 1
 

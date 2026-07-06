@@ -206,7 +206,7 @@ class DBCDiff:
         result = diff.compare(old_dbc, new_dbc)
     """
 
-    # 信号需要比较的字段列表
+    # 信号需要比较的字段列表（不含 comment，注释仅变更不算修改）
     _SIGNAL_FIELDS = [
         ("start_bit",     "起始位"),
         ("length",        "位长度"),
@@ -219,15 +219,13 @@ class DBCDiff:
         ("max_val",       "最大值"),
         ("unit",          "单位"),
         ("receivers",     "接收节点"),
-        ("comment",       "注释"),
     ]
 
-    # 报文需要比较的字段列表
+    # 报文需要比较的字段列表（不含 comment，注释仅变更不算修改）
     _MESSAGE_FIELDS = [
         ("name",    "报文名称"),
         ("dlc",     "DLC"),
         ("sender",  "发送节点"),
-        ("comment", "注释"),
     ]
 
     def compare(self, old_dbc: DBCFile, new_dbc: DBCFile) -> DBCDiffResult:
@@ -272,20 +270,7 @@ class DBCDiff:
                 old_node=old_dbc.nodes[name]
             ))
 
-        for name in sorted(old_names & new_names):
-            old_node = old_dbc.nodes[name]
-            new_node = new_dbc.nodes[name]
-            field_changes = []
-            if old_node.comment != new_node.comment:
-                field_changes.append(FieldChange("注释", old_node.comment, new_node.comment))
-            if field_changes:
-                changes.append(NodeChange(
-                    change_type=ChangeType.MODIFIED,
-                    node_name=name,
-                    old_node=old_node,
-                    new_node=new_node,
-                    field_changes=field_changes
-                ))
+        # 注释仅变更不算修改，节点目前无其他可比较字段，暂跳过共同节点比较
 
         return changes
 
@@ -395,6 +380,9 @@ class DBCDiff:
                         added_fields.append(FieldChange(label, "", val))
                 elif val is not None and val != "":
                     added_fields.append(FieldChange(label, "", val))
+            # 新增信号：展示注释（comment 不参与 MODIFIED 比较，但新增时应展示）
+            if sig.comment:
+                added_fields.append(FieldChange("注释", "", sig.comment))
             changes.append(SignalChange(
                 change_type=ChangeType.ADDED,
                 msg_id=new_msg.msg_id,

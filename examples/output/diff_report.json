@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30 13:48:19",
+  "generated_at": "2026-07-03 14:18:48",
   "old_file": "E:\\gerrit\\00_Tools\\claude-dbcskill\\examples\\sample_v1.dbc",
   "new_file": "E:\\gerrit\\00_Tools\\claude-dbcskill\\examples\\sample_v2.dbc",
   "stats": {
@@ -11,7 +11,7 @@
     "msgs_modified": 3,
     "sigs_added": 1,
     "sigs_removed": 0,
-    "sigs_modified": 3
+    "sigs_modified": 2
   },
   "node_changes": [
     {
@@ -54,47 +54,66 @@
         {
           "type": "ADDED",
           "signal_name": "VCU_SteerAngle",
-          "field_changes": [],
-          "new_signal": {
-            "start_bit": 32,
-            "length": 16,
-            "byte_order": "Intel(小端)",
-            "value_type": "有符号",
-            "factor": 0.1,
-            "offset": -3276.8,
-            "min": -3276.8,
-            "max": 3276.7,
-            "unit": "deg",
-            "receivers": [
-              "ADAS",
-              "GW"
-            ]
-          }
-        },
-        {
-          "type": "MODIFIED",
-          "signal_name": "VCU_DrivingMode",
           "field_changes": [
             {
-              "field": "值表",
-              "old": "{0: 'Normal', 1: 'Sport', 2: 'Eco', 3: 'Snow', 4: 'Custom'}",
-              "new": "{0: 'Normal', 1: 'Sport', 2: 'Eco', 3: 'Snow', 4: 'Custom', 5: 'Auto'}"
+              "field": "起始位",
+              "old": "",
+              "new": "32"
+            },
+            {
+              "field": "位长度",
+              "old": "",
+              "new": "16"
+            },
+            {
+              "field": "字节序",
+              "old": "",
+              "new": "1"
+            },
+            {
+              "field": "值类型",
+              "old": "",
+              "new": "-"
+            },
+            {
+              "field": "比例因子",
+              "old": "",
+              "new": "0.1"
+            },
+            {
+              "field": "偏移",
+              "old": "",
+              "new": "-3276.8"
+            },
+            {
+              "field": "最小值",
+              "old": "",
+              "new": "-3276.8"
+            },
+            {
+              "field": "最大值",
+              "old": "",
+              "new": "3276.7"
+            },
+            {
+              "field": "单位",
+              "old": "",
+              "new": "deg"
+            },
+            {
+              "field": "接收节点",
+              "old": "",
+              "new": "['ADAS', 'GW']"
+            },
+            {
+              "field": "注释",
+              "old": "",
+              "new": "方向盘转角，新增信号"
             }
           ],
           "new_signal": {
-            "start_bit": 28,
-            "length": 3,
-            "byte_order": "Intel(小端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 7.0,
-            "unit": "",
-            "receivers": [
-              "MCU",
-              "GW"
-            ]
+            "start_bit": 32,
+            "length": 16
           }
         },
         {
@@ -102,7 +121,7 @@
           "signal_name": "VCU_VehicleSpeed",
           "field_changes": [
             {
-              "field": "因子",
+              "field": "比例因子",
               "old": "0.1",
               "new": "0.05"
             },
@@ -115,28 +134,11 @@
               "field": "接收节点",
               "old": "['MCU', 'GW']",
               "new": "['MCU', 'GW', 'ADAS']"
-            },
-            {
-              "field": "注释",
-              "old": "车速，精度0.1km/h",
-              "new": "车速，精度0.05km/h（精度提升）"
             }
           ],
           "new_signal": {
             "start_bit": 4,
-            "length": 12,
-            "byte_order": "Intel(小端)",
-            "value_type": "无符号",
-            "factor": 0.05,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 204.75,
-            "unit": "km/h",
-            "receivers": [
-              "MCU",
-              "GW",
-              "ADAS"
-            ]
+            "length": 12
           }
         }
       ]
@@ -162,27 +164,11 @@
               "field": "最大值",
               "old": "255.0",
               "new": "4095.0"
-            },
-            {
-              "field": "注释",
-              "old": "",
-              "new": "故障码，位长度从8扩展到12"
             }
           ],
           "new_signal": {
             "start_bit": 52,
-            "length": 12,
-            "byte_order": "Intel(小端)",
-            "value_type": "无符号",
-            "factor": 1.0,
-            "offset": 0.0,
-            "min": 0.0,
-            "max": 4095.0,
-            "unit": "",
-            "receivers": [
-              "VCU",
-              "GW"
-            ]
+            "length": 12
           }
         }
       ]
